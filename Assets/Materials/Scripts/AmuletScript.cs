@@ -11,6 +11,8 @@ public class AmuletScript : MonoBehaviour
     public bool rotatingRight = false;
     
     float currentRotation;
+    float timerRotationR;
+   
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +23,7 @@ public class AmuletScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         float horizontalInput = Input.GetAxis("P1C_Horizontal");
         float verticalInput = Input.GetAxis("P1C_Vertical");
 
@@ -57,6 +60,14 @@ void CompareRotation()
         rotatingRight = true;
         rotatingLeft = false;
     }
+
+    timerRotationR += Time.deltaTime;
+    if(rotatingRight == true & timerRotationR > 0.5f)
+    {
+        Debug.Log("ROTATING5S");
+        timerRotationR = timerRotationR - 0.5f;
+    }
+
 }
 
 }
