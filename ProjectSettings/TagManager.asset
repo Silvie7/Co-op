@@ -8,6 +8,7 @@ TagManager:
   - ColliderPlayerOne
   - ColliderPlayerTwo
   - Key
+  - TerritoryE
   layers:
   - Default
   - TransparentFX

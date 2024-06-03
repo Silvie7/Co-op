@@ -6,6 +6,8 @@ public class ShootTowardsPlayer : MonoBehaviour
 {
     public Transform target; 
 
+    private GameObject territoryE;
+
     private float shootForce = 10f; 
 
     // Start is called before the first frame update
@@ -18,7 +20,10 @@ public class ShootTowardsPlayer : MonoBehaviour
         // Shoot towards the target
         GetComponent<Rigidbody>().AddForce(direction * shootForce, ForceMode.Impulse);
         } 
+        territoryE = GameObject.Find("TerritoryEnemies"); 
         
+       
+
         
           
         
@@ -28,6 +33,17 @@ public class ShootTowardsPlayer : MonoBehaviour
     void Update()
     {
         
+
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("ColliderPlayerOne") || collision.gameObject.CompareTag("ColliderPlayerTwo")) 
+        {
+            // Scale up the TerritoryE object
+            territoryE.transform.localScale += new Vector3(1, 0, 0); 
+            Destroy(gameObject); 
+        }
     }
     
 }
