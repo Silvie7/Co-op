@@ -34,8 +34,11 @@ public class ShootTowardsEnemy : MonoBehaviour
         if (collision.gameObject.CompareTag("ColliderEnemyOne") || collision.gameObject.CompareTag("ColliderEnemyTwo")) 
         {
             // Scale up the TerritoryE object
+            Debug.Log("COLLIDERSHIELD");
             territoryP.transform.localScale += new Vector3(1, 0, 0); 
             Destroy(gameObject); 
         }
+
+    
     }
 }

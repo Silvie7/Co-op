@@ -10,6 +10,7 @@ TagManager:
   - Key
   - TerritoryE
   - Enemy
+  - BigShield
   layers:
   - Default
   - TransparentFX

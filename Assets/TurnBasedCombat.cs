@@ -44,11 +44,22 @@ public class TurnBasedCombat : MonoBehaviour
     {
         Debug.Log(combatant.name + "'s turn");
         combatant.GetComponent<TurnTaker>().StartTurn();
-        ProjectileEnemy projectileEnemy = combatant.GetComponent<ProjectileEnemy>();
+        ProjectileEnemy projectileEnemy = combatant.GetComponentInChildren<ProjectileEnemy>();
 
-         if (gameObject.tag =="Enemy")
+         if (combatant.tag =="Enemy")
          {
-             projectileEnemy.CreateNewObject();
+            if (projectileEnemy != null)
+            {
+                
+                 projectileEnemy.CreateNewObject();
+
+            }
+             else
+        {
+            Debug.Log("Projectile enemy is null for " + combatant.name);
+        }
+           
+            
 
          }
         yield return new WaitForSeconds(2f);
