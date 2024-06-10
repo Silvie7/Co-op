@@ -61,6 +61,7 @@ public class TurnBasedCombat : MonoBehaviour
                 Vector3 initialDirection = combatant.transform.forward;
                  projectileEnemy.CreateNewObject(initialDirection);
                  yield return SlowDownProjectile(projectileEnemy.instantiatedObject);
+                 yield return new WaitForSeconds(2f); //adding delay to enemy's turn
                  //yield return new WaitForSeconds(1f);
                  //SlowDownProjectile(projectileEnemy.prefab)
                  //yield return new WaitForSeconds(2f);
@@ -77,26 +78,45 @@ public class TurnBasedCombat : MonoBehaviour
 
     IEnumerator SlowDownProjectile(GameObject projectile)
     {
-        float slowDownTime = 1f;
+        float slowDownTime = 0.2f;
         float slowDownFactor = 0.1f;
+        float stopTime = 0.5f;
          Rigidbody rb = projectile.GetComponent<Rigidbody>();
         if (rb != null)
         {
             Vector3 initialDirection = Vector3.forward;
-              float initialSpeed = 10f;
-            float slowDownSpeed = Mathf.Max(initialSpeed * slowDownFactor, 0.1f); // Set a minimum speed of 0.1f
+              float initialSpeed = 0.02f;
+            float slowDownSpeed = Mathf.Max(initialSpeed * slowDownFactor, 0.01f); // Set a minimum speed of 0.1f
 
             
             Debug.Log("Initial speed: " + initialSpeed);
             Debug.Log("Initial direction: " + initialDirection);
 
             float timer = 0f;
-             while (timer < slowDownTime)
+             while (timer < stopTime)
             {
-                rb.velocity = Vector3.Lerp(rb.velocity, initialDirection * slowDownSpeed, timer / slowDownTime);
+                if (rb!= null)
+                {
+                     rb.velocity = Vector3.Lerp(rb.velocity, initialDirection * slowDownSpeed, timer / slowDownTime);
+                }
+                else if (timer < stopTime)
+                {
+                    rb.velocity = Vector3.Lerp(rb.velocity, initialDirection * 0.001f, (timer - slowDownTime) / (stopTime - slowDownTime));
+                }
+                else
+                {
+                    rb.velocity = initialDirection * 5f;
+                }
+               
                 timer += Time.deltaTime;
                  yield return null;
             }
+            
+            if (projectile == null || projectile.activeSelf == false || rb == null)
+             {
+                 Debug.LogError("Projectile or Rigidbody has been destroyed or disabled");
+                 yield break;
+             }
 
               rb.velocity = initialDirection * 5f;
 
