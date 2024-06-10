@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ShootTowardsPlayer : MonoBehaviour
 {
-    public Transform target; 
+    public Transform target;
+    public Vector3 initialDirection; 
 
     private GameObject territoryE;
 
@@ -21,12 +22,17 @@ public class ShootTowardsPlayer : MonoBehaviour
         GetComponent<Rigidbody>().AddForce(direction * shootForce, ForceMode.Impulse);
         } 
         territoryE = GameObject.Find("TerritoryEnemies"); 
+           
         
-       
+    }
 
-        
-          
-        
+    void Update()
+    {
+        if (target!= null)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, target.position, 10f * Time.deltaTime);
+            transform.rotation = Quaternion.LookRotation(initialDirection);
+        }
     }
 
     // Update is called once per frame

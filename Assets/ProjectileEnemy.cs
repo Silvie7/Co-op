@@ -8,9 +8,11 @@ public class ProjectileEnemy : MonoBehaviour
     public Transform player1;
     public Transform player2;
 
-    
+    public GameObject instantiatedObject;
 
     private Transform targetPlayer;
+
+    
 
     
     // Start is called before the first frame update
@@ -20,15 +22,16 @@ public class ProjectileEnemy : MonoBehaviour
     }
    
     // Update is called once per frame
-    public void CreateNewObject()
+    public void CreateNewObject(Vector3 initialDirection)
     {
        
        
-          GameObject newObject = Instantiate(prefab, transform.position, transform.rotation);
+      instantiatedObject = Instantiate(prefab, transform.position, Quaternion.LookRotation(initialDirection));
 
-            targetPlayer = Random.value > 0.5? player1 : player2;
+      targetPlayer = Random.value > 0.5? player1 : player2;
 
-            newObject.GetComponent<ShootTowardsPlayer>().target = targetPlayer;
+      instantiatedObject.GetComponent<ShootTowardsPlayer>().target = targetPlayer;
+      instantiatedObject.GetComponent<ShootTowardsPlayer>().initialDirection = initialDirection;
 
              
 

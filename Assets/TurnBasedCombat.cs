@@ -42,6 +42,13 @@ public class TurnBasedCombat : MonoBehaviour
 
     IEnumerator TakeTurn(GameObject combatant)
     {
+        
+        if (combatant == null)
+        {
+            Debug.LogError("Combatant is null");
+            yield break;
+        }
+
         Debug.Log(combatant.name + "'s turn");
         combatant.GetComponent<TurnTaker>().StartTurn();
         ProjectileEnemy projectileEnemy = combatant.GetComponentInChildren<ProjectileEnemy>();
@@ -51,20 +58,63 @@ public class TurnBasedCombat : MonoBehaviour
             if (projectileEnemy != null)
             {
                 
-                 projectileEnemy.CreateNewObject();
-
+                Vector3 initialDirection = combatant.transform.forward;
+                 projectileEnemy.CreateNewObject(initialDirection);
+                 yield return SlowDownProjectile(projectileEnemy.instantiatedObject);
+                 //yield return new WaitForSeconds(1f);
+                 //SlowDownProjectile(projectileEnemy.prefab)
+                 //yield return new WaitForSeconds(2f);
             }
              else
         {
             Debug.Log("Projectile enemy is null for " + combatant.name);
-        }
-           
-            
+        }   
 
          }
-        yield return new WaitForSeconds(2f);
+       
         combatant.GetComponent<TurnTaker>().EndTurn();
     }
+
+    IEnumerator SlowDownProjectile(GameObject projectile)
+    {
+        float slowDownTime = 1f;
+        float slowDownFactor = 0.1f;
+         Rigidbody rb = projectile.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            Vector3 initialDirection = Vector3.forward;
+              float initialSpeed = 10f;
+            float slowDownSpeed = Mathf.Max(initialSpeed * slowDownFactor, 0.1f); // Set a minimum speed of 0.1f
+
+            
+            Debug.Log("Initial speed: " + initialSpeed);
+            Debug.Log("Initial direction: " + initialDirection);
+
+            float timer = 0f;
+             while (timer < slowDownTime)
+            {
+                rb.velocity = Vector3.Lerp(rb.velocity, initialDirection * slowDownSpeed, timer / slowDownTime);
+                timer += Time.deltaTime;
+                 yield return null;
+            }
+
+              rb.velocity = initialDirection * 5f;
+
+              yield return new WaitForSeconds(0.1f);
+              Debug.Log("Wait over");
+
+            //rb.AddForce(initialDirection * 10f, ForceMode.Impulse);
+
+        }
+
+        isPlayerTurn = true; // switch to player's turn
+        yield break;
+
+      
+    }
+
+
+
 
     IEnumerator WaitUntilAllPlayersHaveFinished()
     {
