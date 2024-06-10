@@ -51,26 +51,37 @@ public class TurnBasedCombat : MonoBehaviour
 
         Debug.Log(combatant.name + "'s turn");
         combatant.GetComponent<TurnTaker>().StartTurn();
-        ProjectileEnemy projectileEnemy = combatant.GetComponentInChildren<ProjectileEnemy>();
 
          if (combatant.tag =="Enemy")
          {
+            ProjectileEnemy projectileEnemy = combatant.GetComponentInChildren<ProjectileEnemy>();
+
             if (projectileEnemy != null)
             {
                 
                 Vector3 initialDirection = combatant.transform.forward;
                  projectileEnemy.CreateNewObject(initialDirection);
+
+                 isPlayerTurn = true; //trigger players turn immediately
+                 foreach (GameObject player in players)
+                 {
+                    StartCoroutine(TakeTurn(player));
+                 }
+                 yield return WaitUntilAllPlayersHaveFinished();
+
+                 //Continue with projectile movement 
                  yield return SlowDownProjectile(projectileEnemy.instantiatedObject);
                  yield return new WaitForSeconds(2f); //adding delay to enemy's turn
+                
                  //yield return new WaitForSeconds(1f);
                  //SlowDownProjectile(projectileEnemy.prefab)
                  //yield return new WaitForSeconds(2f);
             }
              else
-        {
-            Debug.Log("Projectile enemy is null for " + combatant.name);
-        }   
-
+             {
+                 Debug.Log("Projectile enemy is null for " + combatant.name);
+             }   
+             
          }
        
         combatant.GetComponent<TurnTaker>().EndTurn();
