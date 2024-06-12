@@ -13,13 +13,15 @@ public class Shield : MonoBehaviour
     {
         Rigidbody projectileRb = collision.gameObject.GetComponent<Rigidbody>();
 
-        Vector3 deflectionDirection = Vector3.Reflect(projectileRb.velocity, transform.forward);
+        //Vector3 deflectionDirection = Vector3.Reflect(projectileRb.velocity, transform.forward);
 
-        Vector3 targetDirection = (targetPosition.position - projectileRb.position).normalized;
+        //Vector3 targetDirection = (targetPosition.position - projectileRb.position).normalized;
 
-        Vector3 finalDirection = Vector3.Lerp(deflectionDirection, targetDirection, 5f);
+        //Vector3 finalDirection = Vector3.Lerp(deflectionDirection, targetDirection, 5f);
+        
+        Vector3 directionToTarget = (targetPosition.position - projectileRb.position).normalized;
 
-        projectileRb.AddForce(finalDirection * deflectionForce, ForceMode.Impulse);
+        projectileRb.AddForce(directionToTarget * deflectionForce, ForceMode.Impulse);
     }
   }
 }

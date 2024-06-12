@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AmuletRayCast_Controller : MonoBehaviour
+public class AmuletRayCast_P1 : MonoBehaviour
 {
     public GameObject playerTwo;
     public AmuletControlls amuletScript;
