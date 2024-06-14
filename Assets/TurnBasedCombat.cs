@@ -89,15 +89,25 @@ public class TurnBasedCombat : MonoBehaviour
 
     IEnumerator SlowDownProjectile(GameObject projectile)
     {
+        ShootTowardsPlayer shootTowardsPlayer = projectile.GetComponent<ShootTowardsPlayer>();
+        if (shootTowardsPlayer == null)
+    {
+        Debug.LogError("ShootTowardsPlayer component not found on projectile: " + projectile.name);
+        yield break;
+    }
         float slowDownTime = 0.2f;
-        float slowDownFactor = 0.1f;
-        float stopTime = 0.5f;
-         Rigidbody rb = projectile.GetComponent<Rigidbody>();
+        float slowDownFactor = 0.01f;
+        float stopTime = 1f;
+        float stopDuration = 1f; //stoping projectile
+        Rigidbody rb = projectile.GetComponent<Rigidbody>();
         if (rb != null)
         {
-            Vector3 initialDirection = Vector3.forward;
-              float initialSpeed = 0.02f;
-            float slowDownSpeed = Mathf.Max(initialSpeed * slowDownFactor, 0.01f); // Set a minimum speed of 0.1f
+            // ShootTowardsPlayer shootTowardsPlayer = projectile.GetComponent<ShootTowardsPlayer>();
+            // Vector3 initialDirection = (projectile.transform.position - ShootTowardsPlayer.target.position).normalized;
+
+            Vector3 initialDirection = (projectile.transform.position - shootTowardsPlayer.target.position).normalized;
+            float initialSpeed = 0.001f;
+            float slowDownSpeed = Mathf.Max(initialSpeed * slowDownFactor, 0.01f); 
 
             
             Debug.Log("Initial speed: " + initialSpeed);
@@ -110,24 +120,49 @@ public class TurnBasedCombat : MonoBehaviour
                 {
                      rb.velocity = Vector3.Lerp(rb.velocity, initialDirection * slowDownSpeed, timer / slowDownTime);
                 }
-                else if (timer < stopTime)
-                {
-                    rb.velocity = Vector3.Lerp(rb.velocity, initialDirection * 0.001f, (timer - slowDownTime) / (stopTime - slowDownTime));
-                }
-                else
-                {
-                    rb.velocity = initialDirection * 5f;
-                }
+                // else if (timer < stopTime)
+                // {
+                //     rb.velocity = Vector3.Lerp(rb.velocity, initialDirection * 0.001f, (timer - slowDownTime) / (stopTime - slowDownTime));
+                // }
+                // else
+                // {
+                //     rb.velocity = initialDirection * 5f;
+                // }
                
                 timer += Time.deltaTime;
                  yield return null;
             }
+
+            //stop projectile for a little while
+            rb.velocity = Vector3.zero;
+            yield return new WaitForSeconds(stopDuration);
             
-            if (projectile == null || projectile.activeSelf == false || rb == null)
-             {
-                 Debug.LogError("Projectile or Rigidbody has been destroyed or disabled");
-                 yield break;
-             }
+            //continue slowing down the projectile
+            //  timer = 0f;
+            //  while (timer < stopTime)
+            // {
+            //     if (rb!= null)
+            //     {
+            //          rb.velocity = Vector3.Lerp(rb.velocity, initialDirection * slowDownSpeed, timer / slowDownTime);
+            //     }
+            //     else if (timer < stopTime)
+            //     {
+            //         rb.velocity = Vector3.Lerp(rb.velocity, initialDirection * 0.001f, (timer - slowDownTime) / (stopTime - slowDownTime));
+            //     }
+            //     else
+            //     {
+            //         rb.velocity = initialDirection * 5f;
+            //     }
+               
+            //     timer += Time.deltaTime;
+            //      yield return null;
+            // }
+
+            // if (projectile == null || projectile.activeSelf == false || rb == null)
+            //  {
+            //      Debug.LogError("Projectile or Rigidbody has been destroyed or disabled");
+            //      yield break;
+            //  }
 
               rb.velocity = initialDirection * 5f;
 

@@ -10,28 +10,39 @@ public class ShootTowardsPlayer : MonoBehaviour
     private GameObject territoryE;
 
     private float shootForce = 10f; 
+    private Rigidbody rb;
 
     // Start is called before the first frame update
     void Start()
     {
-        {
-            // Calculate the direction towards the target
-        Vector3 direction = (target.position - transform.position).normalized;
+        // {
+        //     // Calculate the direction towards the target
+        // Vector3 direction = (target.position - transform.position).normalized;
 
-        // Shoot towards the target
-        GetComponent<Rigidbody>().AddForce(direction * shootForce, ForceMode.Impulse);
-        } 
-        territoryE = GameObject.Find("TerritoryEnemies"); 
+        // // Shoot towards the target
+        // GetComponent<Rigidbody>().AddForce(direction * shootForce, ForceMode.Impulse);
+        // } 
+         territoryE = GameObject.Find("TerritoryEnemies"); 
+
+        rb = GetComponent<Rigidbody>();
+        rb.AddForce(initialDirection * shootForce, ForceMode.Impulse);
+
            
         
     }
 
     void Update()
     {
+        // if (target!= null)
+        // {
+        //     transform.position = Vector3.MoveTowards(transform.position, target.position, 10f * Time.deltaTime);
+        //     transform.rotation = Quaternion.LookRotation(initialDirection);
+        // }
+
         if (target!= null)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target.position, 10f * Time.deltaTime);
-            transform.rotation = Quaternion.LookRotation(initialDirection);
+            Vector3 direction = (target.position - transform.position).normalized;
+            rb.velocity = direction * shootForce;
         }
     }
 
