@@ -95,11 +95,16 @@ public class TurnBasedCombat : MonoBehaviour
         Debug.LogError("ShootTowardsPlayer component not found on projectile: " + projectile.name);
         yield break;
     }
-        float slowDownTime = 0.2f;
+        float slowDownTime = 1.5f;
         float slowDownFactor = 0.01f;
-        float stopTime = 1f;
+        float stopTime = 4f;
         float stopDuration = 1f; //stoping projectile
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
+        if (rb == null)
+        {
+            Debug.LogError("Rigidbody component not found on projectile: " + projectile.name);
+            yield break;
+        }
         if (rb != null)
         {
             // ShootTowardsPlayer shootTowardsPlayer = projectile.GetComponent<ShootTowardsPlayer>();
