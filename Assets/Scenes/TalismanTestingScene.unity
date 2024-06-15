@@ -1325,6 +1325,8 @@ MonoBehaviour:
   target2Hit: 0
   target3Hit: 0
   target4Hit: 0
+  targetChosen: 0
+  chosenTarget: {fileID: 0}
 --- !u!1 &2095348266
 GameObject:
   m_ObjectHideFlags: 0
@@ -1811,9 +1813,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1.0477481, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8444420303909579875}
   - {fileID: 5052818819996681064}
   - {fileID: 737170499120956052}
+  - {fileID: 8444420303909579875}
   - {fileID: 2086365338}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 190.009, z: 0}

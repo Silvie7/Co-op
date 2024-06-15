@@ -19,6 +19,11 @@ public class AmuletRaycast_P2 : MonoBehaviour
     public bool target3Hit = false;
     public bool target4Hit = false;
 
+    public bool targetChosen = false;
+    public GameObject chosenTarget;
+
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,8 +58,15 @@ public class AmuletRaycast_P2 : MonoBehaviour
                 if (target1 != null && target1.GetComponent<OutlineEffect>() != null)
                 {
                     target1.GetComponent<OutlineEffect>().EnableOutline();
-                }
-            }
+                    
+                    if (Input.GetKey("o"))
+                    {
+                        chosenTarget = target1;
+                        targetChosen = true; 
+                        Debug.Log("Target Choosen");
+                    }
+               }
+             }
             else
             {
                 target1Hit = false;
@@ -65,7 +77,13 @@ public class AmuletRaycast_P2 : MonoBehaviour
                 if (target2 != null && target2.GetComponent<OutlineEffect>() != null)
                 {
                     target2.GetComponent<OutlineEffect>().EnableOutline();
+                    if (Input.GetKey("o"))
+                    {
+                        chosenTarget = target2;
+                        targetChosen = true; 
+                    }
                 }  
+                
             }
             else
             {
@@ -77,6 +95,13 @@ public class AmuletRaycast_P2 : MonoBehaviour
                  if (target3 != null && target3.GetComponent<OutlineEffect>() != null)
                 {
                     target3.GetComponent<OutlineEffect>().EnableOutline();
+                    
+                    
+                    if (Input.GetKey("o"))
+                    {
+                        chosenTarget = target3;
+                        targetChosen = true; 
+                    }
                 } 
             }
               else
@@ -89,6 +114,13 @@ public class AmuletRaycast_P2 : MonoBehaviour
                  if (target4 != null && target4.GetComponent<OutlineEffect>() != null)
                 {
                     target4.GetComponent<OutlineEffect>().EnableOutline();
+                    
+                    
+                    if (Input.GetKey("o"))
+                    {
+                        chosenTarget = target4;
+                        targetChosen = true; 
+                    }
                 } 
             }
              else
