@@ -28,6 +28,11 @@ public class AmuletRaycast_P2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        target1Hit = false;
+        target2Hit = false;
+        target3Hit = false;
+        target4Hit = false;
+
        if (Physics.Raycast (transform.position, transform.TransformDirection (Vector3.forward), out RaycastHit hitinfo, 20f))
         {
            // Debug.Log("Hit something");
@@ -49,36 +54,47 @@ public class AmuletRaycast_P2 : MonoBehaviour
                 {
                     target1.GetComponent<OutlineEffect>().EnableOutline();
                 }
-                
             }
-            else if (hitinfo.collider.gameObject == target2)
+            else
+            {
+                target1Hit = false;
+            }
+            if (hitinfo.collider.gameObject == target2)
             {
                 target2Hit = true;
                 if (target2 != null && target2.GetComponent<OutlineEffect>() != null)
                 {
                     target2.GetComponent<OutlineEffect>().EnableOutline();
-                }
-                
+                }  
             }
-            else if (hitinfo.collider.gameObject == target3)
+            else
+            {
+                target2Hit = false;
+            }            
+            if (hitinfo.collider.gameObject == target3)
             {
                 target3Hit = true;
                  if (target3 != null && target3.GetComponent<OutlineEffect>() != null)
                 {
                     target3.GetComponent<OutlineEffect>().EnableOutline();
-                }
-                
+                } 
             }
-            else if (hitinfo.collider.gameObject == target4)
+              else
+            {
+                target3Hit = false;
+            }    
+            if (hitinfo.collider.gameObject == target4)
             {
                 target4Hit = true;
                  if (target4 != null && target4.GetComponent<OutlineEffect>() != null)
                 {
                     target4.GetComponent<OutlineEffect>().EnableOutline();
-                }
-                
+                } 
             }
-           
+             else
+            {
+                target4Hit = false;
+            }    
            
         }
         else
