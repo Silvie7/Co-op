@@ -63,7 +63,6 @@ public class AmuletRaycast_P2 : MonoBehaviour
                     {
                         chosenTarget = target1;
                         targetChosen = true; 
-                        Debug.Log("Target Choosen");
                     }
                }
              }
@@ -137,23 +136,27 @@ public class AmuletRaycast_P2 : MonoBehaviour
 
             if(target1!= null)
             {
-                OutlineEffect outlineEffect = target1.GetComponent<OutlineEffect>();
-                 if (outlineEffect!= null)
+               OutlineEffect outlineEffect = target1.GetComponent<OutlineEffect>();
+                if (outlineEffect!= null)
                 {
-                    target1.GetComponent<OutlineEffect>().DisableOutline();
-
+                    if (!targetChosen || chosenTarget!= target1)
+                    {
+                        target1.GetComponent<OutlineEffect>().DisableOutline();
+                    }
                 }
+                
 
             }
                  
             if(target2!= null)
             {
                 OutlineEffect outlineEffect = target2.GetComponent<OutlineEffect>();
-
                 if (outlineEffect!= null)
                 {
-                    target2.GetComponent<OutlineEffect>().DisableOutline();
-
+                    if (!targetChosen || chosenTarget!= target2)
+                    {
+                        target2.GetComponent<OutlineEffect>().DisableOutline();
+                    }
                 }
                 
             }
@@ -163,17 +166,23 @@ public class AmuletRaycast_P2 : MonoBehaviour
                 OutlineEffect outlineEffect = target3.GetComponent<OutlineEffect>();
                 if (outlineEffect!= null)
                 {
-                    target3.GetComponent<OutlineEffect>().DisableOutline();
+                    if (!targetChosen || chosenTarget!= target3)
+                    {
+                        target3.GetComponent<OutlineEffect>().DisableOutline();
+                    }
                 }
                 
             }
             
             if(target4!= null)
             {
-                OutlineEffect outlineEffect = target4.GetComponent<OutlineEffect>();
+                 OutlineEffect outlineEffect = target4.GetComponent<OutlineEffect>();
                 if (outlineEffect!= null)
                 {
-                    target4.GetComponent<OutlineEffect>().DisableOutline();
+                    if (!targetChosen || chosenTarget!= target4)
+                    {
+                        target4.GetComponent<OutlineEffect>().DisableOutline();
+                    }
                 }
                
             }
