@@ -31,19 +31,26 @@ public class ShootTowardsPlayer : MonoBehaviour
         
     }
 
-    void Update()
+    void FixedUpdate()
     {
+         if (target!= null)
+         {
+            Vector3 directionToTarget = (target.position - transform.position).normalized;
+            rb.velocity = directionToTarget * 5f;
+            // transform.position = Vector3.MoveTowards(transform.position, target.position, 10f * Time.deltaTime);
+             //transform.rotation = Quaternion.LookRotation(initialDirection);
+         }
+
         // if (target!= null)
         // {
-        //     transform.position = Vector3.MoveTowards(transform.position, target.position, 10f * Time.deltaTime);
-        //     transform.rotation = Quaternion.LookRotation(initialDirection);
+        //     Vector3 direction = (target.position - transform.position).normalized;
+        //     rb.velocity = direction * shootForce;
         // }
+    }
 
-        if (target!= null)
-        {
-            Vector3 direction = (target.position - transform.position).normalized;
-            rb.velocity = direction * shootForce;
-        }
+    public void ChangeTarget(Transform newTarget)
+    {
+        target = newTarget;
     }
 
     // Update is called once per frame

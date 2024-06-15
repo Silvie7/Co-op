@@ -12,6 +12,9 @@ public class Shield : MonoBehaviour
     if (collision.gameObject.GetComponent<ShootTowardsPlayer>()!= null)
     {
         Rigidbody projectileRb = collision.gameObject.GetComponent<Rigidbody>();
+        ShootTowardsPlayer shootTowardsPlayer = collision.gameObject.GetComponent<ShootTowardsPlayer>();
+
+        shootTowardsPlayer.ChangeTarget(targetPosition);
 
         //Vector3 deflectionDirection = Vector3.Reflect(projectileRb.velocity, transform.forward);
 
@@ -20,8 +23,8 @@ public class Shield : MonoBehaviour
         //Vector3 finalDirection = Vector3.Lerp(deflectionDirection, targetDirection, 5f);
         
         Vector3 directionToTarget = (targetPosition.position - projectileRb.position).normalized;
-
-        projectileRb.AddForce(directionToTarget * deflectionForce, ForceMode.Impulse);
+        projectileRb.velocity = directionToTarget * 5;
+       // projectileRb.AddForce(directionToTarget * deflectionForce, ForceMode.Impulse);
     }
   }
 }
