@@ -6,6 +6,7 @@ public class ShootTowardsPlayer : MonoBehaviour
 {
     public Transform target;
     public Vector3 initialDirection; 
+     public bool hasHitPlayer = false;
 
     private GameObject territoryE;
 
@@ -60,9 +61,14 @@ public class ShootTowardsPlayer : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("ColliderPlayerOne") || collision.gameObject.CompareTag("ColliderPlayerTwo")) 
         {
+            hasHitPlayer = true;
             // Scale up the TerritoryE object
             territoryE.transform.localScale += new Vector3(1, 0, 0); 
             Destroy(gameObject); 
+        }
+        else
+        {
+            hasHitPlayer = false;
         }
     }
     

@@ -105,6 +105,15 @@ public class TurnBasedCombat : MonoBehaviour
             Debug.LogError("Rigidbody component not found on projectile: " + projectile.name);
             yield break;
         }
+
+        Rigidbody localRb = rb;
+
+        if (projectile == null || !projectile.activeSelf || rb == null)
+         {
+            Debug.LogError ("Projectile or Rigidbody has been destroyed or disabled");
+            yield break;
+         }
+
         if (rb != null)
         {
             // ShootTowardsPlayer shootTowardsPlayer = projectile.GetComponent<ShootTowardsPlayer>();
@@ -112,6 +121,7 @@ public class TurnBasedCombat : MonoBehaviour
 
             Vector3 initialDirection = (projectile.transform.position - shootTowardsPlayer.target.position).normalized;
             float initialSpeed = 0.001f;
+           
             float slowDownSpeed = Mathf.Max(initialSpeed * slowDownFactor, 0.01f); 
 
             
@@ -119,60 +129,58 @@ public class TurnBasedCombat : MonoBehaviour
             Debug.Log("Initial direction: " + initialDirection);
 
             float timer = 0f;
-             while (timer < stopTime)
+            if (localRb!= null)
             {
-                if (rb!= null)
+                    while (timer < stopTime)
                 {
-                     rb.velocity = Vector3.Lerp(rb.velocity, initialDirection * slowDownSpeed, timer / slowDownTime);
+                    if (shootTowardsPlayer.hasHitPlayer)
+                    {
+                        break;
+                    }
+
+                    if (rb!= null && rb.gameObject.activeSelf)
+                    {
+                        rb.velocity = Vector3.Lerp(rb.velocity, initialDirection * slowDownSpeed, timer / slowDownTime);
+                    }
+                    else
+                    {
+                        Debug.LogError("Rigidbody has been destroyed or disabled");
+                        break;
+                    }
+                    // else if (timer < stopTime)
+                    // {
+                    //     rb.velocity = Vector3.Lerp(rb.velocity, initialDirection * 0.001f, (timer - slowDownTime) / (stopTime - slowDownTime));
+                    // }
+                    // else
+                    // {
+                    //     rb.velocity = initialDirection * 5f;
+                    // }
+                
+                    timer += Time.deltaTime;
+                    yield return null;
                 }
-                // else if (timer < stopTime)
-                // {
-                //     rb.velocity = Vector3.Lerp(rb.velocity, initialDirection * 0.001f, (timer - slowDownTime) / (stopTime - slowDownTime));
-                // }
-                // else
-                // {
-                //     rb.velocity = initialDirection * 5f;
-                // }
-               
-                timer += Time.deltaTime;
-                 yield return null;
+
             }
+           
 
             //stop projectile for a little while
-            rb.velocity = Vector3.zero;
-            yield return new WaitForSeconds(stopDuration);
+            if (rb!= null && rb.gameObject.activeSelf)
+            {
+                 rb.velocity = Vector3.zero;
+                 yield return new WaitForSeconds(stopDuration);
+
+            }
+           
             
             //continue slowing down the projectile
-            //  timer = 0f;
-            //  while (timer < stopTime)
-            // {
-            //     if (rb!= null)
-            //     {
-            //          rb.velocity = Vector3.Lerp(rb.velocity, initialDirection * slowDownSpeed, timer / slowDownTime);
-            //     }
-            //     else if (timer < stopTime)
-            //     {
-            //         rb.velocity = Vector3.Lerp(rb.velocity, initialDirection * 0.001f, (timer - slowDownTime) / (stopTime - slowDownTime));
-            //     }
-            //     else
-            //     {
-            //         rb.velocity = initialDirection * 5f;
-            //     }
-               
-            //     timer += Time.deltaTime;
-            //      yield return null;
-            // }
+            if (rb != null && rb.gameObject.activeSelf)
+            {
+                 rb.velocity = initialDirection * 5f;
 
-            // if (projectile == null || projectile.activeSelf == false || rb == null)
-            //  {
-            //      Debug.LogError("Projectile or Rigidbody has been destroyed or disabled");
-            //      yield break;
-            //  }
-
-              rb.velocity = initialDirection * 5f;
-
-              yield return new WaitForSeconds(0.1f);
-              Debug.Log("Wait over");
+                yield return new WaitForSeconds(0.1f);
+                Debug.Log("Wait over");
+            }
+             
 
             //rb.AddForce(initialDirection * 10f, ForceMode.Impulse);
 
