@@ -22,6 +22,9 @@ public class AmuletRaycast_P2 : MonoBehaviour
     public bool targetChosen = false;
     public GameObject chosenTarget;
 
+    public bool sameTarget = false;
+
+
     
 
     // Start is called before the first frame update
@@ -186,6 +189,8 @@ public class AmuletRaycast_P2 : MonoBehaviour
                 }
                
             }
+            
+            
             
         }
     }

@@ -22,8 +22,10 @@ public class AmuletRaycast_P1 : MonoBehaviour
     public bool targetChosen = false;
     public GameObject chosenTarget;
 
-    public GameObject selectedTargetOutline;
-    public bool showSelectedTargetOutline = false;
+
+
+    
+
 
 
     int playerLayer;
@@ -134,49 +136,49 @@ public class AmuletRaycast_P1 : MonoBehaviour
             //Debug.Log("HIt nothing");
             Debug.DrawRay(transform.position,transform.TransformDirection(Vector3.forward) * 20f, Color.green );
             P2Hit = false;
-            //  if(target1!= null)
-            // {
-            //     OutlineEffect outlineEffect = target1.GetComponent<OutlineEffect>();
-            //      if (outlineEffect!= null)
-            //     {
-            //         target1.GetComponent<OutlineEffect>().DisableOutline();
+             if(target1!= null)
+            {
+                OutlineEffect outlineEffect = target1.GetComponent<OutlineEffect>();
+                 if (outlineEffect!= null)
+                {
+                    target1.GetComponent<OutlineEffect>().DisableOutline();
 
-            //     }
+                }
 
-            // }
+            }
                  
-            // if(target2!= null)
-            // {
-            //     OutlineEffect outlineEffect = target2.GetComponent<OutlineEffect>();
+            if(target2!= null)
+            {
+                OutlineEffect outlineEffect = target2.GetComponent<OutlineEffect>();
 
-            //     if (outlineEffect!= null)
-            //     {
-            //         target2.GetComponent<OutlineEffect>().DisableOutline();
+                if (outlineEffect!= null)
+                {
+                    target2.GetComponent<OutlineEffect>().DisableOutline();
 
-            //     }
+                }
                 
-            // }
+            }
             
-            // if(target3!= null)
-            // {
-            //     OutlineEffect outlineEffect = target3.GetComponent<OutlineEffect>();
-            //     if (outlineEffect!= null)
-            //     {
-            //         target3.GetComponent<OutlineEffect>().DisableOutline();
-            //     }
+            if(target3!= null)
+            {
+                OutlineEffect outlineEffect = target3.GetComponent<OutlineEffect>();
+                if (outlineEffect!= null)
+                {
+                    target3.GetComponent<OutlineEffect>().DisableOutline();
+                }
                 
-            // }
+            }
             
-            // if(target4!= null)
-            // {
-            //     OutlineEffect outlineEffect = target4.GetComponent<OutlineEffect>();
-            //     if (outlineEffect!= null)
-            //     {
-            //         target4.GetComponent<OutlineEffect>().DisableOutline();
-            //     }
+            if(target4!= null)
+            {
+                OutlineEffect outlineEffect = target4.GetComponent<OutlineEffect>();
+                if (outlineEffect!= null)
+                {
+                    target4.GetComponent<OutlineEffect>().DisableOutline();
+                }
                
-            // }
-            
+            }
+           
         }
 
         

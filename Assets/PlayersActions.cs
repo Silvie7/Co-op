@@ -9,6 +9,8 @@ public class PlayersActions : MonoBehaviour
    public GameObject shield; //shield for both that push the ball away
    public GameObject shieldForP2; //shield that only protects player 2 (don't know what else it does for now)
 
+   public bool sameTarget = false;
+
    private AmuletRaycast_P2 p2Raycast;
    private AmuletRaycast_P1 p1Raycast;
    private PlayerOneManager p1Energy; //player 1 manager script, takes energy info
@@ -79,5 +81,9 @@ public class PlayersActions : MonoBehaviour
             p1Energy.energy = 5f;   
         }
         
+        if (p1Raycast.chosenTarget == p2Raycast.chosenTarget)
+        {
+            sameTarget = true;
+        }
     }
 }
