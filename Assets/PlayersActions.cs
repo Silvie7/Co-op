@@ -54,14 +54,7 @@ public class PlayersActions : MonoBehaviour
         }
 
         //If both press X then activate the shield
-        if (bothPressX == true && bothPressX == true)
-        {
-            shield.SetActive(true);
-        }
-        else
-        {
-            shield.SetActive(false);
-        }
+       
         
 
         //SHIELD FOR PROTECTING PLAYER TWO
@@ -88,6 +81,18 @@ public class PlayersActions : MonoBehaviour
         else
         {
             sameTarget = false;
+        }
+
+        if (sameTarget == true)
+        {
+            if (bothPressX == true )
+            {
+                shield.SetActive(true);
+            }
+            else
+            {
+                shield.SetActive(false);
+            }
         }
     }
 }
