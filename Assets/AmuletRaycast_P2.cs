@@ -24,8 +24,9 @@ public class AmuletRaycast_P2 : MonoBehaviour
     public GameObject chosenTarget;
 
     public bool sameTarget = false;
-    public Target targetScript;
     public bool p2Key = false;
+
+    private Target targetScript;
 
     
 
@@ -67,11 +68,15 @@ public class AmuletRaycast_P2 : MonoBehaviour
                         targetScript.player2Hit = true;
                     }
                     
-                    // if (Input.GetKey("o"))
-                    // {
-                    //     p2Key = true;
-                    //     chosenTarget = hitinfo.collider.gameObject;
-                    // }
+                    if (Input.GetKey("o"))
+                    {
+                        p2Key = true;
+                        chosenTarget = hitinfo.collider.gameObject;
+                    }
+                    else 
+                    {
+                        p2Key = false;
+                    }
                 }
            }  
         }
@@ -84,7 +89,8 @@ public class AmuletRaycast_P2 : MonoBehaviour
             {
                 targetScript.player2Hit = false;
             }
-            
+           
+           
         }
        
     }
