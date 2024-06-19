@@ -76,14 +76,18 @@ public class PlayersActions : MonoBehaviour
         }
 
 
-        if (p2Raycast.P1Hit == true && Input.GetKey("o"))
-        {
-            p1Energy.energy = 5f;   
-        }
+        // if (p2Raycast.P1Hit == true && Input.GetKey("o"))
+        // {
+        //     p1Energy.energy = 5f;   
+        // }
         
-        if (p1Raycast.chosenTarget == p2Raycast.chosenTarget)
+        if (p1Raycast.chosenTargetp1!= null && p2Raycast.chosenTarget!= null && p1Raycast.chosenTargetp1.name == p2Raycast.chosenTarget.name)
         {
             sameTarget = true;
+        }
+        else
+        {
+            sameTarget = false;
         }
     }
 }

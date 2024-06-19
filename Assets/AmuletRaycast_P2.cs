@@ -23,7 +23,7 @@ public class AmuletRaycast_P2 : MonoBehaviour
     public GameObject aimedTarget;
     public GameObject chosenTarget;
 
-    public bool sameTarget = false;
+    
     public bool p2Key = false;
 
     private Target targetScript;

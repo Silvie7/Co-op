@@ -245,6 +245,7 @@ MonoBehaviour:
   player1Hit: 0
   player2Hit: 0
   bothHit: 0
+  hasChosenTarget: 0
 --- !u!114 &88242916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -611,6 +612,7 @@ MonoBehaviour:
   player1Hit: 0
   player2Hit: 0
   bothHit: 0
+  hasChosenTarget: 0
 --- !u!114 &797462834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1024,6 +1026,7 @@ MonoBehaviour:
   player1Hit: 0
   player2Hit: 0
   bothHit: 0
+  hasChosenTarget: 0
 --- !u!114 &1219612313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1377,8 +1380,6 @@ MonoBehaviour:
   targetChosen: 0
   aimedTarget: {fileID: 0}
   chosenTarget: {fileID: 0}
-  sameTarget: 0
-  targetScript: {fileID: 0}
   p2Key: 0
 --- !u!1 &2095348266
 GameObject:
@@ -1518,6 +1519,7 @@ MonoBehaviour:
   player1Hit: 0
   player2Hit: 0
   bothHit: 0
+  hasChosenTarget: 0
 --- !u!114 &2095348273
 MonoBehaviour:
   m_ObjectHideFlags: 0
