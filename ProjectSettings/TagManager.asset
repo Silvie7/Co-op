@@ -11,6 +11,8 @@ TagManager:
   - TerritoryE
   - Enemy
   - BigShield
+  - ColliderEnemyOne
+  - ColliderEnemyTwo
   layers:
   - Default
   - TransparentFX

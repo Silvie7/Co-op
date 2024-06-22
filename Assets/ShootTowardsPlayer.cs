@@ -6,9 +6,12 @@ public class ShootTowardsPlayer : MonoBehaviour
 {
     public Transform target;
     public Vector3 initialDirection; 
-     public bool hasHitPlayer = false;
+    public bool hasHitPlayer = false;
+
+    public bool hasHitEnemy = false;
 
     private GameObject territoryE;
+    private GameObject territoryP;
 
     private float shootForce = 10f; 
     private Rigidbody rb;
@@ -24,6 +27,7 @@ public class ShootTowardsPlayer : MonoBehaviour
         // GetComponent<Rigidbody>().AddForce(direction * shootForce, ForceMode.Impulse);
         // } 
          territoryE = GameObject.Find("TerritoryEnemies"); 
+         territoryP = GameObject.Find("TerritoryPlayers"); 
 
         rb = GetComponent<Rigidbody>();
         rb.AddForce(initialDirection * shootForce, ForceMode.Impulse);
@@ -69,6 +73,18 @@ public class ShootTowardsPlayer : MonoBehaviour
         else
         {
             hasHitPlayer = false;
+        }
+
+        if (collision.gameObject.CompareTag("ColliderEnemyOne") || collision.gameObject.CompareTag("ColliderEnemyTwo")) 
+        {
+            hasHitEnemy = true;
+            // Scale up the TerritoryE object
+            territoryP.transform.localScale += new Vector3(1, 0, 0); 
+            Destroy(gameObject); 
+        }
+        else
+        {
+            hasHitEnemy = false;
         }
     }
     

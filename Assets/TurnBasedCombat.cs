@@ -52,7 +52,7 @@ public class TurnBasedCombat : MonoBehaviour
         Debug.Log(combatant.name + "'s turn");
         combatant.GetComponent<TurnTaker>().StartTurn();
 
-         if (combatant.tag =="Enemy")
+         if (combatant.tag =="ColliderEnemyOne")
          {
             ProjectileEnemy projectileEnemy = combatant.GetComponentInChildren<ProjectileEnemy>();
 
