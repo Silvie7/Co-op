@@ -1275,6 +1275,7 @@ MonoBehaviour:
   enemies:
   - {fileID: 2095348266}
   - {fileID: 1219612306}
+  hitEnemy: {fileID: 8802150159427312967, guid: e4c5a9c7259b1224b8b48992ab272974, type: 3}
 --- !u!4 &1631623047
 Transform:
   m_ObjectHideFlags: 0
@@ -1833,6 +1834,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5052818819996681064}
+  - component: {fileID: 5052818819996681065}
   m_Layer: 8
   m_Name: SpawnPoint
   m_TagString: Untagged
@@ -1884,6 +1886,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6153025335497659788}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5052818819996681065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4080808580867404058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52bf4a8b74477d548bd5e55b65a709b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerProjectilePrefab: {fileID: 2150590065062114673, guid: e4c5a9c7259b1224b8b48992ab272974, type: 3}
 --- !u!4 &6153025335497659788
 Transform:
   m_ObjectHideFlags: 0

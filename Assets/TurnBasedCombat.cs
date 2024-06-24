@@ -9,9 +9,16 @@ public class TurnBasedCombat : MonoBehaviour
 
     private bool isPlayerTurn = false;
 
+    public ShootTowardsPlayer hitEnemy;
+    private GameObject territoryP;
+
+    private ShootTowardsPlayer shootTowardsPlayer;
+
     // Start is called before the first frame update
     void Start()
     {
+        territoryP = GameObject.Find("TerritoryPlayers"); 
+
         StartCoroutine(TrunCycle());
     }
 
@@ -53,7 +60,7 @@ public class TurnBasedCombat : MonoBehaviour
         combatant.GetComponent<TurnTaker>().StartTurn();
 
          if (combatant.tag =="ColliderEnemyOne")
-         {
+        {
             ProjectileEnemy projectileEnemy = combatant.GetComponentInChildren<ProjectileEnemy>();
 
             if (projectileEnemy != null)
@@ -80,9 +87,28 @@ public class TurnBasedCombat : MonoBehaviour
              else
              {
                  Debug.Log("Projectile enemy is null for " + combatant.name);
-             }   
+             }
+                hitEnemy = GameObject.FindObjectOfType<ShootTowardsPlayer>();
+             if (hitEnemy!= null && hitEnemy.hasHitEnemy == true)
+             {
+                if (territoryP != null)
+                {
+                    territoryP.transform.localScale += new Vector3(1, 0, 0); 
+                    ProjectilePlayer projectilePlayer = GameObject.FindObjectOfType<ProjectilePlayer>();
+                    if (projectilePlayer != null)
+                    {
+                        projectilePlayer.CreateNewObjectForPlayer(); 
+                        Debug.Log("NEW OBJECT");
+                    }
+                    Destroy(gameObject); 
+                }
+               
+                
+             }
+         
+
              
-         }
+        }
        
         combatant.GetComponent<TurnTaker>().EndTurn();
     }

@@ -13,6 +13,8 @@ public class ShootTowardsPlayer : MonoBehaviour
     private GameObject territoryE;
     private GameObject territoryP;
 
+    public ProjectilePlayer projectilePlayer;
+
     private float shootForce = 10f; 
     private Rigidbody rb;
 
@@ -78,14 +80,8 @@ public class ShootTowardsPlayer : MonoBehaviour
         if (collision.gameObject.CompareTag("ColliderEnemyOne") || collision.gameObject.CompareTag("ColliderEnemyTwo")) 
         {
             hasHitEnemy = true;
-            // Scale up the TerritoryE object
-            territoryP.transform.localScale += new Vector3(1, 0, 0); 
-            Destroy(gameObject); 
-        }
-        else
-        {
-            hasHitEnemy = false;
-        }
+        }    
+        
     }
     
 }
