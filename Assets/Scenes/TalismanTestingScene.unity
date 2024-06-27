@@ -491,6 +491,7 @@ MonoBehaviour:
   deflectionForce: 10
   targetPosition: {fileID: 1219612310}
   shieldHit: 0
+  enemyManager: {fileID: 0}
 --- !u!1 &797462828
 GameObject:
   m_ObjectHideFlags: 0

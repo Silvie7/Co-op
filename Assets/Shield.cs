@@ -8,10 +8,12 @@ public class Shield : MonoBehaviour
     public Transform targetPosition;
     private AmuletRaycast_P2 amuletRaycast_P2;
     public bool shieldHit = false;
+    public EnemyManager enemyManager;
 
     void Start ()
     {
       amuletRaycast_P2 = GameObject.FindObjectOfType<AmuletRaycast_P2>();
+       enemyManager = GameObject.FindObjectOfType<EnemyManager>();
     }
 
   void OnCollisionEnter(Collision collision)
@@ -33,6 +35,7 @@ public class Shield : MonoBehaviour
         Vector3 directionToTarget = (amuletRaycast_P2.chosenTarget.transform.position - projectileRb.position).normalized;
         projectileRb.velocity = directionToTarget * 5;
        // projectileRb.AddForce(directionToTarget * deflectionForce, ForceMode.Impulse);
+       enemyManager.ResetPrintedLog();
     }
     else
     {

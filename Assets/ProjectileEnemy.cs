@@ -10,6 +10,8 @@ public class ProjectileEnemy : MonoBehaviour
 
     public GameObject instantiatedObject;
 
+    
+
     private Transform targetPlayer;
 
     
@@ -18,7 +20,7 @@ public class ProjectileEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+       
     }
    
     // Update is called once per frame
@@ -32,6 +34,8 @@ public class ProjectileEnemy : MonoBehaviour
 
       instantiatedObject.GetComponent<ShootTowardsPlayer>().target = targetPlayer;
       instantiatedObject.GetComponent<ShootTowardsPlayer>().initialDirection = initialDirection;
+
+      
 
              
 
