@@ -490,6 +490,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deflectionForce: 10
   targetPosition: {fileID: 1219612310}
+  shieldHit: 0
 --- !u!1 &797462828
 GameObject:
   m_ObjectHideFlags: 0
@@ -504,6 +505,7 @@ GameObject:
   - component: {fileID: 797462834}
   - component: {fileID: 797462833}
   - component: {fileID: 797462829}
+  - component: {fileID: 797462835}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -626,22 +628,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMaterial: {fileID: 2100000, guid: 333883bb984c8e14fbd42f672b8c7d1b, type: 2}
---- !u!114 &808674125
+--- !u!114 &797462835
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8477929700190667829}
+  m_GameObject: {fileID: 797462828}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28a057363c2a9cf41bddcf21bc8e7847, type: 3}
+  m_Script: {fileID: 11500000, guid: b0245ddb77d678949be296e10029a536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canAttack: 0
-  prefabPlayer2: {fileID: 4980466625467018165, guid: 1f371a2ebd3e09449acda51de252221c, type: 3}
-  enemy1: {fileID: 2095348270}
-  enemy2: {fileID: 1219612310}
 --- !u!1 &936653048
 GameObject:
   m_ObjectHideFlags: 0
@@ -782,6 +780,7 @@ MonoBehaviour:
   shield: {fileID: 740696754}
   shieldForP2: {fileID: 1737275643276486487}
   sameTarget: 0
+  p2Raycast: {fileID: 0}
 --- !u!4 &962657434
 Transform:
   m_ObjectHideFlags: 0
@@ -792,6 +791,52 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 22.20439, y: -13.20309, z: 0.66423106}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1048209371
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1048209373}
+  - component: {fileID: 1048209372}
+  m_Layer: 0
+  m_Name: EnemyActionManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1048209372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048209371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d2f06f3d01450d4994312c89a242c2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playersActions: {fileID: 962657433}
+  shield: {fileID: 740696759}
+--- !u!4 &1048209373
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048209371}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 22.019531, y: -15.856216, z: -4.209817}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1300,7 +1345,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1907282434}
-  - component: {fileID: 1907282435}
   m_Layer: 0
   m_Name: Enemies
   m_TagString: Untagged
@@ -1325,18 +1369,6 @@ Transform:
   - {fileID: 1219612310}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1907282435
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1907282433}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d2f06f3d01450d4994312c89a242c2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2086365337
 GameObject:
   m_ObjectHideFlags: 0
@@ -1880,7 +1912,7 @@ Transform:
   m_GameObject: {fileID: 4080808580867404058}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.52, y: -0.08, z: -2.55}
+  m_LocalPosition: {x: -1.4, y: -0.61, z: -0.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2026,7 +2058,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8444420303909579875}
   - component: {fileID: 7153129895792983517}
-  - component: {fileID: 808674125}
   m_Layer: 8
   m_Name: TriggerCollider
   m_TagString: ColliderPlayerTwo
@@ -2077,3 +2108,4 @@ SceneRoots:
   - {fileID: 740696758}
   - {fileID: 88242914}
   - {fileID: 797462832}
+  - {fileID: 1048209373}

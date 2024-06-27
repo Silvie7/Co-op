@@ -7,6 +7,7 @@ public class Shield : MonoBehaviour
     public float deflectionForce = 10f;
     public Transform targetPosition;
     private AmuletRaycast_P2 amuletRaycast_P2;
+    public bool shieldHit = false;
 
     void Start ()
     {
@@ -17,6 +18,7 @@ public class Shield : MonoBehaviour
   {
     if (collision.gameObject.GetComponent<ShootTowardsPlayer>()!= null)
     {
+        shieldHit = true;
         Rigidbody projectileRb = collision.gameObject.GetComponent<Rigidbody>();
         ShootTowardsPlayer shootTowardsPlayer = collision.gameObject.GetComponent<ShootTowardsPlayer>();
 
@@ -31,6 +33,10 @@ public class Shield : MonoBehaviour
         Vector3 directionToTarget = (amuletRaycast_P2.chosenTarget.transform.position - projectileRb.position).normalized;
         projectileRb.velocity = directionToTarget * 5;
        // projectileRb.AddForce(directionToTarget * deflectionForce, ForceMode.Impulse);
+    }
+    else
+    {
+      shieldHit = false;
     }
   }
 }

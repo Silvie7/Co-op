@@ -11,7 +11,7 @@ public class PlayersActions : MonoBehaviour
 
    public bool sameTarget = false;
 
-   private AmuletRaycast_P2 p2Raycast;
+   public AmuletRaycast_P2 p2Raycast;
    private AmuletRaycast_P1 p1Raycast;
    private PlayerOneManager p1Energy; //player 1 manager script, takes energy info
 
