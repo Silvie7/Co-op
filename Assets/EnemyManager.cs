@@ -11,6 +11,7 @@ public class EnemyManager : MonoBehaviour
     public GameObject enemy2;
     public Transform position1;
     public Transform position2;
+    public GameObject enemyShield;
 
     private bool hasPrintedLog = false;
     // Start is called before the first frame update
@@ -84,12 +85,14 @@ public class EnemyManager : MonoBehaviour
 
     IEnumerator MoveEnemy(GameObject enemy, Vector3 targetPosition)
     {
-        float speed = 2.0f; //movement speed of the enemies
+        float speed = 5.0f; //movement speed of the enemies
         while (Vector3.Distance(enemy.transform.position, targetPosition) > 0.01f)
         {
             enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, targetPosition, speed * Time.deltaTime);
             yield return null;
         }
         enemy.transform.position = targetPosition;
+        enemyShield.SetActive(true);
     }   
+    
 }
