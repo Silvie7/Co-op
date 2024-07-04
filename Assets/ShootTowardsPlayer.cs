@@ -80,6 +80,7 @@ public class ShootTowardsPlayer : MonoBehaviour
         if (collision.gameObject.CompareTag("ColliderEnemyOne") || collision.gameObject.CompareTag("ColliderEnemyTwo")) 
         {
             hasHitEnemy = true;
+            // Destroy(gameObject);
         }    
         
     }

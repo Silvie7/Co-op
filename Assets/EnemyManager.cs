@@ -7,6 +7,11 @@ public class EnemyManager : MonoBehaviour
     public PlayersActions playersActions;
     public Shield shield;
 
+    public GameObject enemy1;
+    public GameObject enemy2;
+    public Transform position1;
+    public Transform position2;
+
     private bool hasPrintedLog = false;
     // Start is called before the first frame update
     void Start()
@@ -27,7 +32,7 @@ public class EnemyManager : MonoBehaviour
                     if (shield?.shieldHit == true && !hasPrintedLog)
                     {
                         Debug.Log ("SHIELD HIT");
-                        PrintRandomLog();
+                        ActivateShield();
                         hasPrintedLog = true;
                       
                     }
@@ -56,17 +61,35 @@ public class EnemyManager : MonoBehaviour
     }
 
       void PrintRandomLog()
+        {
+            string[] randomLogs = new string[]
             {
-                string[] randomLogs = new string[]
-                {
-                    "RANDOM 1",
-                    "RANDOM 2",
-                    "RANDOM 3"   
-                };
-                    int randomIndex = Random.Range(0, randomLogs.Length);
-                    string randomLog = randomLogs[randomIndex];
-                    Debug.Log(randomLog);
+                "RANDOM 1",
+                "RANDOM 2",
+                "RANDOM 3"   
+            };
+            int randomIndex = Random.Range(0, randomLogs.Length);
+            string randomLog = randomLogs[randomIndex];
+            Debug.Log(randomLog);
                     
                        
-            }
+        }
+    
+    
+    void ActivateShield()
+    {
+        StartCoroutine(MoveEnemy(enemy1, position1.position));
+        StartCoroutine(MoveEnemy(enemy2, position2.position));
+    }
+
+    IEnumerator MoveEnemy(GameObject enemy, Vector3 targetPosition)
+    {
+        float speed = 2.0f; //movement speed of the enemies
+        while (Vector3.Distance(enemy.transform.position, targetPosition) > 0.01f)
+        {
+            enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, targetPosition, speed * Time.deltaTime);
+            yield return null;
+        }
+        enemy.transform.position = targetPosition;
+    }   
 }
