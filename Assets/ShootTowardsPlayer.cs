@@ -14,6 +14,7 @@ public class ShootTowardsPlayer : MonoBehaviour
     private GameObject territoryP;
 
     public ProjectilePlayer projectilePlayer;
+    public TurnsManager turnsManager;
 
     private float shootForce = 10f; 
     private Rigidbody rb;
@@ -33,6 +34,8 @@ public class ShootTowardsPlayer : MonoBehaviour
 
         rb = GetComponent<Rigidbody>();
         rb.AddForce(initialDirection * shootForce, ForceMode.Impulse);
+
+        turnsManager = GameObject.Find("TurnsManager").GetComponent<TurnsManager>();
 
            
         
@@ -68,6 +71,8 @@ public class ShootTowardsPlayer : MonoBehaviour
         if (collision.gameObject.CompareTag("ColliderPlayerOne") || collision.gameObject.CompareTag("ColliderPlayerTwo")) 
         {
             hasHitPlayer = true;
+            turnsManager.playerHit = true;
+            Debug.Log("shoot towars true");
             // Scale up the TerritoryE object
             territoryE.transform.localScale += new Vector3(1, 0, 0); 
             Destroy(gameObject); 

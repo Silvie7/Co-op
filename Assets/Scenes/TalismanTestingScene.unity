@@ -1615,7 +1615,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1631623047}
-  - component: {fileID: 1631623046}
+  - component: {fileID: 1631623048}
   m_Layer: 0
   m_Name: TurnsManager
   m_TagString: Untagged
@@ -1623,25 +1623,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1631623046
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1631623045}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 042fc441892154446a23f6c9e2280a3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  players:
-  - {fileID: 493443947}
-  - {fileID: 1730361236088485714}
-  enemies:
-  - {fileID: 2095348266}
-  - {fileID: 1219612306}
-  hitEnemy: {fileID: 8802150159427312967, guid: e4c5a9c7259b1224b8b48992ab272974, type: 3}
 --- !u!4 &1631623047
 Transform:
   m_ObjectHideFlags: 0
@@ -1657,6 +1638,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1631623048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1631623045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf29205423d1b4544bffee27b15cc9c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentTurn: 0
+  playerHit: 0
+  projectileEnemy: {fileID: 2117621520}
+  shootTowardsPlayer: {fileID: 8802150159427312967, guid: e4c5a9c7259b1224b8b48992ab272974, type: 3}
 --- !u!1 &1907282433
 GameObject:
   m_ObjectHideFlags: 0
