@@ -13,6 +13,8 @@ public class EnemyManager : MonoBehaviour
     public Transform position2;
     public GameObject enemyShield;
 
+    public GameObject shieldE1;
+
     private bool hasPrintedLog = false;
     // Start is called before the first frame update
     void Start()
@@ -86,7 +88,7 @@ public class EnemyManager : MonoBehaviour
     {
         System.Action[] randomActions = new System.Action[]
         {
-            ActivateShield,
+            ActivateShieldForEnemy1,
             Action3,
             Action4
         };
@@ -131,5 +133,11 @@ public class EnemyManager : MonoBehaviour
      void Action4()
     {
         Debug.Log("ACTION4");
+    }
+
+    void ActivateShieldForEnemy1()
+    {
+        // shieldE1.SetActive(true);
+  
     }
 }

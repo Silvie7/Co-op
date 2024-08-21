@@ -85,7 +85,7 @@ public class PlayersActions : MonoBehaviour
           
 
         //SHIELD FOR PROTECTING PLAYER TWO
-        // If player one hits player two and presses square it activates
+        // If player one hits player two and presses square it sets shield bool to true
         if (p1Raycast.P2Hit == true && Input.GetButton("Square"))
         {
             shieldP2 = true;
@@ -97,7 +97,7 @@ public class PlayersActions : MonoBehaviour
         }
 
         //SHIELD FOR PROTECTING PLAYER ONE
-         // If player two hits player one and presses square it activates
+         // If player two hits player one and presses q it activates
         if (p2Raycast.P1Hit == true && Input.GetKey("q"))
         {
             shieldP1 = true;

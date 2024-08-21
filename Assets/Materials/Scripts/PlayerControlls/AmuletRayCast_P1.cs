@@ -63,6 +63,7 @@ public class AmuletRaycast_P1 : MonoBehaviour
                     Debug.Log("PLAYER TWO HIT");
                     P2Hit = true;
                 }
+    
                  else if (hitinfo.collider.gameObject == target1 || hitinfo.collider.gameObject == target2 || hitinfo.collider.gameObject == target3 || hitinfo.collider.gameObject == target4)
                 {
                     //set the aimedTarget variable to the object that was hit
@@ -85,6 +86,7 @@ public class AmuletRaycast_P1 : MonoBehaviour
                         p1Key = false;
                     }
                 }
+                
            }  
         }
         else
@@ -96,7 +98,7 @@ public class AmuletRaycast_P1 : MonoBehaviour
             {
                 targetScript.player1Hit = false;
             }
-           
+           P2Hit = false;
            
         }
        

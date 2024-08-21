@@ -52,6 +52,7 @@ public class TurnsManager : MonoBehaviour
             Debug.Log ("Is players turn");
         }
 
+        //PLAYERS TURN
         if (currentTurn == Turn.Player)
         {
             if (pActionScript.sameTarget == true)
