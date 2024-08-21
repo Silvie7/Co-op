@@ -7,9 +7,15 @@ public class PlayersActions : MonoBehaviour
    public bool aimingBoth = false; //both aim at each other
    public bool bothPressX = false; //both are pressing x
    public GameObject shield; //shield for both that push the ball away
-   public GameObject shieldForP2; //shield that only protects player 2 (don't know what else it does for now)
+   public GameObject shieldForP1;
+   public GameObject shieldForP2;
+
+   public bool charging = false;
+   
 
    public bool sameTarget = false;
+   public bool shieldP2 = false; //shield only for p2 made by p1
+   public bool shieldP1 = false; //shield only for p1 made by p2
 
    public AmuletRaycast_P2 p2Raycast;
    private AmuletRaycast_P1 p1Raycast;
@@ -28,7 +34,7 @@ public class PlayersActions : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //  SHIELD
+        //  SHIELD FOR BOTH PLAYERS
 
         //both players pressing X
         if (Input.GetButton("X") && Input.GetKey("x"))
@@ -54,25 +60,6 @@ public class PlayersActions : MonoBehaviour
         }
 
         //If both press X then activate the shield
-       
-        
-
-        //SHIELD FOR PROTECTING PLAYER TWO
-        // If player one hits player two and presses square it activates
-        if (p1Raycast.P2Hit == true && Input.GetButton("Square"))
-        {
-            shieldForP2.SetActive(true);
-        }
-        else
-        {
-            shieldForP2.SetActive(false);
-        }
-
-
-        // if (p2Raycast.P1Hit == true && Input.GetKey("o"))
-        // {
-        //     p1Energy.energy = 5f;   
-        // }
         
         if (p1Raycast.chosenTargetp1!= null && p2Raycast.chosenTarget!= null && p1Raycast.chosenTargetp1.name == p2Raycast.chosenTarget.name)
         {
@@ -83,16 +70,50 @@ public class PlayersActions : MonoBehaviour
             sameTarget = false;
         }
 
-        if (sameTarget == true)
+        // if (sameTarget == true)
+        // {
+        //     if (bothPressX == true )
+        //     {
+        //         shield.SetActive(true);
+        //     }
+        //     else
+        //     {
+        //         shield.SetActive(false);
+        //     }
+        // }
+
+          
+
+        //SHIELD FOR PROTECTING PLAYER TWO
+        // If player one hits player two and presses square it activates
+        if (p1Raycast.P2Hit == true && Input.GetButton("Square"))
         {
-            if (bothPressX == true )
-            {
-                shield.SetActive(true);
-            }
-            else
-            {
-                shield.SetActive(false);
-            }
+            shieldP2 = true;
+           
         }
+        else
+        {
+            shieldP2 = false;
+        }
+
+        //SHIELD FOR PROTECTING PLAYER ONE
+         // If player two hits player one and presses square it activates
+        if (p2Raycast.P1Hit == true && Input.GetKey("q"))
+        {
+            shieldP1 = true;
+           
+        }
+        else
+        {
+            shieldP1 = false;
+        }
+
+        //CHARGING ENERGY P1 lvl 1
+        if (p1Raycast.EnergyAmuletHit == true && Input.GetButton("Triangle"))
+        {
+            charging = true;
+        }
+
+
     }
 }

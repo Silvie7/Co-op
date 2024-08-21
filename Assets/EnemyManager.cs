@@ -33,9 +33,8 @@ public class EnemyManager : MonoBehaviour
                     if (shield?.shieldHit == true && !hasPrintedLog)
                     {
                         Debug.Log ("SHIELD HIT");
-                        ActivateShield();
-                        hasPrintedLog = true;
-                      
+                        PerformRandomActionSphere();
+                        hasPrintedLog = true; 
                     }
                     else if (shield?.shieldHit == false)
                     {
@@ -45,6 +44,16 @@ public class EnemyManager : MonoBehaviour
                 case "Cube":
                     break;
                 case "Enemy1":
+                    if (shield?.shieldHit == true && !hasPrintedLog)
+                    {
+                        Debug.Log ("SHIELD HIT");
+                        PerformRandomActionEnemy1();
+                        hasPrintedLog = true; 
+                    }
+                    else if (shield?.shieldHit == false)
+                    {
+                        hasPrintedLog = false;
+                    }
                     break;
                 case "Enemy2":
                     break;
@@ -61,20 +70,29 @@ public class EnemyManager : MonoBehaviour
         hasPrintedLog = false;
     }
 
-      void PrintRandomLog()
+    void PerformRandomActionSphere()
+    {
+        System.Action[] randomActions = new System.Action[]
         {
-            string[] randomLogs = new string[]
-            {
-                "RANDOM 1",
-                "RANDOM 2",
-                "RANDOM 3"   
-            };
-            int randomIndex = Random.Range(0, randomLogs.Length);
-            string randomLog = randomLogs[randomIndex];
-            Debug.Log(randomLog);
-                    
-                       
-        }
+            ActivateShield,
+            Action1,
+            Action2
+        };
+        int randomIndex = Random.Range(0, randomActions.Length);
+        randomActions[randomIndex]();                
+    }
+
+    void PerformRandomActionEnemy1()
+    {
+        System.Action[] randomActions = new System.Action[]
+        {
+            ActivateShield,
+            Action3,
+            Action4
+        };
+        int randomIndex = Random.Range(0, randomActions.Length);
+        randomActions[randomIndex]();    
+    }
     
     
     void ActivateShield()
@@ -94,5 +112,24 @@ public class EnemyManager : MonoBehaviour
         enemy.transform.position = targetPosition;
         enemyShield.SetActive(true);
     }   
+
+    void Action1()
+    {
+        Debug.Log("ACTION1");
+    }
     
+    void Action2()
+    {
+        Debug.Log("ACTION2");
+    }
+
+     void Action3()
+    {
+        Debug.Log("ACTION3");
+    }
+
+     void Action4()
+    {
+        Debug.Log("ACTION4");
+    }
 }

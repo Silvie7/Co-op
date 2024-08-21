@@ -25,6 +25,8 @@ public class AmuletRaycast_P1 : MonoBehaviour
 
     public bool p1Key = false;
 
+    public bool EnergyAmuletHit = false;
+    
     private Target targetScript;
 
     
@@ -50,6 +52,12 @@ public class AmuletRaycast_P1 : MonoBehaviour
            
            if (hitinfo.collider != null)
            {
+                //its charging amulet lvl 1
+                if (hitinfo.collider.tag == "EnergyAmuletlvl1")
+                {
+                    Debug.Log("Energy Amulet Hit");
+                    EnergyAmuletHit = true;
+                }
                 if (hitinfo.collider.tag == "ColliderPlayerTwo")
                 {
                     Debug.Log("PLAYER TWO HIT");

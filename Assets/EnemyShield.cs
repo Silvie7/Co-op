@@ -2,37 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shield : MonoBehaviour
+public class EnemyShield : MonoBehaviour
 {
-    public float deflectionForce = 10f;
-    public Transform targetPosition;
+    public bool eShieldHit = false;
     private AmuletRaycast_P2 amuletRaycast_P2;
-    public bool shieldHit = false;
     public EnemyManager enemyManager;
-
-    void Start ()
+    public Transform playerOne;
+    public Transform playerTwo;
+    // Start is called before the first frame update
+    void Start()
     {
-      amuletRaycast_P2 = GameObject.FindObjectOfType<AmuletRaycast_P2>();
+        amuletRaycast_P2 = GameObject.FindObjectOfType<AmuletRaycast_P2>();
       enemyManager = GameObject.FindObjectOfType<EnemyManager>();
     }
 
+    // Update is called once per frame
+    
   void OnCollisionEnter(Collision collision)
   {
     if (collision.gameObject.GetComponent<ShootTowardsPlayer>()!= null)
     {
-        shieldHit = true;
+        eShieldHit = true;
         Rigidbody projectileRb = collision.gameObject.GetComponent<Rigidbody>();
         ShootTowardsPlayer shootTowardsPlayer = collision.gameObject.GetComponent<ShootTowardsPlayer>();
 
-        shootTowardsPlayer.ChangeTarget(amuletRaycast_P2.chosenTarget.transform);
+        Transform randomTarget = Random.value < 0.5f ? playerOne : playerTwo;
+
+        shootTowardsPlayer.ChangeTarget(randomTarget);
         
-        Vector3 directionToTarget = (amuletRaycast_P2.chosenTarget.transform.position - projectileRb.position).normalized;
+        Vector3 directionToTarget = (randomTarget.position - projectileRb.position).normalized;
         projectileRb.velocity = directionToTarget * 5;
-       enemyManager.ResetPrintedLog();
+        enemyManager.ResetPrintedLog();
     }
     else
     {
-      shieldHit = false;
+      eShieldHit = false;
     }
   }
 }

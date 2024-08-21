@@ -14,6 +14,8 @@ public class TurnsManager : MonoBehaviour
     public ShootTowardsPlayer shootTowardsPlayer;
 
     private bool gameStart = false;
+    private PlayersActions pActionScript;
+    private PlayerOneManager p1Manager;
     
 
 
@@ -23,6 +25,8 @@ public class TurnsManager : MonoBehaviour
         //its enemies turn and they create the ball 
         gameStart = true;
         StartCoroutine(CheckForPlayerHit());
+        pActionScript = FindObjectOfType<PlayersActions>();
+        p1Manager = FindObjectOfType<PlayerOneManager>();
 
     }
 
@@ -42,14 +46,54 @@ public class TurnsManager : MonoBehaviour
                 gameStart = false;
                 StartCoroutine(SwitchTurnAfterDelay(2f));
             }
-            //EnemyAction();
-            //SwitchTurn();
         }
         else
         {
             Debug.Log ("Is players turn");
-            PlayerAction();
-            //SwitchTurn();
+        }
+
+        if (currentTurn == Turn.Player)
+        {
+            if (pActionScript.sameTarget == true)
+            {
+                if (pActionScript.bothPressX == true)
+                {
+                    pActionScript.shield.SetActive(true);
+                }
+            }
+
+            //SHIELD ONLY FOR PLAYER 2
+            if (pActionScript.shieldP2 == true)
+            {
+                pActionScript.shieldForP2.SetActive(true);
+                
+            }
+            else
+            {
+                pActionScript.shieldForP2.SetActive(false);
+            }
+
+            //SHIELD ONLY FOR PLAYER 1
+            if (pActionScript.shieldP1 == true)
+            {
+                pActionScript.shieldForP1.SetActive(true);
+                
+            }
+            else
+            {
+                pActionScript.shieldForP1.SetActive(false);
+            }
+            
+            //charging p1 energy with lvl 1 amulet 
+            if (pActionScript.charging = true)
+            {
+                p1Manager.p1Energy += 2;
+            }
+
+            // if (Input THIS)
+            // {
+            //     StealingBall = true
+            // }
         }
     }
 
@@ -87,17 +131,17 @@ public class TurnsManager : MonoBehaviour
         currentTurn = (currentTurn == Turn.Enemy) ? Turn.Player : Turn.Enemy;
     }
 
-    //ENEMY ACTIONS
-    void EnemyAction()
-    {
-        //enemy does something
-    }
+    // //ENEMY ACTIONS
+    // void EnemyAction()
+    // {
+    //     //enemy does something
+    // }
 
-    //PLAYER ACTIONS
-    void PlayerAction()
-    {
-        //player does something
-    }
+    // //PLAYER ACTIONS
+    // void PlayerAction()
+    // {
+    //     //player does something
+    // }
 }
 
 
