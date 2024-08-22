@@ -25,7 +25,7 @@ public class AmuletRaycast_P1 : MonoBehaviour
 
     public bool p1Key = false;
 
-    public bool EnergyAmuletHit = false;
+    public bool EnergyAmuletHitP1 = false;
     
     private Target targetScript;
 
@@ -56,7 +56,7 @@ public class AmuletRaycast_P1 : MonoBehaviour
                 if (hitinfo.collider.tag == "EnergyAmuletlvl1")
                 {
                     Debug.Log("Energy Amulet Hit");
-                    EnergyAmuletHit = true;
+                    EnergyAmuletHitP1 = true;
                 }
                 if (hitinfo.collider.tag == "ColliderPlayerTwo")
                 {
@@ -99,6 +99,7 @@ public class AmuletRaycast_P1 : MonoBehaviour
                 targetScript.player1Hit = false;
             }
            P2Hit = false;
+           EnergyAmuletHitP1 = false;
            
         }
        

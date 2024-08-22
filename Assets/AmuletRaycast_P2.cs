@@ -28,6 +28,8 @@ public class AmuletRaycast_P2 : MonoBehaviour
 
     private Target targetScript;
 
+    public bool EnergyAmuletHitP2 = false;
+
     
 
     // Start is called before the first frame update
@@ -51,6 +53,11 @@ public class AmuletRaycast_P2 : MonoBehaviour
            
            if (hitinfo.collider != null)
            {
+                if (hitinfo.collider.tag == "EnergyAmuletlvl1")
+                {
+                    EnergyAmuletHitP2 = true;
+                }
+
                 if (hitinfo.collider.tag == "ColliderPlayerOne")
                 {
                     Debug.Log("PLAYER ONE HIT");
@@ -89,7 +96,8 @@ public class AmuletRaycast_P2 : MonoBehaviour
             {
                 targetScript.player2Hit = false;
             }
-           
+           P1Hit = false;
+           EnergyAmuletHitP2 = false;
            
         }
        

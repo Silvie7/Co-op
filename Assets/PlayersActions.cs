@@ -10,7 +10,9 @@ public class PlayersActions : MonoBehaviour
    public GameObject shieldForP1;
    public GameObject shieldForP2;
 
-   public bool charging = false;
+   public bool chargingP1 = false;
+   public bool chargingP2 = false;
+   
    
 
    public bool sameTarget = false;
@@ -109,10 +111,26 @@ public class PlayersActions : MonoBehaviour
         }
 
         //CHARGING ENERGY P1 lvl 1
-        if (p1Raycast.EnergyAmuletHit == true && Input.GetButton("Triangle"))
+        if (p1Raycast.EnergyAmuletHitP1 == true && Input.GetButton("Triangle"))
         {
-            charging = true;
+            Debug.Log("TRIANGLE");
+            chargingP1 = true;
         }
+        else
+        {
+            chargingP1 = false;
+        }
+
+        if (p2Raycast.EnergyAmuletHitP2 == true && Input.GetKeyDown("e"))
+        {
+            chargingP2 = true;
+        }
+        else
+        {
+            chargingP2 = false;
+        }
+
+
 
 
     }

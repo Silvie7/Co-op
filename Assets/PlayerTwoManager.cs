@@ -4,11 +4,7 @@ using UnityEngine;
 
 public class PlayerTwoManager : MonoBehaviour
 {
-    
-    
-
-    
-    
+    public float p2Energy = 10f;
     // Start is called before the first frame update
     void Start()
     {

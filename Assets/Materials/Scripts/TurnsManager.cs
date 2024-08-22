@@ -16,6 +16,7 @@ public class TurnsManager : MonoBehaviour
     private bool gameStart = false;
     private PlayersActions pActionScript;
     private PlayerOneManager p1Manager;
+    private PlayerTwoManager p2Manager;
     
 
 
@@ -27,6 +28,7 @@ public class TurnsManager : MonoBehaviour
         StartCoroutine(CheckForPlayerHit());
         pActionScript = FindObjectOfType<PlayersActions>();
         p1Manager = FindObjectOfType<PlayerOneManager>();
+        p2Manager = FindObjectOfType<PlayerTwoManager>();
 
     }
 
@@ -86,10 +88,16 @@ public class TurnsManager : MonoBehaviour
             }
             
             //charging p1 energy with lvl 1 amulet 
-            if (pActionScript.charging = true)
+            if (pActionScript.chargingP1 == true)
             {
                 p1Manager.p1Energy += 2;
             }
+
+            if (pActionScript.chargingP2 == true)
+            {
+                p2Manager.p2Energy += 2;
+            }
+
 
             // if (Input THIS)
             // {

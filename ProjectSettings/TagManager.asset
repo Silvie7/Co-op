@@ -15,6 +15,7 @@ TagManager:
   - ColliderEnemyTwo
   - ShieldForP2
   - ShieldFor
+  - EnergyAmuletlvl1
   layers:
   - Default
   - TransparentFX
