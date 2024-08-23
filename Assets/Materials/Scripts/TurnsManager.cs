@@ -17,6 +17,7 @@ public class TurnsManager : MonoBehaviour
     private PlayersActions pActionScript;
     private PlayerOneManager p1Manager;
     private PlayerTwoManager p2Manager;
+    private ChargingAmuletLvl1 chargingAmulet1;
     
 
 
@@ -29,6 +30,7 @@ public class TurnsManager : MonoBehaviour
         pActionScript = FindObjectOfType<PlayersActions>();
         p1Manager = FindObjectOfType<PlayerOneManager>();
         p2Manager = FindObjectOfType<PlayerTwoManager>();
+        chargingAmulet1 = FindObjectOfType<ChargingAmuletLvl1>();
 
     }
 
@@ -88,14 +90,16 @@ public class TurnsManager : MonoBehaviour
             }
             
             //charging p1 energy with lvl 1 amulet 
-            if (pActionScript.chargingP1 == true)
+            if (pActionScript.chargingP1 == true && !chargingAmulet1.isOnCooldown)
             {
                 p1Manager.p1Energy += 2;
+                chargingAmulet1.StartCoroutine(chargingAmulet1.ChargingCooldown(chargingAmulet1.cooldownTime));
             }
 
-            if (pActionScript.chargingP2 == true)
+            if (pActionScript.chargingP2 == true && !chargingAmulet1.isOnCooldown)
             {
                 p2Manager.p2Energy += 2;
+                chargingAmulet1.StartCoroutine(chargingAmulet1.ChargingCooldown(chargingAmulet1.cooldownTime));
             }
 
 

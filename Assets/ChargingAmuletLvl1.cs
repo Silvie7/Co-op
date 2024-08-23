@@ -4,27 +4,20 @@ using UnityEngine;
 
 public class ChargingAmuletLvl1 : MonoBehaviour
 {
-    public float cooldownTime = 5f;
-    private bool isOnCooldown = false;
-
-    public bool canCharge { get { return !isOnCooldown;} }
-
-    // Start is called before the first frame update
+   public float cooldownTime = 5f;
+   public bool isOnCooldown = false;
     void Start()
     {
-        isOnCooldown = false;
+       
     }
 
-    // Update is called once per frame
-   public void StartCooldown()
+    public IEnumerator ChargingCooldown(float cooldownTime)
     {
         isOnCooldown = true;
-        StartCoroutine(ResetCooldown());
-    }
-
-    private IEnumerator ResetCooldown()
-    {
         yield return new WaitForSeconds(cooldownTime);
         isOnCooldown = false;
     }
+    
+
+    
 }
