@@ -112,7 +112,7 @@ public class EnemyManager : MonoBehaviour
             yield return null;
         }
         enemy.transform.position = targetPosition;
-        enemyShield.SetActive(true);
+        enemyShield.SetActive(true); 
     }   
 
     void Action1()

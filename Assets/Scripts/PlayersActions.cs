@@ -13,7 +13,7 @@ public class PlayersActions : MonoBehaviour
    public bool chargingP1 = false;
    public bool chargingP2 = false;
    
-   
+   public bool stealingBall = false;
 
    public bool sameTarget = false;
    public bool shieldP2 = false; //shield only for p2 made by p1
@@ -128,6 +128,16 @@ public class PlayersActions : MonoBehaviour
         else
         {
             chargingP2 = false;
+        }
+
+        //Ball stealing
+        if (p1Raycast.hitsBallColliderP1 == true && p2Raycast.hitsBallColliderP2 == true)
+        {
+            if (Input.GetKey("r") && Input.GetButton("R2"))
+            {
+                stealingBall = true;
+            }
+
         }
 
 

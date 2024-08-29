@@ -16,6 +16,7 @@ TagManager:
   - ShieldForP2
   - ShieldFor
   - EnergyAmuletlvl1
+  - Ball
   layers:
   - Default
   - TransparentFX
@@ -27,7 +28,7 @@ TagManager:
   - Player One
   - Player Two
   - ShieldFor
-  - 
+  - BallCollider
   - 
   - 
   - 

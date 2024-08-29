@@ -15,9 +15,17 @@ public class ShootTowardsPlayer : MonoBehaviour
 
     public ProjectilePlayer projectilePlayer;
     public TurnsManager turnsManager;
+    public Transform ballPosition;
+    public EnemyManager enemyManager;
+    public PlayersActions pActionScript;
 
     private float shootForce = 10f; 
-    private Rigidbody rb;
+    public Rigidbody rb;
+
+    private float normalSpeed = 5f;
+    private float slowSpeed = 1f; //spead of the ball
+
+    private bool isInSlowZone = false;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +44,9 @@ public class ShootTowardsPlayer : MonoBehaviour
         rb.AddForce(initialDirection * shootForce, ForceMode.Impulse);
 
         turnsManager = GameObject.Find("TurnsManager").GetComponent<TurnsManager>();
+        enemyManager = GameObject.FindObjectOfType<EnemyManager>();
+        pActionScript = GameObject.FindObjectOfType<PlayersActions>();
+
 
            
         
@@ -46,16 +57,19 @@ public class ShootTowardsPlayer : MonoBehaviour
          if (target!= null)
          {
             Vector3 directionToTarget = (target.position - transform.position).normalized;
-            rb.velocity = directionToTarget * 5f;
-            // transform.position = Vector3.MoveTowards(transform.position, target.position, 10f * Time.deltaTime);
-             //transform.rotation = Quaternion.LookRotation(initialDirection);
+            float currentSpeed = isInSlowZone ? slowSpeed : normalSpeed;
+            rb.velocity = directionToTarget * currentSpeed;
+            
          }
 
-        // if (target!= null)
-        // {
-        //     Vector3 direction = (target.position - transform.position).normalized;
-        //     rb.velocity = direction * shootForce;
-        // }
+        if (pActionScript.stealingBall == true)
+        {
+           ChangeTarget(ballPosition.transform);
+           Vector3 directionToTarget = (ballPosition.transform.position - rb.position).normalized;
+            rb.velocity = directionToTarget * 5;
+            enemyManager.ResetPrintedLog();
+            pActionScript.stealingBall = false;  
+        }
     }
 
     public void ChangeTarget(Transform newTarget)
@@ -85,10 +99,28 @@ public class ShootTowardsPlayer : MonoBehaviour
         if (collision.gameObject.CompareTag("ColliderEnemyOne") || collision.gameObject.CompareTag("ColliderEnemyTwo")) 
         {
             hasHitEnemy = true;
-            // Destroy(gameObject);
+            //Destroy(gameObject);
         }    
         
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("SlowZone"))
+        {
+            isInSlowZone = true;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if(other.CompareTag("SlowZone"))
+        {
+            isInSlowZone = false;
+        }
+    }
+    
+   
     
 }
 

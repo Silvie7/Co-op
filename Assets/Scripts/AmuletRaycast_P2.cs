@@ -29,6 +29,7 @@ public class AmuletRaycast_P2 : MonoBehaviour
     private Target targetScript;
 
     public bool EnergyAmuletHitP2 = false;
+    public bool hitsBallColliderP2 = false;
 
     
 
@@ -53,6 +54,10 @@ public class AmuletRaycast_P2 : MonoBehaviour
            
            if (hitinfo.collider != null)
            {
+                if (hitinfo.collider.tag == "BallCollider")
+                {
+                    hitsBallColliderP2 = true;
+                }
                 if (hitinfo.collider.tag == "EnergyAmuletlvl1")
                 {
                     EnergyAmuletHitP2 = true;

@@ -26,6 +26,7 @@ public class AmuletRaycast_P1 : MonoBehaviour
     public bool p1Key = false;
 
     public bool EnergyAmuletHitP1 = false;
+    public bool hitsBallColliderP1 = false;
     
     private Target targetScript;
 
@@ -52,6 +53,10 @@ public class AmuletRaycast_P1 : MonoBehaviour
            
            if (hitinfo.collider != null)
            {
+                if (hitinfo.collider.tag == "BallCollider")
+                {
+                    hitsBallColliderP1 = true;
+                }
                 //its charging amulet lvl 1
                 if (hitinfo.collider.tag == "EnergyAmuletlvl1")
                 {
@@ -100,6 +105,7 @@ public class AmuletRaycast_P1 : MonoBehaviour
             }
            P2Hit = false;
            EnergyAmuletHitP1 = false;
+           hitsBallColliderP1 = false;
            
         }
        
