@@ -136,6 +136,7 @@ public class PlayersActions : MonoBehaviour
             if (Input.GetKey("r") && Input.GetButton("R2"))
             {
                 stealingBall = true;
+                Debug.Log("STEAL");
             }
 
         }

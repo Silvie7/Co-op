@@ -18,7 +18,10 @@ public class TurnsManager : MonoBehaviour
     private PlayerOneManager p1Manager;
     private PlayerTwoManager p2Manager;
     private ChargingAmuletLvl1 chargingAmulet1;
+    private EnemyManager enemyManager;
     
+    private GameObject ball;
+    public Transform ballPosition;
 
 
     // Start is called before the first frame update
@@ -31,7 +34,7 @@ public class TurnsManager : MonoBehaviour
         p1Manager = FindObjectOfType<PlayerOneManager>();
         p2Manager = FindObjectOfType<PlayerTwoManager>();
         chargingAmulet1 = FindObjectOfType<ChargingAmuletLvl1>();
-
+        enemyManager = FindObjectOfType<EnemyManager>();
     }
 
     // Update is called once per frame
@@ -103,10 +106,21 @@ public class TurnsManager : MonoBehaviour
             }
 
 
-            // if (Input THIS)
-            // {
-            //     StealingBall = true
-            // }
+            if (pActionScript.stealingBall == true)
+            {
+                shootTowardsPlayer = GameObject.FindGameObjectWithTag("Ball").GetComponent<ShootTowardsPlayer>();
+
+                if (shootTowardsPlayer != null)
+                {
+                    Rigidbody ballRb = shootTowardsPlayer.GetComponent<Rigidbody>();
+               
+                    shootTowardsPlayer.ChangeTarget(ballPosition.transform);
+
+                    Vector3 directionToBallTarget = (ballPosition.transform.position - ballRb.position).normalized;
+                    ballRb.velocity = directionToBallTarget * 5;
+                    enemyManager.ResetPrintedLog();
+                }
+            }
         }
     }
 

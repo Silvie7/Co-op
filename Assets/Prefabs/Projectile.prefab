@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8802150159427312967}
   m_Layer: 0
   m_Name: Projectile
-  m_TagString: Untagged
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -153,7 +153,6 @@ MonoBehaviour:
   hasHitEnemy: 0
   projectilePlayer: {fileID: 0}
   turnsManager: {fileID: 0}
-  ballPosition: {fileID: 0}
   enemyManager: {fileID: 0}
   pActionScript: {fileID: 0}
   rb: {fileID: 0}
@@ -168,9 +167,9 @@ GameObject:
   - component: {fileID: 3130555776207116395}
   - component: {fileID: 5594669907850061724}
   - component: {fileID: 4896547650609824576}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: ColliderBall
-  m_TagString: Untagged
+  m_TagString: BallCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -56,6 +56,7 @@ public class AmuletRaycast_P1 : MonoBehaviour
                 if (hitinfo.collider.tag == "BallCollider")
                 {
                     hitsBallColliderP1 = true;
+                    Debug.Log("HITBALL");
                 }
                 //its charging amulet lvl 1
                 if (hitinfo.collider.tag == "EnergyAmuletlvl1")

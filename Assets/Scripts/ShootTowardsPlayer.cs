@@ -15,7 +15,7 @@ public class ShootTowardsPlayer : MonoBehaviour
 
     public ProjectilePlayer projectilePlayer;
     public TurnsManager turnsManager;
-    public Transform ballPosition;
+    // public Transform ballPosition;
     public EnemyManager enemyManager;
     public PlayersActions pActionScript;
 
@@ -62,14 +62,14 @@ public class ShootTowardsPlayer : MonoBehaviour
             
          }
 
-        if (pActionScript.stealingBall == true)
-        {
-           ChangeTarget(ballPosition.transform);
-           Vector3 directionToTarget = (ballPosition.transform.position - rb.position).normalized;
-            rb.velocity = directionToTarget * 5;
-            enemyManager.ResetPrintedLog();
-            pActionScript.stealingBall = false;  
-        }
+        // // if (pActionScript.stealingBall == true)
+        // // {
+        // //    ChangeTarget(ballPosition.transform);
+        // //    Vector3 directionToTarget = (ballPosition.transform.position - rb.position).normalized;
+        // //     rb.velocity = directionToTarget * 5;
+        // //     enemyManager.ResetPrintedLog();
+        // //     pActionScript.stealingBall = false;  
+        // }
     }
 
     public void ChangeTarget(Transform newTarget)
