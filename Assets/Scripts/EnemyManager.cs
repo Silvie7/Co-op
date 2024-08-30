@@ -15,6 +15,8 @@ public class EnemyManager : MonoBehaviour
     public Transform startPosition2;
     public GameObject enemyShield;
     public EnemyShield enemyShieldScript;
+    public AmuletRaycast_P1 rayCastP1;
+    public AmuletRaycast_P2 rayCastP2;
 
     public GameObject shieldE1;
 
@@ -110,6 +112,8 @@ public class EnemyManager : MonoBehaviour
             enemyShield.SetActive(false);
              StartCoroutine(ResetPosition(enemy1, startPosition1.position));
              StartCoroutine(ResetPosition(enemy2, startPosition2.position));
+             rayCastP1.chosenTargetp1 = null;
+             rayCastP2.chosenTarget = null;
 
         }   
     }

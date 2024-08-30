@@ -68,6 +68,12 @@ public class TurnsManager : MonoBehaviour
                 {
                     pActionScript.shield.SetActive(true);
                 }
+                
+            }
+            else
+            {
+                
+                pActionScript.shield.SetActive (false);
             }
 
             //SHIELD ONLY FOR PLAYER 2
