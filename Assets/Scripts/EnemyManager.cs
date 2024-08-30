@@ -11,7 +11,10 @@ public class EnemyManager : MonoBehaviour
     public GameObject enemy2;
     public Transform position1;
     public Transform position2;
+    public Transform startPosition1;
+    public Transform startPosition2;
     public GameObject enemyShield;
+    public EnemyShield enemyShieldScript;
 
     public GameObject shieldE1;
 
@@ -21,6 +24,7 @@ public class EnemyManager : MonoBehaviour
     {
         playersActions = playersActions ?? FindObjectOfType<PlayersActions>();
         shield = shield ?? FindObjectOfType<Shield>(); 
+       
         
     }
 
@@ -77,8 +81,8 @@ public class EnemyManager : MonoBehaviour
         System.Action[] randomActions = new System.Action[]
         {
             ActivateShield,
-            Action1,
-            Action2
+            // Action1,
+            // Action2
         };
         int randomIndex = Random.Range(0, randomActions.Length);
         randomActions[randomIndex]();                
@@ -101,6 +105,13 @@ public class EnemyManager : MonoBehaviour
     {
         StartCoroutine(MoveEnemy(enemy1, position1.position));
         StartCoroutine(MoveEnemy(enemy2, position2.position));
+        if (enemyShieldScript.eShieldHit == true)
+        {
+            enemyShield.SetActive(false);
+             StartCoroutine(ResetPosition(enemy1, startPosition1.position));
+             StartCoroutine(ResetPosition(enemy2, startPosition2.position));
+
+        }   
     }
 
     IEnumerator MoveEnemy(GameObject enemy, Vector3 targetPosition)
@@ -112,8 +123,19 @@ public class EnemyManager : MonoBehaviour
             yield return null;
         }
         enemy.transform.position = targetPosition;
-        enemyShield.SetActive(true); 
+        enemyShield.SetActive(true);
     }   
+    
+    IEnumerator ResetPosition(GameObject enemy, Vector3 startingPosition)
+    {
+        float speed = 0.5f;
+        while (Vector3.Distance(enemy.transform.position, startingPosition)> 0.01f)
+        {
+            enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, startingPosition, speed * Time.deltaTime);
+            yield return null;
+        }
+        enemy.transform.position = startingPosition;
+    }
 
     void Action1()
     {
