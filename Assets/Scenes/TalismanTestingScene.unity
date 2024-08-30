@@ -1282,29 +1282,14 @@ GameObject:
   m_Component:
   - component: {fileID: 964852602}
   - component: {fileID: 964852601}
-  - component: {fileID: 964852600}
   - component: {fileID: 964852603}
   m_Layer: 0
   m_Name: SlowDownZone
-  m_TagString: Untagged
+  m_TagString: SlowZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &964852600
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 964852599}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45e86ad749262c940a1107f246544d35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slowDownSpeed: 20
-  slowDownTime: 60
 --- !u!65 &964852601
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2016,6 +2001,7 @@ MonoBehaviour:
   playerHit: 0
   projectileEnemy: {fileID: 2117621520}
   shootTowardsPlayer: {fileID: 8802150159427312967, guid: e4c5a9c7259b1224b8b48992ab272974, type: 3}
+  ballPosition: {fileID: 1739187929}
 --- !u!1 &1739187927
 GameObject:
   m_ObjectHideFlags: 0
@@ -2673,7 +2659,8 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1488822650666315340, guid: f192d3a7ea9f07a4ca9c625becb5345e, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1719757367204008222, guid: f192d3a7ea9f07a4ca9c625becb5345e, type: 3}

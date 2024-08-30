@@ -17,6 +17,8 @@ TagManager:
   - ShieldFor
   - EnergyAmuletlvl1
   - Ball
+  - SlowZone
+  - BallCollider
   layers:
   - Default
   - TransparentFX
