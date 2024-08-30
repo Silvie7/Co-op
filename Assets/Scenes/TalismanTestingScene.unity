@@ -1431,6 +1431,9 @@ MonoBehaviour:
   startPosition1: {fileID: 497924326}
   startPosition2: {fileID: 1898520246}
   enemyShield: {fileID: 676575013}
+  enemyShieldScript: {fileID: 676575018}
+  rayCastP1: {fileID: 1106020642}
+  rayCastP2: {fileID: 2086365339}
   shieldE1: {fileID: 0}
 --- !u!4 &1048209373
 Transform:
@@ -1644,6 +1647,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1106020642 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1160786214395302037, guid: f192d3a7ea9f07a4ca9c625becb5345e, type: 3}
+  m_PrefabInstance: {fileID: 4013473033303992819}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 157b5a81b02900d48b1f1b6da4372376, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1219612306
 GameObject:
   m_ObjectHideFlags: 0
