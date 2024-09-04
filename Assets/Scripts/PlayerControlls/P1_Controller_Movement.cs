@@ -38,12 +38,12 @@ public class P1_Controller_Movement : MonoBehaviour
 
         }
 
-        //Debug.Log(Input.GetButton("R2"));
-        if(Input.GetButton("R2"))
-        {
-            Debug.Log ("movementFalse");
-            movement = false;
-        }
+        // //Debug.Log(Input.GetButton("R2"));
+        // if(Input.GetButton("R2"))
+        // {
+        //     Debug.Log ("movementFalse");
+        //     movement = false;
+        // }
 
     }
 
