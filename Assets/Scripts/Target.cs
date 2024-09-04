@@ -34,15 +34,15 @@ public class Target : MonoBehaviour
 
         }
 
-        if (player2Hit || hasChosenTarget)
-        {
-            GetComponent<OutlineEffect>().EnableOutline();
+        // if (player2Hit || hasChosenTarget)
+        // {
+        //     GetComponent<OutlineEffect>().EnableOutline();
 
-        }
-        else if (!player2Hit || !hasChosenTarget)
-        {
-            GetComponent<OutlineEffect>().DisableOutline();
-        }
+        // }
+        // else if (!player2Hit || !hasChosenTarget)
+        // {
+        //     GetComponent<OutlineEffect>().DisableOutline();
+        // }
         
     }   
       
