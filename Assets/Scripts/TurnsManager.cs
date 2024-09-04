@@ -70,11 +70,11 @@ public class TurnsManager : MonoBehaviour
                 }
                 
             }
-            else
-            {
+            // else
+            // {
                 
-                pActionScript.shield.SetActive (false);
-            }
+            //     pActionScript.shield.SetActive (false);
+            // }
 
             //SHIELD ONLY FOR PLAYER 2
             if (pActionScript.shieldP2 == true)

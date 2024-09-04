@@ -6,6 +6,7 @@ public class EnemyManager : MonoBehaviour
 {
     public PlayersActions playersActions;
     public Shield shield;
+    public GameObject playerShield;
 
     public GameObject enemy1;
     public GameObject enemy2;
@@ -107,20 +108,21 @@ public class EnemyManager : MonoBehaviour
     {
         StartCoroutine(MoveEnemy(enemy1, position1.position));
         StartCoroutine(MoveEnemy(enemy2, position2.position));
+         playerShield.SetActive(false);
+
         if (enemyShieldScript.eShieldHit == true)
         {
             enemyShield.SetActive(false);
              StartCoroutine(ResetPosition(enemy1, startPosition1.position));
              StartCoroutine(ResetPosition(enemy2, startPosition2.position));
              rayCastP1.chosenTargetp1 = null;
-             rayCastP2.chosenTarget = null;
-
+             rayCastP2.chosenTarget = null; 
         }   
     }
 
     IEnumerator MoveEnemy(GameObject enemy, Vector3 targetPosition)
     {
-        float speed = 5.0f; //movement speed of the enemies
+        float speed = 3f; //movement speed of the enemies
         while (Vector3.Distance(enemy.transform.position, targetPosition) > 0.01f)
         {
             enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, targetPosition, speed * Time.deltaTime);
@@ -132,7 +134,8 @@ public class EnemyManager : MonoBehaviour
     
     IEnumerator ResetPosition(GameObject enemy, Vector3 startingPosition)
     {
-        float speed = 0.5f;
+        float speed = 3f;
+        enemyShieldScript.eShieldHit = false;
         while (Vector3.Distance(enemy.transform.position, startingPosition)> 0.01f)
         {
             enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, startingPosition, speed * Time.deltaTime);

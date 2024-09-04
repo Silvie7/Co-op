@@ -1424,6 +1424,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playersActions: {fileID: 962657433}
   shield: {fileID: 740696759}
+  playerShield: {fileID: 740696754}
   enemy1: {fileID: 2095348266}
   enemy2: {fileID: 1219612306}
   position1: {fileID: 568394718}
