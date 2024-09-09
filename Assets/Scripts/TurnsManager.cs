@@ -12,6 +12,7 @@ public class TurnsManager : MonoBehaviour
 
     public ProjectileEnemy projectileEnemy;
     public ShootTowardsPlayer shootTowardsPlayer;
+    public bool canSelect = false; //checks if players can start selecting the targets
 
     private bool gameStart = false;
     private PlayersActions pActionScript;
@@ -60,22 +61,16 @@ public class TurnsManager : MonoBehaviour
         }
 
         //PLAYERS TURN
+        //BOTH PLAYERS PRESS X AND SET ACTIVE SHIELD
         if (currentTurn == Turn.Player)
         {
-            if (pActionScript.sameTarget == true)
+            if (pActionScript.bothPressX == true)
             {
-                if (pActionScript.bothPressX == true)
-                {
-                    pActionScript.shield.SetActive(true);
-                }
-                
+                pActionScript.shield.SetActive(true);
+                canSelect = true;
             }
-            // else
-            // {
                 
-            //     pActionScript.shield.SetActive (false);
-            // }
-
+    
             //SHIELD ONLY FOR PLAYER 2
             if (pActionScript.shieldP2 == true)
             {

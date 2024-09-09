@@ -816,6 +816,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldownTime: 15
   isOnCooldown: 0
+--- !u!1 &476793776
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 476793778}
+  - component: {fileID: 476793777}
+  m_Layer: 0
+  m_Name: Target Select
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &476793777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 476793776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef6c5bbe6231cfa4a8efe4f32598898a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objects:
+  - {fileID: 2095348266}
+  - {fileID: 1219612306}
+  - {fileID: 797462828}
+  - {fileID: 88242910}
+  selectedMaterialP2: {fileID: 2100000, guid: 333883bb984c8e14fbd42f672b8c7d1b, type: 2}
+--- !u!4 &476793778
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 476793776}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 65.028244, y: -85.6428, z: 2.8263996}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &493443947 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1719757367204008222, guid: f192d3a7ea9f07a4ca9c625becb5345e, type: 3}
@@ -1330,7 +1380,6 @@ GameObject:
   - component: {fileID: 797462833}
   - component: {fileID: 797462829}
   - component: {fileID: 797462835}
-  - component: {fileID: 797462836}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -1452,23 +1501,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0245ddb77d678949be296e10029a536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &797462836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 797462828}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8901561daab90854b8dee1fc7ed33509, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  newMaterialP2: {fileID: 2100000, guid: 333883bb984c8e14fbd42f672b8c7d1b, type: 2}
-  newMaterialP1: {fileID: 2100000, guid: 5d1db37280583094a98ff1aacfb42da4, type: 2}
-  passiveMaterial: {fileID: 2100000, guid: 35a283449272a0349a3f5330db11024a, type: 2}
-  changeMatP2: 0
-  changeMatP1: 0
 --- !u!1 &936653048
 GameObject:
   m_ObjectHideFlags: 0
@@ -2377,6 +2409,7 @@ MonoBehaviour:
   playerHit: 0
   projectileEnemy: {fileID: 2117621520}
   shootTowardsPlayer: {fileID: 8802150159427312967, guid: e4c5a9c7259b1224b8b48992ab272974, type: 3}
+  canSelect: 0
   ballPosition: {fileID: 1739187929}
 --- !u!1 &1739187927
 GameObject:
@@ -2686,14 +2719,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerOne: {fileID: 0}
   P1Hit: 0
-  target1: {fileID: 2095348266}
-  target2: {fileID: 1219612306}
-  target3: {fileID: 88242910}
-  target4: {fileID: 797462828}
-  target1Hit: 0
-  target2Hit: 0
-  target3Hit: 0
-  target4Hit: 0
   targetChosen: 0
   aimedTarget: {fileID: 0}
   chosenTarget: {fileID: 0}
@@ -3342,3 +3367,4 @@ SceneRoots:
   - {fileID: 308252607}
   - {fileID: 15370597}
   - {fileID: 42398122}
+  - {fileID: 476793778}
