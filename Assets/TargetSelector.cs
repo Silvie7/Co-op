@@ -43,12 +43,14 @@ public class TargetSelector : MonoBehaviour
                 selectedIndex = (selectedIndex - 1 + objects.Length) % objects.Length;
                 ChangeSelectedObjectMaterial(selectedIndex);
             }
-        }
-        // If RightArrow was pressed, select the next object
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            selectedIndex = (selectedIndex + 1) % objects.Length;
-            ChangeSelectedObjectMaterial(selectedIndex);
+            
+             // If LeftArrow was pressed, select the previous object
+             else if (Input.GetKeyDown(KeyCode.RightArrow))
+             {
+                selectedIndex = (selectedIndex + 1) % objects.Length;
+                ChangeSelectedObjectMaterial(selectedIndex);
+             }
+
         }
     }
 
