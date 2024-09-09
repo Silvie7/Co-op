@@ -88,7 +88,7 @@ public class ShootTowardsPlayer : MonoBehaviour
             turnsManager.playerHit = true;
             Debug.Log("shoot towars true");
             // Scale up the TerritoryE object
-            territoryE.transform.localScale += new Vector3(1, 0, 0); 
+            territoryE.transform.localScale += new Vector3(0.5f, 0, 0); 
             Destroy(gameObject); 
         }
         else
