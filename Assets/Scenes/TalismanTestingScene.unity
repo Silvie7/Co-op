@@ -1149,9 +1149,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8901561daab90854b8dee1fc7ed33509, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newMaterial: {fileID: 2100000, guid: 333883bb984c8e14fbd42f672b8c7d1b, type: 2}
+  newMaterialP2: {fileID: 2100000, guid: 333883bb984c8e14fbd42f672b8c7d1b, type: 2}
+  newMaterialP1: {fileID: 2100000, guid: 5d1db37280583094a98ff1aacfb42da4, type: 2}
   passiveMaterial: {fileID: 2100000, guid: 35a283449272a0349a3f5330db11024a, type: 2}
-  changeMat: 0
+  changeMatP2: 0
+  changeMatP1: 0
 --- !u!1 &936653048
 GameObject:
   m_ObjectHideFlags: 0

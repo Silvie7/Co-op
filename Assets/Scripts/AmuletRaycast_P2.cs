@@ -80,10 +80,11 @@ public class AmuletRaycast_P2 : MonoBehaviour
                         targetScript.player2Hit = true;
                     }
 
+                    //MATERIAL CHANGE BOOL SE TO TRUE WHEN AIMING AT OBJECT
                     ChangeMaterial changeMaterialScript = aimedTarget.GetComponent<ChangeMaterial>();
                     if (changeMaterialScript != null)
                     {
-                        changeMaterialScript.changeMat = true;
+                        changeMaterialScript.changeMatP2 = true;
                     }
                     
                     if (Input.GetKey("o"))

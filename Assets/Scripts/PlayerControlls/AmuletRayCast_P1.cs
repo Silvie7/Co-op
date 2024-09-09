@@ -81,6 +81,13 @@ public class AmuletRaycast_P1 : MonoBehaviour
                     {
                         targetScript.player1Hit = true;
                     }
+
+                    //MATERIAL CHANGE BOOL SE TO TRUE WHEN AIMING AT OBJECT
+                    ChangeMaterial changeMaterialScript = aimedTargetp1.GetComponent<ChangeMaterial>();
+                    if (changeMaterialScript != null)
+                    {
+                        changeMaterialScript.changeMatP1 = true;
+                    }
                     
                     if (Input.GetButton("Circle"))
                     {
