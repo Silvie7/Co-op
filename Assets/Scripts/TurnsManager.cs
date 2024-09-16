@@ -12,7 +12,8 @@ public class TurnsManager : MonoBehaviour
 
     public ProjectileEnemy projectileEnemy;
     public ShootTowardsPlayer shootTowardsPlayer;
-    public bool canSelect = false; //checks if players can start selecting the targets
+    public bool canSelectP1 = false; //checks if players can start selecting the targets
+    public bool canSelectP2 = false;
 
     private bool gameStart = false;
     private PlayersActions pActionScript;
@@ -67,7 +68,8 @@ public class TurnsManager : MonoBehaviour
             if (pActionScript.bothPressX == true)
             {
                 pActionScript.shield.SetActive(true);
-                canSelect = true;
+                canSelectP1 = true;
+                canSelectP2 = true;
             }
                 
     

@@ -6,13 +6,13 @@ public class Shield : MonoBehaviour
 {
     public float deflectionForce = 10f;
     public Transform targetPosition;
-    private AmuletRaycast_P2 amuletRaycast_P2;
+    private PlayersActions playersActions;
     public bool shieldHit = false;
     public EnemyManager enemyManager;
 
     void Start ()
     {
-      amuletRaycast_P2 = GameObject.FindObjectOfType<AmuletRaycast_P2>();
+      playersActions = GameObject.FindObjectOfType<PlayersActions>();
       enemyManager = GameObject.FindObjectOfType<EnemyManager>();
     }
 
@@ -24,9 +24,9 @@ public class Shield : MonoBehaviour
         Rigidbody projectileRb = collision.gameObject.GetComponent<Rigidbody>();
         ShootTowardsPlayer shootTowardsPlayer = collision.gameObject.GetComponent<ShootTowardsPlayer>();
 
-        shootTowardsPlayer.ChangeTarget(amuletRaycast_P2.chosenTarget.transform);
+        shootTowardsPlayer.ChangeTarget(playersActions.finalTarget.transform);
         
-        Vector3 directionToTarget = (amuletRaycast_P2.chosenTarget.transform.position - projectileRb.position).normalized;
+        Vector3 directionToTarget = (playersActions.finalTarget.transform.position - projectileRb.position).normalized;
         projectileRb.velocity = directionToTarget * 5;
        enemyManager.ResetPrintedLog();
     }

@@ -9,6 +9,8 @@ public class PlayersActions : MonoBehaviour
    public GameObject shield; //shield for both that push the ball away
    public GameObject shieldForP1;
    public GameObject shieldForP2;
+   public bool sameTargetChosen = false; //both players chose the same target
+   public GameObject finalTarget; //stores the final target of both players here
 
    public bool chargingP1 = false;
    public bool chargingP2 = false;
@@ -21,6 +23,8 @@ public class PlayersActions : MonoBehaviour
 
    public AmuletRaycast_P2 p2Raycast;
    private AmuletRaycast_P1 p1Raycast;
+   private TargetSelectorP1 targetSelectorP1;
+   private TargetSelectorP2 targetSelectorP2;
    private PlayerOneManager p1Energy; //player 1 manager script, takes energy info
 
 
@@ -31,6 +35,8 @@ public class PlayersActions : MonoBehaviour
         p1Raycast = FindObjectOfType<AmuletRaycast_P1>();
 
         p1Energy = FindObjectOfType<PlayerOneManager>(); 
+        targetSelectorP1 = FindObjectOfType<TargetSelectorP1>();
+        targetSelectorP2 = FindObjectOfType<TargetSelectorP2>();
     }
 
     // Update is called once per frame
@@ -72,6 +78,15 @@ public class PlayersActions : MonoBehaviour
             sameTarget = false;
         }
 
+        //TARGET SELECTION
+        if (targetSelectorP1.hasBeenChosenP1 && targetSelectorP2.hasBeenChosenP2)
+        {
+            if(targetSelectorP1.chosenObjectP1 == targetSelectorP1.chosenObjectP1)
+            {
+                sameTargetChosen = true;
+                finalTarget = targetSelectorP1.chosenObjectP1; //store the target both chose
+            }
+        }
         // if (sameTarget == true)
         // {
         //     if (bothPressX == true )

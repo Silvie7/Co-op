@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TargetSelector : MonoBehaviour
+public class TargetSelectorP1 : MonoBehaviour
 {
-    //objects that can be selected
-    public GameObject[] objects;
+   public GameObject[] objects;
 
     //the material to aply when object is selected by p2
-    public Material selectedMaterialP2;
+    public Material selectedMaterialP1;
+
+    public GameObject chosenObjectP1;
+    public bool hasBeenChosenP1 = false;
 
     //the currect selected object index
     private int selectedIndex = 0;
@@ -34,21 +36,29 @@ public class TargetSelector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // float dPadHorizontal = Input.GetAxis("DPadHorizontal");
+        //  Debug.Log("DPadHorizontal: " + dPadHorizontal);
         // If canSelect is true, check if the LeftArrow or RightArrow key was pressed
-        if(turnsManager.canSelect == true)
+        if(turnsManager.canSelectP1 == true && !hasBeenChosenP1)
         {
              // If LeftArrow was pressed, select the previous object
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            if (Input.GetButton("Left"))
             {
                 selectedIndex = (selectedIndex - 1 + objects.Length) % objects.Length;
                 ChangeSelectedObjectMaterial(selectedIndex);
             }
             
              // If LeftArrow was pressed, select the previous object
-             else if (Input.GetKeyDown(KeyCode.RightArrow))
+             else if (Input.GetButton("Right"))
              {
                 selectedIndex = (selectedIndex + 1) % objects.Length;
                 ChangeSelectedObjectMaterial(selectedIndex);
+             }
+
+             else if (Input.GetButton("Circle") && previousSelectedIndex != -1)
+             {
+                chosenObjectP1 = objects[previousSelectedIndex];
+                hasBeenChosenP1 = true;
              }
 
         }
@@ -56,7 +66,7 @@ public class TargetSelector : MonoBehaviour
 
     void ChangeSelectedObjectMaterial(int index)
     {
-        if (previousSelectedIndex != -1)
+        if (previousSelectedIndex != -1 && objects[previousSelectedIndex] != chosenObjectP1)
         {
             objects[previousSelectedIndex].GetComponent<Renderer>().material = originalMaterials[previousSelectedIndex];
         }
@@ -64,10 +74,11 @@ public class TargetSelector : MonoBehaviour
         //Apply the selected material to the newly selected object
         if (objects[index] != null)
         {
-           objects[index].GetComponent<Renderer>().material = selectedMaterialP2;
+           objects[index].GetComponent<Renderer>().material = selectedMaterialP1;
         }
 
         //Update the previouslSelectedIndex to the current index
         previousSelectedIndex = index;
     }
 }
+
