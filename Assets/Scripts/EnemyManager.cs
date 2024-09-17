@@ -10,6 +10,7 @@ public class EnemyManager : MonoBehaviour
 
     public GameObject enemy1;
     public GameObject enemy2;
+    public bool nullTheTarget = false;
     public Transform position1; //position where enemy 1 moves to protect the sphere
     public Transform position2; //position where enemy 2 moves to protect the sphere
     public Transform startPosition1; //position where the enemy 1 returns
@@ -24,7 +25,9 @@ public class EnemyManager : MonoBehaviour
     public GameObject shieldForE1; //small shield for enemy 1
     public GameObject shieldForE2; //small shield for enemy 2
 
+
     private bool hasPrintedLog = false;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -105,8 +108,9 @@ public class EnemyManager : MonoBehaviour
             // Action2
         };
         int randomIndex = Random.Range(0, randomActions.Length);
-        randomActions[randomIndex]();     
-         playersActions.finalTarget = null;           
+        randomActions[randomIndex]();
+        nullTheTarget = true;   
+               
     }
 
     void PerformRandomActionEnemy1()
@@ -119,7 +123,8 @@ public class EnemyManager : MonoBehaviour
         };
         int randomIndex = Random.Range(0, randomActions.Length);
         randomActions[randomIndex]();    
-         playersActions.finalTarget = null;
+        nullTheTarget = true;
+        
     }
 
     void PerformActionCube()
@@ -130,7 +135,8 @@ public class EnemyManager : MonoBehaviour
         };
         int randomIndex = Random.Range(0, randomActions.Length);
         randomActions[randomIndex]();
-         playersActions.finalTarget = null;
+        nullTheTarget = true;
+         
     }
     
     void PerformRandomActionEnemy2()
@@ -142,7 +148,8 @@ public class EnemyManager : MonoBehaviour
         };
         int randomIndex = Random.Range(0, randomActions.Length);
         randomActions[randomIndex]();
-         playersActions.finalTarget = null;
+        nullTheTarget = true;
+         
     }
     
     void ActivateShieldSphere() //activates the big shield when aiming at sphere

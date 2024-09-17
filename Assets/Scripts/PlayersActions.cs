@@ -25,6 +25,7 @@ public class PlayersActions : MonoBehaviour
    private AmuletRaycast_P1 p1Raycast;
    private TargetSelectorP1 targetSelectorP1;
    private TargetSelectorP2 targetSelectorP2;
+   private EnemyManager enemyManager;
    private PlayerOneManager p1Energy; //player 1 manager script, takes energy info
 
 
@@ -37,6 +38,7 @@ public class PlayersActions : MonoBehaviour
         p1Energy = FindObjectOfType<PlayerOneManager>(); 
         targetSelectorP1 = FindObjectOfType<TargetSelectorP1>();
         targetSelectorP2 = FindObjectOfType<TargetSelectorP2>();
+        enemyManager = FindObjectOfType<EnemyManager>();
     }
 
     // Update is called once per frame
@@ -81,12 +83,20 @@ public class PlayersActions : MonoBehaviour
         //TARGET SELECTION
         if (targetSelectorP1.hasBeenChosenP1 && targetSelectorP2.hasBeenChosenP2)
         {
-            if(targetSelectorP1.chosenObjectP1 == targetSelectorP1.chosenObjectP1)
+            if(targetSelectorP1.chosenObjectP1 == targetSelectorP2.chosenObjectP2)
             {
                 sameTargetChosen = true;
                 finalTarget = targetSelectorP1.chosenObjectP1; //store the target both chose
             }
+            if (enemyManager.nullTheTarget == true)
+            {
+                targetSelectorP1.hasBeenChosenP1 = false;
+                targetSelectorP2.hasBeenChosenP2 = false;
+                sameTargetChosen = false;
+                finalTarget = null;
+            }
         }
+
         // if (sameTarget == true)
         // {
         //     if (bothPressX == true )
