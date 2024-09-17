@@ -25,6 +25,7 @@ public class PlayersActions : MonoBehaviour
    private AmuletRaycast_P1 p1Raycast;
    private TargetSelectorP1 targetSelectorP1;
    private TargetSelectorP2 targetSelectorP2;
+   private TurnsManager turnsManager;
    private EnemyManager enemyManager;
    private PlayerOneManager p1Energy; //player 1 manager script, takes energy info
 
@@ -39,6 +40,7 @@ public class PlayersActions : MonoBehaviour
         targetSelectorP1 = FindObjectOfType<TargetSelectorP1>();
         targetSelectorP2 = FindObjectOfType<TargetSelectorP2>();
         enemyManager = FindObjectOfType<EnemyManager>();
+        turnsManager = FindObjectOfType<TurnsManager>();
     }
 
     // Update is called once per frame
@@ -94,6 +96,8 @@ public class PlayersActions : MonoBehaviour
                 targetSelectorP2.hasBeenChosenP2 = false;
                 sameTargetChosen = false;
                 finalTarget = null;
+                turnsManager.canSelectP1 = false;
+                turnsManager.canSelectP2 = false;
             }
         }
 

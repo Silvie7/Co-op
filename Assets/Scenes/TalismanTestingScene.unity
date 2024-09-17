@@ -482,7 +482,7 @@ GameObject:
   - component: {fileID: 152488009}
   - component: {fileID: 152488008}
   m_Layer: 0
-  m_Name: Position3
+  m_Name: Position4
   m_TagString: ColliderEnemyTwo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1831,12 +1831,13 @@ MonoBehaviour:
   playerShield: {fileID: 740696754}
   enemy1: {fileID: 2095348266}
   enemy2: {fileID: 1219612306}
+  nullTheTarget: 0
   position1: {fileID: 1689648097}
   position2: {fileID: 336551491}
   startPosition1: {fileID: 497924326}
   startPosition2: {fileID: 1898520246}
-  position3: {fileID: 152488011}
-  position4: {fileID: 1841010310}
+  position3: {fileID: 1841010310}
+  position4: {fileID: 152488011}
   enemyShield: {fileID: 676575013}
   enemyShieldScript: {fileID: 676575018}
   rayCastP1: {fileID: 1106020642}
@@ -2752,7 +2753,7 @@ GameObject:
   - component: {fileID: 1841010308}
   - component: {fileID: 1841010307}
   m_Layer: 0
-  m_Name: Position4
+  m_Name: Position3
   m_TagString: ColliderEnemyTwo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3774,5 +3775,5 @@ SceneRoots:
   - {fileID: 2000204141}
   - {fileID: 1689648097}
   - {fileID: 336551491}
-  - {fileID: 152488011}
   - {fileID: 1841010310}
+  - {fileID: 152488011}
