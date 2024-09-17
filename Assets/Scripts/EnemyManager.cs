@@ -10,16 +10,19 @@ public class EnemyManager : MonoBehaviour
 
     public GameObject enemy1;
     public GameObject enemy2;
-    public Transform position1;
-    public Transform position2;
-    public Transform startPosition1;
-    public Transform startPosition2;
-    public GameObject enemyShield;
-    public EnemyShield enemyShieldScript;
+    public Transform position1; //position where enemy 1 moves to protect the sphere
+    public Transform position2; //position where enemy 2 moves to protect the sphere
+    public Transform startPosition1; //position where the enemy 1 returns
+    public Transform startPosition2; //positon where the enemy 2 returns
+    public Transform position3; // position where enemy 1 moves to protect the cube
+    public Transform position4; //position where enemy 2 moves to protect the cube
+    public GameObject enemyShield; //big shield for enemies
+    public EnemyShield enemyShieldScript; //shield enemy script
     public AmuletRaycast_P1 rayCastP1;
     public AmuletRaycast_P2 rayCastP2;
 
-    public GameObject shieldE1;
+    public GameObject shieldForE1; //small shield for enemy 1
+    public GameObject shieldForE2; //small shield for enemy 2
 
     private bool hasPrintedLog = false;
     // Start is called before the first frame update
@@ -34,9 +37,9 @@ public class EnemyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playersActions?.sameTarget == true && playersActions.p2Raycast != null && playersActions.p2Raycast.chosenTarget != null)
+        if (playersActions?.sameTargetChosen == true && shield.shieldHit == true)
         {
-            switch (playersActions.p2Raycast.chosenTarget.name)        
+            switch (playersActions.finalTarget.name)        
             {
                 case "Sphere":
                     if (shield?.shieldHit == true && !hasPrintedLog)
@@ -44,6 +47,7 @@ public class EnemyManager : MonoBehaviour
                         Debug.Log ("SHIELD HIT");
                         PerformRandomActionSphere();
                         hasPrintedLog = true; 
+                        playersActions.sameTargetChosen = false;
                     }
                     else if (shield?.shieldHit == false)
                     {
@@ -51,13 +55,20 @@ public class EnemyManager : MonoBehaviour
                     }
                     break;
                 case "Cube":
+                    {
+                        PerformActionCube();
+                        hasPrintedLog = true;
+                        playersActions.sameTargetChosen = false;
+                    }
                     break;
+
                 case "Enemy1":
                     if (shield?.shieldHit == true && !hasPrintedLog)
                     {
                         Debug.Log ("SHIELD HIT");
                         PerformRandomActionEnemy1();
                         hasPrintedLog = true; 
+                        playersActions.sameTargetChosen = false;
                     }
                     else if (shield?.shieldHit == false)
                     {
@@ -65,6 +76,12 @@ public class EnemyManager : MonoBehaviour
                     }
                     break;
                 case "Enemy2":
+                    if (shield?.shieldHit == true)
+                    {
+                        PerformRandomActionEnemy2();
+                        hasPrintedLog = true;
+                        playersActions.sameTargetChosen = false;
+                    }
                     break;
 
                 default:
@@ -83,12 +100,13 @@ public class EnemyManager : MonoBehaviour
     {
         System.Action[] randomActions = new System.Action[]
         {
-            ActivateShield,
+            ActivateShieldSphere,
             // Action1,
             // Action2
         };
         int randomIndex = Random.Range(0, randomActions.Length);
-        randomActions[randomIndex]();                
+        randomActions[randomIndex]();     
+         playersActions.finalTarget = null;           
     }
 
     void PerformRandomActionEnemy1()
@@ -96,33 +114,71 @@ public class EnemyManager : MonoBehaviour
         System.Action[] randomActions = new System.Action[]
         {
             ActivateShieldForEnemy1,
-            Action3,
-            Action4
+            BothActivateShield
+            // Action4
         };
         int randomIndex = Random.Range(0, randomActions.Length);
         randomActions[randomIndex]();    
+         playersActions.finalTarget = null;
+    }
+
+    void PerformActionCube()
+    {
+        System.Action[] randomActions = new System.Action[]
+        {
+            ActivateShieldForCube
+        };
+        int randomIndex = Random.Range(0, randomActions.Length);
+        randomActions[randomIndex]();
+         playersActions.finalTarget = null;
     }
     
+    void PerformRandomActionEnemy2()
+    {
+        System.Action[] randomActions = new System.Action[]
+        {
+            ActivateShieldForEnemy2,
+            BothActivateShield
+        };
+        int randomIndex = Random.Range(0, randomActions.Length);
+        randomActions[randomIndex]();
+         playersActions.finalTarget = null;
+    }
     
-    void ActivateShield()
+    void ActivateShieldSphere() //activates the big shield when aiming at sphere
     {
         StartCoroutine(MoveEnemy(enemy1, position1.position));
         StartCoroutine(MoveEnemy(enemy2, position2.position));
          playerShield.SetActive(false);
+         shield.shieldHit = false;
 
         if (enemyShieldScript.eShieldHit == true)
         {
             enemyShield.SetActive(false);
              StartCoroutine(ResetPosition(enemy1, startPosition1.position));
              StartCoroutine(ResetPosition(enemy2, startPosition2.position));
-             rayCastP1.chosenTargetp1 = null;
-             rayCastP2.chosenTarget = null; 
         }   
+        
     }
 
-    IEnumerator MoveEnemy(GameObject enemy, Vector3 targetPosition)
+    void ActivateShieldForCube()
     {
-        float speed = 3f; //movement speed of the enemies
+        StartCoroutine(MoveEnemyCube(enemy2, position4.position)); 
+        StartCoroutine(MoveEnemyCube(enemy1, position3.position));
+        playerShield.SetActive(false);
+
+        if (enemyShieldScript.eShieldHit == true)
+        {
+            StartCoroutine(ResetPositionCube(enemy2, startPosition1.position));
+            StartCoroutine(ResetPositionCube(enemy1, startPosition2.position));
+            enemyShield.SetActive(false);
+             shield.shieldHit = false;
+        }
+    }
+
+    IEnumerator MoveEnemy(GameObject enemy, Vector3 targetPosition) //moving enemy when aiming at sphere to the position of the sphere
+    {
+        float speed = 1f; //movement speed of the enemies
         while (Vector3.Distance(enemy.transform.position, targetPosition) > 0.01f)
         {
             enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, targetPosition, speed * Time.deltaTime);
@@ -132,9 +188,9 @@ public class EnemyManager : MonoBehaviour
         enemyShield.SetActive(true);
     }   
     
-    IEnumerator ResetPosition(GameObject enemy, Vector3 startingPosition)
+    IEnumerator ResetPosition(GameObject enemy, Vector3 startingPosition) //moving enemy back to starting position 
     {
-        float speed = 3f;
+        float speed = 1f;
         enemyShieldScript.eShieldHit = false;
         while (Vector3.Distance(enemy.transform.position, startingPosition)> 0.01f)
         {
@@ -142,6 +198,30 @@ public class EnemyManager : MonoBehaviour
             yield return null;
         }
         enemy.transform.position = startingPosition;
+    }
+
+    IEnumerator MoveEnemyCube(GameObject enemy, Vector3 targetPosition)
+    {
+        float speed = 1f;
+        while (Vector3.Distance(enemy.transform.position, targetPosition) > 0.01f)
+        {
+            enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, targetPosition, speed * Time.deltaTime);
+            yield return null;
+        }
+        enemy.transform.position = targetPosition;
+        enemyShield.SetActive(true);
+    }
+
+    IEnumerator ResetPositionCube(GameObject enemy, Vector3 startingPosition)
+    {
+        float speed = 1f;
+        while (Vector3.Distance(enemy.transform.position, startingPosition) > 0.01f)
+        {
+            enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, startingPosition, speed * Time.deltaTime);
+            yield return null;
+        }
+        enemy.transform.position = startingPosition;
+        enemyShieldScript.eShieldHit = false;
     }
 
     void Action1()
@@ -166,7 +246,49 @@ public class EnemyManager : MonoBehaviour
 
     void ActivateShieldForEnemy1()
     {
-        // shieldE1.SetActive(true);
-  
+        shieldForE1.SetActive(true); //sets active the small shield for enemy one
+        shield.shieldHit = false;
+        if (enemyShieldScript.eShieldHit == true)
+        {
+            StartCoroutine(DeactivateShieldForE1());
+        }
+    }
+
+    IEnumerator DeactivateShieldForE1()
+    {
+        yield return new WaitForSeconds(3f); //wait for 3 seconds
+        shieldForE1.SetActive(false);
+    }
+
+    void BothActivateShield()
+    {
+        enemyShield.SetActive(true);
+        shield.shieldHit = false;
+        if (enemyShieldScript.eShieldHit == true)
+        {
+            StartCoroutine(DeactivateShieldForBoth());
+        }
+    }
+
+    IEnumerator DeactivateShieldForBoth()
+    {
+        yield return new WaitForSeconds(3f); //wait for 3 seconds
+        enemyShield.SetActive(false); //deactivate big enemy shield 
+        shield.shieldHit = false;
+    }
+
+    void ActivateShieldForEnemy2()
+    {
+        shieldForE2.SetActive(true); //sets active the small shield for enemy two
+        if (enemyShieldScript.eShieldHit == true)
+        {
+            StartCoroutine(DeactivateShieldForE2());
+        }
+    }
+
+    IEnumerator DeactivateShieldForE2()
+    {
+        yield return new WaitForSeconds(3f);
+        shieldForE2.SetActive(false); //deactivate small shield for enemy two
     }
 }
