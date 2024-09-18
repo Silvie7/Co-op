@@ -94,11 +94,26 @@ public class EnemyManager : MonoBehaviour
 
          if (enemyShield.active == true && enemyShieldScript.eShieldHit == true)
         {
-            Debug.Log("SHIELDHIT");
-            StartCoroutine(ResetPositionCube(enemy2, startPosition1.position));
-            StartCoroutine(ResetPositionCube(enemy1, startPosition2.position));
-            enemyShield.SetActive(false);
-             shield.shieldHit = false;
+            if (playersActions.finalTarget != null)
+            {
+            if (playersActions.finalTarget.name == "Cube")
+            {
+                StartCoroutine(ResetPositionCube(enemy2, startPosition1.position));
+                StartCoroutine(ResetPositionCube(enemy1, startPosition2.position));
+                enemyShield.SetActive(false);
+                shield.shieldHit = false;
+                nullTheTarget = true;   
+            }
+            if (playersActions.finalTarget.name == "Sphere")
+            {
+                enemyShield.SetActive(false);
+                StartCoroutine(ResetPosition(enemy1, startPosition1.position));
+                StartCoroutine(ResetPosition(enemy2, startPosition2.position));
+                enemyShield.SetActive(false);
+                shield.shieldHit = false;
+                nullTheTarget = true;   
+            }
+            }
         }
 
 
@@ -119,7 +134,6 @@ public class EnemyManager : MonoBehaviour
         };
         int randomIndex = Random.Range(0, randomActions.Length);
         randomActions[randomIndex]();
-        nullTheTarget = true;   
                
     }
 
@@ -133,7 +147,7 @@ public class EnemyManager : MonoBehaviour
         };
         int randomIndex = Random.Range(0, randomActions.Length);
         randomActions[randomIndex]();    
-        nullTheTarget = true;
+        
         
     }
 
@@ -145,7 +159,7 @@ public class EnemyManager : MonoBehaviour
         };
         int randomIndex = Random.Range(0, randomActions.Length);
         randomActions[randomIndex]();
-        nullTheTarget = true;
+        
          
     }
     
@@ -158,7 +172,6 @@ public class EnemyManager : MonoBehaviour
         };
         int randomIndex = Random.Range(0, randomActions.Length);
         randomActions[randomIndex]();
-        nullTheTarget = true;
          
     }
     
@@ -169,12 +182,6 @@ public class EnemyManager : MonoBehaviour
          playerShield.SetActive(false);
          shield.shieldHit = false;
 
-        if (enemyShieldScript.eShieldHit == true)
-        {
-            enemyShield.SetActive(false);
-             StartCoroutine(ResetPosition(enemy1, startPosition1.position));
-             StartCoroutine(ResetPosition(enemy2, startPosition2.position));
-        }   
         
     }
 
@@ -200,7 +207,6 @@ public class EnemyManager : MonoBehaviour
     IEnumerator ResetPosition(GameObject enemy, Vector3 startingPosition) //moving enemy back to starting position 
     {
         float speed = 1f;
-        enemyShieldScript.eShieldHit = false;
         while (Vector3.Distance(enemy.transform.position, startingPosition)> 0.01f)
         {
             enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, startingPosition, speed * Time.deltaTime);

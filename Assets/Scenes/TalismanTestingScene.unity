@@ -1902,8 +1902,8 @@ MonoBehaviour:
   nullTheTarget: 0
   position1: {fileID: 336551491}
   position2: {fileID: 1689648097}
-  startPosition1: {fileID: 497924326}
-  startPosition2: {fileID: 1898520246}
+  startPosition1: {fileID: 1898520246}
+  startPosition2: {fileID: 497924326}
   position3: {fileID: 1841010310}
   position4: {fileID: 152488011}
   enemyShield: {fileID: 676575013}
