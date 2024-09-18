@@ -98,6 +98,7 @@ public class PlayersActions : MonoBehaviour
                 finalTarget = null;
                 turnsManager.canSelectP1 = false;
                 turnsManager.canSelectP2 = false;
+                enemyManager.nullTheTarget = false;
             }
         }
 
