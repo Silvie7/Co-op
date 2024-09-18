@@ -91,7 +91,17 @@ public class EnemyManager : MonoBehaviour
                     break;
             }
         }
-       
+
+         if (enemyShield.active == true && enemyShieldScript.eShieldHit == true)
+        {
+            Debug.Log("SHIELDHIT");
+            StartCoroutine(ResetPositionCube(enemy2, startPosition1.position));
+            StartCoroutine(ResetPositionCube(enemy1, startPosition2.position));
+            enemyShield.SetActive(false);
+             shield.shieldHit = false;
+        }
+
+
     }
 
     public void ResetPrintedLog()
@@ -168,19 +178,11 @@ public class EnemyManager : MonoBehaviour
         
     }
 
-    void ActivateShieldForCube()
+   public void ActivateShieldForCube()
     {
         StartCoroutine(MoveEnemyCube(enemy2, position4.position)); 
         StartCoroutine(MoveEnemyCube(enemy1, position3.position));
         playerShield.SetActive(false);
-
-        if (enemyShieldScript.eShieldHit == true)
-        {
-            StartCoroutine(ResetPositionCube(enemy2, startPosition1.position));
-            StartCoroutine(ResetPositionCube(enemy1, startPosition2.position));
-            enemyShield.SetActive(false);
-             shield.shieldHit = false;
-        }
     }
 
     IEnumerator MoveEnemy(GameObject enemy, Vector3 targetPosition) //moving enemy when aiming at sphere to the position of the sphere

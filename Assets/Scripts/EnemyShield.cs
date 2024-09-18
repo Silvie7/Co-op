@@ -23,6 +23,7 @@ public class EnemyShield : MonoBehaviour
     if (collision.gameObject.GetComponent<ShootTowardsPlayer>()!= null)
     {
         eShieldHit = true;
+        
         Rigidbody projectileRb = collision.gameObject.GetComponent<Rigidbody>();
         ShootTowardsPlayer shootTowardsPlayer = collision.gameObject.GetComponent<ShootTowardsPlayer>();
 
@@ -33,10 +34,12 @@ public class EnemyShield : MonoBehaviour
         Vector3 directionToTarget = (randomTarget.position - projectileRb.position).normalized;
         projectileRb.velocity = directionToTarget * 5;
         enemyManager.ResetPrintedLog();
+        
+        // enemyManager.ActivateShieldForCube();
     }
-    else
-    {
-      eShieldHit = false;
-    }
+    // else
+    // {
+    //   eShieldHit = false;
+    // }
   }
 }
