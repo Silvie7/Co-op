@@ -2778,9 +2778,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   e1ShieldHit: 0
-  enemyManager: {fileID: 0}
-  playerOne: {fileID: 0}
-  playerTwo: {fileID: 0}
+  enemyManager: {fileID: 1048209372}
+  playerOne: {fileID: 2074768605068345328}
+  playerTwo: {fileID: 6153025335497659788}
 --- !u!65 &1435205202
 BoxCollider:
   m_ObjectHideFlags: 0

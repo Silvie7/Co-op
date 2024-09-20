@@ -25,6 +25,7 @@ public class ShieldForE1 : MonoBehaviour
         if (collision.gameObject.GetComponent<ShootTowardsPlayer>() != null)
         {
             e1ShieldHit = true;
+            Debug.Log("E1HIT");
             Rigidbody projectileRb = collision.gameObject.GetComponent<Rigidbody>();
 
             Transform randomTarget = Random.value < 0.5f ? playerOne : playerTwo;

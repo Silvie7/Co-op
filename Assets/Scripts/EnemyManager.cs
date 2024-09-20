@@ -25,13 +25,16 @@ public class EnemyManager : MonoBehaviour
     public GameObject shieldForE1; //small shield for enemy 1
     public GameObject shieldForE2; //small shield for enemy 2
 
-
+    private ShieldForE1 e1Shield;
+    private ShieldForE2 e2Shield;
     private bool hasPrintedLog = false;
     
     // Start is called before the first frame update
     void Start()
     {
-        playersActions = playersActions ?? FindObjectOfType<PlayersActions>();
+        playersActions = FindObjectOfType<PlayersActions>();
+        e1Shield= FindObjectOfType<ShieldForE1>();
+        e2Shield=  FindObjectOfType<ShieldForE2>();
         shield = shield ?? FindObjectOfType<Shield>(); 
        
         
@@ -96,26 +99,61 @@ public class EnemyManager : MonoBehaviour
         {
             if (playersActions.finalTarget != null)
             {
-            if (playersActions.finalTarget.name == "Cube")
-            {
-                StartCoroutine(ResetPositionCube(enemy2, startPosition1.position));
-                StartCoroutine(ResetPositionCube(enemy1, startPosition2.position));
-                enemyShield.SetActive(false);
-                shield.shieldHit = false;
-                nullTheTarget = true;   
-            }
-            if (playersActions.finalTarget.name == "Sphere")
-            {
-                enemyShield.SetActive(false);
-                StartCoroutine(ResetPosition(enemy1, startPosition1.position));
-                StartCoroutine(ResetPosition(enemy2, startPosition2.position));
-                enemyShield.SetActive(false);
-                shield.shieldHit = false;
-                nullTheTarget = true;   
-            }
+                if (playersActions.finalTarget.name == "Cube")
+                {
+                    StartCoroutine(ResetPositionCube(enemy2, startPosition1.position));
+                    StartCoroutine(ResetPositionCube(enemy1, startPosition2.position));
+                    enemyShield.SetActive(false);
+                    shield.shieldHit = false;
+                    enemyShieldScript.eShieldHit = false;
+                    nullTheTarget = true;   
+                }
+                if (playersActions.finalTarget.name == "Sphere")
+                {
+                    enemyShield.SetActive(false);
+                    StartCoroutine(ResetPosition(enemy1, startPosition1.position));
+                    StartCoroutine(ResetPosition(enemy2, startPosition2.position));
+                    shield.shieldHit = false;
+                    enemyShieldScript.eShieldHit = false;
+                    nullTheTarget = true;   
+                } 
+                if (playersActions.finalTarget.name == "Enemy2" || playersActions.finalTarget.name == "Enemy1" )
+                {
+                    {
+                        shield.shieldHit = false;
+                        enemyShieldScript.eShieldHit = false;
+                        nullTheTarget = true;
+                        DeactivateShieldForBoth();
+                    }
+                }   
             }
         }
 
+        if (e1Shield != null)
+        {
+             if (shieldForE1.activeSelf && e1Shield.e1ShieldHit == true)
+            {
+                if (playersActions.finalTarget.name == "Enemy1")
+                {
+                    playerShield.SetActive(false);
+                    e1Shield.e1ShieldHit = false;
+                    nullTheTarget = true;
+                    DeactivateShieldForE1();
+                }
+            }
+        }
+       
+        if (shieldForE2.activeSelf && e2Shield.e2ShieldHit == true)
+            {
+                if (playersActions.finalTarget.name == "Enemy2")
+                {
+                    shield.shieldHit = false;
+                    e2Shield.e2ShieldHit = false;
+                    nullTheTarget = true;
+                    DeactivateShieldForE2();
+                }
+            
+            }
 
     }
 
@@ -190,6 +228,8 @@ public class EnemyManager : MonoBehaviour
         StartCoroutine(MoveEnemyCube(enemy2, position4.position)); 
         StartCoroutine(MoveEnemyCube(enemy1, position3.position));
         playerShield.SetActive(false);
+        shield.shieldHit = false;
+        
     }
 
     IEnumerator MoveEnemy(GameObject enemy, Vector3 targetPosition) //moving enemy when aiming at sphere to the position of the sphere
@@ -261,49 +301,44 @@ public class EnemyManager : MonoBehaviour
 
     void ActivateShieldForEnemy1()
     {
-        shieldForE1.SetActive(true); //sets active the small shield for enemy one
         shield.shieldHit = false;
-        if (enemyShieldScript.eShieldHit == true)
-        {
-            StartCoroutine(DeactivateShieldForE1());
-        }
+        shieldForE1.SetActive(true); //sets active the small shield for enemy one
+        
     }
 
     IEnumerator DeactivateShieldForE1()
     {
-        yield return new WaitForSeconds(3f); //wait for 3 seconds
+        yield return new WaitForSeconds(2f); //wait for 3 seconds
         shieldForE1.SetActive(false);
     }
 
     void BothActivateShield()
     {
         enemyShield.SetActive(true);
-        shield.shieldHit = false;
         if (enemyShieldScript.eShieldHit == true)
         {
             StartCoroutine(DeactivateShieldForBoth());
         }
+        playerShield.SetActive(false);
     }
 
     IEnumerator DeactivateShieldForBoth()
     {
-        yield return new WaitForSeconds(3f); //wait for 3 seconds
+        yield return new WaitForSeconds(2f); //wait for 3 seconds
         enemyShield.SetActive(false); //deactivate big enemy shield 
         shield.shieldHit = false;
     }
 
     void ActivateShieldForEnemy2()
     {
+        shield.shieldHit = false;
         shieldForE2.SetActive(true); //sets active the small shield for enemy two
-        if (enemyShieldScript.eShieldHit == true)
-        {
-            StartCoroutine(DeactivateShieldForE2());
-        }
     }
 
     IEnumerator DeactivateShieldForE2()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         shieldForE2.SetActive(false); //deactivate small shield for enemy two
+        shield.shieldHit = false;
     }
 }
