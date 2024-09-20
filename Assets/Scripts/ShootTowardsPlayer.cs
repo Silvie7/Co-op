@@ -22,8 +22,8 @@ public class ShootTowardsPlayer : MonoBehaviour
     private float shootForce = 10f; 
     public Rigidbody rb;
 
-    private float normalSpeed = 5f;
-    public float slowSpeed = 2f; //spead of the ball
+    private float normalSpeed = 1f;
+     public float slowSpeed = 1f;//spead of the ball
 
     private bool isInSlowZone = false;
 
