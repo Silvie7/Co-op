@@ -36,9 +36,5 @@ public class ShieldForE1 : MonoBehaviour
             projectileRb.velocity = directionToTarget * 5;
             enemyManager.ResetPrintedLog();
         }
-        else
-        {
-            e1ShieldHit = false;
-        }
     }
 }

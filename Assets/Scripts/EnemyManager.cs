@@ -25,16 +25,14 @@ public class EnemyManager : MonoBehaviour
     public GameObject shieldForE1; //small shield for enemy 1
     public GameObject shieldForE2; //small shield for enemy 2
 
-    private ShieldForE1 e1Shield;
-    private ShieldForE2 e2Shield;
+    public ShieldForE1 e1Shield;
+    public ShieldForE2 e2Shield;
     private bool hasPrintedLog = false;
     
     // Start is called before the first frame update
     void Start()
     {
         playersActions = FindObjectOfType<PlayersActions>();
-        e1Shield= FindObjectOfType<ShieldForE1>();
-        e2Shield=  FindObjectOfType<ShieldForE2>();
         shield = shield ?? FindObjectOfType<Shield>(); 
        
         
@@ -123,7 +121,7 @@ public class EnemyManager : MonoBehaviour
                         shield.shieldHit = false;
                         enemyShieldScript.eShieldHit = false;
                         nullTheTarget = true;
-                        DeactivateShieldForBoth();
+                        StartCoroutine(DeactivateShieldForBoth());
                     }
                 }   
             }
@@ -135,26 +133,25 @@ public class EnemyManager : MonoBehaviour
             {
                 if (playersActions.finalTarget.name == "Enemy1")
                 {
-                    playerShield.SetActive(false);
-                    e1Shield.e1ShieldHit = false;
-                    nullTheTarget = true;
-                    DeactivateShieldForE1();
+                    StartCoroutine(DeactivateShieldForE1());
                 }
             }
         }
        
-        if (shieldForE2.activeSelf && e2Shield.e2ShieldHit == true)
+       if (e2Shield != null)
+       {
+            if (shieldForE2.activeSelf && e2Shield.e2ShieldHit == true)
             {
                 if (playersActions.finalTarget.name == "Enemy2")
                 {
-                    shield.shieldHit = false;
-                    e2Shield.e2ShieldHit = false;
-                    nullTheTarget = true;
-                    DeactivateShieldForE2();
+                    StartCoroutine(DeactivateShieldForE2());
                 }
             
             }
 
+
+       }
+        
     }
 
     public void ResetPrintedLog()
@@ -179,8 +176,8 @@ public class EnemyManager : MonoBehaviour
     {
         System.Action[] randomActions = new System.Action[]
         {
-            ActivateShieldForEnemy1,
-            BothActivateShield
+            ActivateShieldForEnemy1
+            // BothActivateShield
             // Action4
         };
         int randomIndex = Random.Range(0, randomActions.Length);
@@ -301,6 +298,7 @@ public class EnemyManager : MonoBehaviour
 
     void ActivateShieldForEnemy1()
     {
+        playerShield.SetActive(false);
         shield.shieldHit = false;
         shieldForE1.SetActive(true); //sets active the small shield for enemy one
         
@@ -310,6 +308,9 @@ public class EnemyManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2f); //wait for 3 seconds
         shieldForE1.SetActive(false);
+        nullTheTarget = true;
+        e1Shield.e1ShieldHit = false;
+       
     }
 
     void BothActivateShield()
@@ -331,12 +332,15 @@ public class EnemyManager : MonoBehaviour
 
     void ActivateShieldForEnemy2()
     {
+        playerShield.SetActive(false);
         shield.shieldHit = false;
         shieldForE2.SetActive(true); //sets active the small shield for enemy two
     }
 
     IEnumerator DeactivateShieldForE2()
     {
+        e2Shield.e2ShieldHit = false;
+        nullTheTarget = true;
         yield return new WaitForSeconds(2f);
         shieldForE2.SetActive(false); //deactivate small shield for enemy two
         shield.shieldHit = false;

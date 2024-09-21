@@ -2137,6 +2137,8 @@ MonoBehaviour:
   rayCastP2: {fileID: 2086365339}
   shieldForE1: {fileID: 1435205199}
   shieldForE2: {fileID: 1093114751}
+  e1Shield: {fileID: 1435205201}
+  e2Shield: {fileID: 1093114753}
 --- !u!4 &1048209373
 Transform:
   m_ObjectHideFlags: 0
