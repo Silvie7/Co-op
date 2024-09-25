@@ -99,8 +99,8 @@ public class EnemyManager : MonoBehaviour
             {
                 if (playersActions.finalTarget.name == "Cube")
                 {
-                    StartCoroutine(ResetPositionCube(enemy2, startPosition1.position));
-                    StartCoroutine(ResetPositionCube(enemy1, startPosition2.position));
+                    StartCoroutine(ResetPositionCube(enemy1, startPosition1.position));
+                    StartCoroutine(ResetPositionCube(enemy2, startPosition2.position));
                     enemyShield.SetActive(false);
                     shield.shieldHit = false;
                     enemyShieldScript.eShieldHit = false;
