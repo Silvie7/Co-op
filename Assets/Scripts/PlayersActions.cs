@@ -23,6 +23,7 @@ public class PlayersActions : MonoBehaviour
 
    public AmuletRaycast_P2 p2Raycast;
    private AmuletRaycast_P1 p1Raycast;
+   public ShieldForP2 shieldForP2Script;
    private TargetSelectorP1 targetSelectorP1;
    private TargetSelectorP2 targetSelectorP2;
    private TurnsManager turnsManager;
@@ -90,18 +91,19 @@ public class PlayersActions : MonoBehaviour
                 sameTargetChosen = true;
                 finalTarget = targetSelectorP1.chosenObjectP1; //store the target both chose
             }
-            if (enemyManager.nullTheTarget == true)
+            
+        }
+        if (enemyManager.nullTheTarget == true)
             {
                 targetSelectorP1.hasBeenChosenP1 = false;
                 targetSelectorP2.hasBeenChosenP2 = false;
                 sameTargetChosen = false;
+                //shieldForP2Script.randomTarget = null;
                 finalTarget = null;
                 turnsManager.canSelectP1 = false;
                 turnsManager.canSelectP2 = false;
                 enemyManager.nullTheTarget = false;
             }
-        }
-
         // if (sameTarget == true)
         // {
         //     if (bothPressX == true )
