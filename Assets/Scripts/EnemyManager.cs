@@ -19,8 +19,10 @@ public class EnemyManager : MonoBehaviour
     public Transform position4; //position where enemy 2 moves to protect the cube
     public GameObject enemyShield; //big shield for enemies
     public EnemyShield enemyShieldScript; //shield enemy script
+    public ShieldForP2 p2Shield;
     public AmuletRaycast_P1 rayCastP1;
     public AmuletRaycast_P2 rayCastP2;
+    public bool canHappenE1 = false;
 
     public GameObject shieldForE1; //small shield for enemy 1
     public GameObject shieldForE2; //small shield for enemy 2
@@ -34,21 +36,21 @@ public class EnemyManager : MonoBehaviour
     {
         playersActions = FindObjectOfType<PlayersActions>();
         shield = shield ?? FindObjectOfType<Shield>(); 
-       
+
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (playersActions?.sameTargetChosen == true && shield.shieldHit == true)
+        if (playersActions?.sameTargetChosen == true && shield.shieldHit == true || p2Shield.shieldForP2 == true)
         {
+            Debug.Log("Final target name: " + playersActions.finalTarget.name);
             switch (playersActions.finalTarget.name)        
             {
                 case "Sphere":
                     if (shield?.shieldHit == true && !hasPrintedLog)
                     {
-                        Debug.Log ("SHIELD HIT");
                         PerformRandomActionSphere();
                         hasPrintedLog = true; 
                         playersActions.sameTargetChosen = false;
@@ -67,12 +69,11 @@ public class EnemyManager : MonoBehaviour
                     break;
 
                 case "Enemy1":
-                    if (shield?.shieldHit == true && !hasPrintedLog)
+                    if (shield?.shieldHit == true && !hasPrintedLog || p2Shield.shieldForP2 == true)
                     {
-                        Debug.Log ("SHIELD HIT");
-                        PerformRandomActionEnemy1();
                         hasPrintedLog = true; 
                         playersActions.sameTargetChosen = false;
+                        PerformRandomActionEnemy1();
                     }
                     else if (shield?.shieldHit == false)
                     {
@@ -80,11 +81,13 @@ public class EnemyManager : MonoBehaviour
                     }
                     break;
                 case "Enemy2":
-                    if (shield?.shieldHit == true)
+                    canHappenE1 = true;
+
+                    if (shield?.shieldHit == true || canHappenE1 == true)
                     {
-                        PerformRandomActionEnemy2();
                         hasPrintedLog = true;
                         playersActions.sameTargetChosen = false;
+                        PerformRandomActionEnemy2();
                     }
                     break;
 
@@ -148,8 +151,6 @@ public class EnemyManager : MonoBehaviour
                 }
             
             }
-
-
        }
         
     }
@@ -299,6 +300,7 @@ public class EnemyManager : MonoBehaviour
     void ActivateShieldForEnemy1()
     {
         playerShield.SetActive(false);
+        p2Shield.shieldForP2 = false;
         shield.shieldHit = false;
         shieldForE1.SetActive(true); //sets active the small shield for enemy one
         
@@ -306,7 +308,7 @@ public class EnemyManager : MonoBehaviour
 
     IEnumerator DeactivateShieldForE1()
     {
-        yield return new WaitForSeconds(2f); //wait for 3 seconds
+        yield return new WaitForSeconds(2f); //wait for 2 seconds
         shieldForE1.SetActive(false);
         nullTheTarget = true;
         e1Shield.e1ShieldHit = false;
@@ -315,24 +317,29 @@ public class EnemyManager : MonoBehaviour
 
     void BothActivateShield()
     {
+        Debug.Log("ISACTIVEboth");
+        p2Shield.shieldForP2 = false;
         enemyShield.SetActive(true);
+        playerShield.SetActive(false);
         if (enemyShieldScript.eShieldHit == true)
         {
             StartCoroutine(DeactivateShieldForBoth());
         }
-        playerShield.SetActive(false);
+        
     }
 
     IEnumerator DeactivateShieldForBoth()
     {
-        yield return new WaitForSeconds(2f); //wait for 3 seconds
+        yield return new WaitForSeconds(2f); //wait for x seconds
         enemyShield.SetActive(false); //deactivate big enemy shield 
         shield.shieldHit = false;
     }
 
     void ActivateShieldForEnemy2()
     {
+        Debug.Log("ISACTIVEe2");
         playerShield.SetActive(false);
+        p2Shield.shieldForP2 = false;
         shield.shieldHit = false;
         shieldForE2.SetActive(true); //sets active the small shield for enemy two
     }

@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShieldFor : MonoBehaviour
+public class ShieldForP1 : MonoBehaviour
 {
-    public bool shieldFor = false;
+    public bool shieldForP1 = false;
 
     public Transform enemyOne;
     public Transform enemyTwo;
@@ -23,7 +23,7 @@ public class ShieldFor : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<ShootTowardsPlayer>()!= null)
          {
-            shieldFor = true;
+            shieldForP1 = true;
             Rigidbody projectileRb = collision.gameObject.GetComponent<Rigidbody>();
             ShootTowardsPlayer shootTowardsPlayer = collision.gameObject.GetComponent<ShootTowardsPlayer>();
 
@@ -35,10 +35,10 @@ public class ShieldFor : MonoBehaviour
             projectileRb.velocity = directionToTarget * 5;
             enemyManager.ResetPrintedLog();
         }
-        else
-        {
-            shieldFor = false;
-        }
+        // else
+        // {
+        //     shieldFor = false;
+        // }
 
     }
 

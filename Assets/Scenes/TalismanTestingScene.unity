@@ -705,7 +705,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 12.830001, y: -11.33, z: -4.99}
-  m_LocalScale: {x: 1, y: 3.0039644, z: 3.037172}
+  m_LocalScale: {x: 1, y: 3.0039647, z: 3.037172}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -793,10 +793,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61a07f989ac0c7b4596c97480886b05c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shieldFor: 0
+  shieldForP1: 0
   enemyOne: {fileID: 2095348270}
   enemyTwo: {fileID: 1219612310}
-  enemyManager: {fileID: 0}
+  enemyManager: {fileID: 1048209372}
 --- !u!1 &308252603
 GameObject:
   m_ObjectHideFlags: 0
@@ -2586,6 +2586,7 @@ MonoBehaviour:
   position4: {fileID: 152488011}
   enemyShield: {fileID: 676575013}
   enemyShieldScript: {fileID: 676575018}
+  p2Shield: {fileID: 1861639336}
   rayCastP1: {fileID: 1106020642}
   rayCastP2: {fileID: 2086365339}
   shieldForE1: {fileID: 1435205199}
@@ -4012,12 +4013,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1861639331}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.9961879, z: -0, w: -0.087233365}
-  m_LocalPosition: {x: -1.89, y: 0.45, z: -0.42}
-  m_LocalScale: {x: 0.92929, y: 3.0162077, z: 2.6566381}
+  m_LocalRotation: {x: -0, y: -0, z: 0, w: 1}
+  m_LocalPosition: {x: 13.206569, y: -11.518513, z: -2.7048771}
+  m_LocalScale: {x: 0.9292902, y: 3.1602259, z: 2.6566386}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6153025335497659788}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1861639333
 BoxCollider:
@@ -4099,13 +4100,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1861639331}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61a07f989ac0c7b4596c97480886b05c, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ee0a8686f908ca469ae9b54c444d88e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shieldFor: 0
+  shieldForP2: 0
   enemyOne: {fileID: 2095348270}
   enemyTwo: {fileID: 1219612310}
-  enemyManager: {fileID: 0}
+  enemyManager: {fileID: 1048209372}
+  playersActions: {fileID: 962657433}
 --- !u!1 &1898520245
 GameObject:
   m_ObjectHideFlags: 0
@@ -4865,7 +4867,6 @@ Transform:
   - {fileID: 5052818819996681064}
   - {fileID: 8444420303909579875}
   - {fileID: 2086365338}
-  - {fileID: 1861639332}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 190.009, z: 0}
 --- !u!136 &6505079786235326487
@@ -5031,6 +5032,7 @@ SceneRoots:
   - {fileID: 1057988854}
   - {fileID: 1324754695}
   - {fileID: 717207528}
+  - {fileID: 1861639332}
   - {fileID: 252314396}
   - {fileID: 4013473033303992819}
   - {fileID: 6153025335497659788}
