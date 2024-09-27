@@ -32,8 +32,8 @@ TagManager:
   - ShieldFor
   - BallCollider
   - Ball
-  - 
-  - 
+  - CursorPlane
+  - UI
   - 
   - 
   - 
