@@ -9,7 +9,8 @@ public class ShieldForP1 : MonoBehaviour
     public Transform enemyOne;
     public Transform enemyTwo;
      private AmuletRaycast_P2 amuletRaycast_P2;
-    public EnemyManager enemyManager;
+   
+    public PlayerManager playerManager;
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +24,7 @@ public class ShieldForP1 : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<ShootTowardsPlayer>()!= null)
          {
-            shieldForP1 = true;
+            playerManager.shieldHit = true;
             Rigidbody projectileRb = collision.gameObject.GetComponent<Rigidbody>();
             ShootTowardsPlayer shootTowardsPlayer = collision.gameObject.GetComponent<ShootTowardsPlayer>();
 
@@ -33,7 +34,6 @@ public class ShieldForP1 : MonoBehaviour
                 
             Vector3 directionToTarget = (randomTarget.position - projectileRb.position).normalized;
             projectileRb.velocity = directionToTarget * 5;
-            enemyManager.ResetPrintedLog();
         }
         // else
         // {

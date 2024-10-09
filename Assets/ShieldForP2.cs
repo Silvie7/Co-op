@@ -9,8 +9,10 @@ public class ShieldForP2: MonoBehaviour
     public Transform enemyOne;
     public Transform enemyTwo;
      private AmuletRaycast_P2 amuletRaycast_P2;
-    public EnemyManager enemyManager;
-    public PlayersActions playersActions;
+  
+    public PlayerManager playerManager;
+    public CursorManager cursorManager;
+
 
     // Start is called before the first frame update
     void Start()
@@ -24,20 +26,19 @@ public class ShieldForP2: MonoBehaviour
     {
         if (collision.gameObject.GetComponent<ShootTowardsPlayer>()!= null)
          {
+            playerManager.shieldHit = true;
             Rigidbody projectileRb = collision.gameObject.GetComponent<Rigidbody>();
             ShootTowardsPlayer shootTowardsPlayer = collision.gameObject.GetComponent<ShootTowardsPlayer>();
 
             Transform randomTarget = Random.value < 0.5f ? enemyOne : enemyTwo;
 
-            playersActions.finalTarget = randomTarget.gameObject;
-            Debug.Log("Final target set to: " + playersActions.finalTarget.name);
+            cursorManager.target = randomTarget.gameObject;
             
             shootTowardsPlayer.ChangeTarget(randomTarget);
                 
             Vector3 directionToTarget = (randomTarget.position - projectileRb.position).normalized;
             projectileRb.velocity = directionToTarget * 5;
-            shieldForP2 = true;
-            enemyManager.ResetPrintedLog();
+          
         }
         // // else
         // // {

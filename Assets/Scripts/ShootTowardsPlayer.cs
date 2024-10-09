@@ -15,9 +15,8 @@ public class ShootTowardsPlayer : MonoBehaviour
 
     public ProjectilePlayer projectilePlayer;
     public TurnsManager turnsManager;
-    // public Transform ballPosition;
-    public EnemyManager enemyManager;
-    public PlayersActions pActionScript;
+  
+    
 
     private float shootForce = 10f; 
     public Rigidbody rb;
@@ -44,9 +43,8 @@ public class ShootTowardsPlayer : MonoBehaviour
         rb.AddForce(initialDirection * shootForce, ForceMode.Impulse);
 
         turnsManager = GameObject.Find("TurnsManager").GetComponent<TurnsManager>();
-        enemyManager = GameObject.FindObjectOfType<EnemyManager>();
-        pActionScript = GameObject.FindObjectOfType<PlayersActions>();
-
+        
+      
 
            
         

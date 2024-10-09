@@ -6,14 +6,14 @@ public class EnemyShield : MonoBehaviour
 {
     public bool eShieldHit = false;
     private AmuletRaycast_P2 amuletRaycast_P2;
-    public EnemyManager enemyManager;
+   
     public Transform playerOne;
     public Transform playerTwo;
     // Start is called before the first frame update
     void Start()
     {
         amuletRaycast_P2 = GameObject.FindObjectOfType<AmuletRaycast_P2>();
-      enemyManager = GameObject.FindObjectOfType<EnemyManager>();
+      
     }
 
     // Update is called once per frame
@@ -33,7 +33,6 @@ public class EnemyShield : MonoBehaviour
         
         Vector3 directionToTarget = (randomTarget.position - projectileRb.position).normalized;
         projectileRb.velocity = directionToTarget * 5;
-        enemyManager.ResetPrintedLog();
         
         // enemyManager.ActivateShieldForCube();
     }

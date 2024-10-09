@@ -5,13 +5,13 @@ using UnityEngine;
 public class ShieldForE1 : MonoBehaviour
 {
     public bool e1ShieldHit = false;
-    public EnemyManager enemyManager;
+    
     public Transform playerOne;
     public Transform playerTwo;
     // Start is called before the first frame update
     void Start()
     {
-        enemyManager = GameObject.FindObjectOfType<EnemyManager>();
+        
     }
 
     // Update is called once per frame
@@ -34,7 +34,7 @@ public class ShieldForE1 : MonoBehaviour
 
             Vector3 directionToTarget = (randomTarget.position - projectileRb.position).normalized;
             projectileRb.velocity = directionToTarget * 5;
-            enemyManager.ResetPrintedLog();
+           
         }
     }
 }

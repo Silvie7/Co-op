@@ -14,7 +14,7 @@ public class CursorManager : MonoBehaviour
     public float allowedDistance;
     public float joystickSpeed = 1;
 
-    public List <GameObject> targets = new List <GameObject>();
+    //public List <GameObject> targets = new List <GameObject>();
     public List<float> distances = new List<float>();
     public float lowestDistance;
     public GameObject target;
@@ -23,21 +23,21 @@ public class CursorManager : MonoBehaviour
 
     void Start()
     {
-
+        target = cursorCenter;
     }
 
     void Update()
     {
         CursorMovement();
         HandleCursorCenter();
-        if (canSelect)
-        {
-            SelectTarget();
-        }
-        else 
-        {
-            target = null;
-        }
+        //if (canSelect)
+        //{
+        //    SelectTarget();
+        //}
+        //else 
+        //{
+        //    target = null;
+        //}
 
     }
     void CursorMovement() 
@@ -75,29 +75,29 @@ public class CursorManager : MonoBehaviour
             canSelect = true;
         }
     }
-    void SelectTarget() 
-    {
-        //foreach (GameObject obj in targets) 
-        //{
-        //    if (Vector3.Distance(obj.transform.position, cursorCenter.transform.position) < 2) 
-        //    {
-        //        target = obj;   
-        //    }
-        //}
+    //void SelectTarget() 
+    //{
+    //    //foreach (GameObject obj in targets) 
+    //    //{
+    //    //    if (Vector3.Distance(obj.transform.position, cursorCenter.transform.position) < 2) 
+    //    //    {
+    //    //        target = obj;   
+    //    //    }
+    //    //}
 
-        for (int i = 0; i < targets.Count; i++) 
-        {
-            distances[i] = Vector3.Distance(targets[i].transform.position, cursorCenter.transform.position);
-        }
+    //    for (int i = 0; i < targets.Count; i++) 
+    //    {
+    //        distances[i] = Vector3.Distance(targets[i].transform.position, cursorCenter.transform.position);
+    //    }
 
-        lowestDistance = distances.Min();
+    //    lowestDistance = distances.Min();
 
-        for (int i = 0; i < distances.Count; i++)
-        {
-            if (distances[i] == lowestDistance) 
-            {
-                target = targets[i];
-            }
-        }
-    }
+    //    for (int i = 0; i < distances.Count; i++)
+    //    {
+    //        if (distances[i] == lowestDistance) 
+    //        {
+    //            target = targets[i];
+    //        }
+    //    }
+    //}
 }

@@ -5,14 +5,14 @@ using UnityEngine;
 public class ShieldForE2 : MonoBehaviour
 {
     public bool e2ShieldHit = false;
-    public EnemyManager enemyManager;
+    
     public Transform playerOne;
     public Transform playerTwo;
     public ShootTowardsPlayer shootTowardsPlayer;
     // Start is called before the first frame update
     void Start()
     {
-        enemyManager = GameObject.FindObjectOfType<EnemyManager>();
+        
         shootTowardsPlayer = GameObject.FindObjectOfType<ShootTowardsPlayer>();
     }
 
@@ -35,7 +35,7 @@ public class ShieldForE2 : MonoBehaviour
 
             Vector3 directionToTarget = (randomTarget.position - projectileRb.position).normalized;
             projectileRb.velocity = directionToTarget * 5;
-            enemyManager.ResetPrintedLog();
+           
         }
         else
         {

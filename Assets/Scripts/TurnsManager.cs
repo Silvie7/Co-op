@@ -14,13 +14,13 @@ public class TurnsManager : MonoBehaviour
     public ShootTowardsPlayer shootTowardsPlayer;
     public bool canSelectP1 = false; //checks if players can start selecting the targets
     public bool canSelectP2 = false;
-
+    public ChargingObject chargingObject;
     private bool gameStart = false;
-    private PlayersActions pActionScript;
+    public PlayerManager pActionScript;
     private PlayerOneManager p1Manager;
     private PlayerTwoManager p2Manager;
-    private ChargingAmuletLvl1 chargingAmulet1;
-    private EnemyManager enemyManager;
+   
+    
     
     private GameObject ball;
     public Transform ballPosition;
@@ -32,11 +32,10 @@ public class TurnsManager : MonoBehaviour
         //its enemies turn and they create the ball 
         gameStart = true;
         StartCoroutine(CheckForPlayerHit());
-        pActionScript = FindObjectOfType<PlayersActions>();
         p1Manager = FindObjectOfType<PlayerOneManager>();
         p2Manager = FindObjectOfType<PlayerTwoManager>();
-        chargingAmulet1 = FindObjectOfType<ChargingAmuletLvl1>();
-        enemyManager = FindObjectOfType<EnemyManager>();
+      
+        
     }
 
     // Update is called once per frame
@@ -65,65 +64,8 @@ public class TurnsManager : MonoBehaviour
         //BOTH PLAYERS PRESS X AND SET ACTIVE SHIELD
         if (currentTurn == Turn.Player)
         {
-            if (pActionScript.bothPressX == true)
-            {
-                pActionScript.shield.SetActive(true);
-                canSelectP1 = true;
-                canSelectP2 = true;
-            }
-                
-    
-            //SHIELD ONLY FOR PLAYER 2
-            if (pActionScript.shieldP2 == true)
-            {
-                pActionScript.shieldForP2.SetActive(true);
-                
-            }
-            else
-            {
-                pActionScript.shieldForP2.SetActive(false);
-            }
-
-            //SHIELD ONLY FOR PLAYER 1
-            if (pActionScript.shieldP1 == true)
-            {
-                pActionScript.shieldForP1.SetActive(true);
-                
-            }
-            else
-            {
-                pActionScript.shieldForP1.SetActive(false);
-            }
             
-            //charging p1 energy with lvl 1 amulet 
-            if (pActionScript.chargingP1 == true && !chargingAmulet1.isOnCooldown)
-            {
-                p1Manager.p1Energy += 2;
-                chargingAmulet1.StartCoroutine(chargingAmulet1.ChargingCooldown(chargingAmulet1.cooldownTime));
-            }
-
-            if (pActionScript.chargingP2 == true && !chargingAmulet1.isOnCooldown)
-            {
-                p2Manager.p2Energy += 2;
-                chargingAmulet1.StartCoroutine(chargingAmulet1.ChargingCooldown(chargingAmulet1.cooldownTime));
-            }
-
-
-            if (pActionScript.stealingBall == true)
-            {
-                shootTowardsPlayer = GameObject.FindGameObjectWithTag("Ball").GetComponent<ShootTowardsPlayer>();
-
-                if (shootTowardsPlayer != null)
-                {
-                    Rigidbody ballRb = shootTowardsPlayer.GetComponent<Rigidbody>();
-               
-                    shootTowardsPlayer.ChangeTarget(ballPosition.transform);
-
-                    Vector3 directionToBallTarget = (ballPosition.transform.position - ballRb.position).normalized;
-                    ballRb.velocity = directionToBallTarget * 5;
-                    enemyManager.ResetPrintedLog();
-                }
-            }
+           
         }
     }
 
