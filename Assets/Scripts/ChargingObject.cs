@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class ChargingObject: MonoBehaviour
 {
+   public PlayerManager playerManager;
    public float cooldownTime = 5f;
    public bool isOnCooldown = false;
 
-    public PlayerManager playerManager;
 
     public IEnumerator ChargingCooldown(float cooldownTime)
     {
@@ -19,14 +19,15 @@ public class ChargingObject: MonoBehaviour
     public void OnTriggerEnter(Collider collider)
     {
 
-        if (collider.gameObject.layer == LayerMask.NameToLayer("PlayerOne"))
+        if (collider.gameObject.CompareTag("P1TriggerCollider"))
         {
             playerManager.p1ChargeDistanceIs = true;
         }
 
-        if (collider.gameObject.layer == LayerMask.NameToLayer("PlayerTwo"))
+        if (collider.gameObject.CompareTag("P2TriggerCollider"))
         {
             playerManager.p2ChargeDistanceIs = true;
+            Debug.Log("IsIn");
         }
     }
     

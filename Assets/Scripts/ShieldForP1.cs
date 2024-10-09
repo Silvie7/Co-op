@@ -8,9 +8,10 @@ public class ShieldForP1 : MonoBehaviour
 
     public Transform enemyOne;
     public Transform enemyTwo;
-     private AmuletRaycast_P2 amuletRaycast_P2;
+    private AmuletRaycast_P2 amuletRaycast_P2;
    
     public PlayerManager playerManager;
+    public CursorManager cursorManager;
 
     // Start is called before the first frame update
     void Start()

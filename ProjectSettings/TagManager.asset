@@ -19,6 +19,8 @@ TagManager:
   - Ball
   - SlowZone
   - BallCollider
+  - P1TriggerCollider
+  - P2TriggerCollider
   layers:
   - Default
   - TransparentFX

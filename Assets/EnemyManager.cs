@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnenemyManagerr : MonoBehaviour
+public class EnemyManager : MonoBehaviour
 {
 
     public float enemy1Energy = 10;
@@ -37,9 +37,6 @@ public class EnenemyManagerr : MonoBehaviour
         //connected always, some fast...
         // they will slowly start going back to their starting spot but this can be inttreputed by player reaction 
 
-        if (playerManager.shieldHit == true)
-        {
-            RandomAction();
 
             //get the final target position
             //call the reaction
@@ -50,11 +47,11 @@ public class EnenemyManagerr : MonoBehaviour
             //or choose action big shield for now 
             //while one charges, the other one can deflect aiming at one of players randomly
             //deactivate the charging object for a while to make the enemies withou the energy
-        }
+        
 
     }
 
-    void RandomAction()
+    public void RandomAction() //calling this in every player shield sccrip
     {
         int randomChoice = Random.Range(0, 2);
         if (randomChoice == 0)
@@ -165,6 +162,7 @@ public class EnenemyManagerr : MonoBehaviour
         {
             enemy1.transform.position = Vector3.MoveTowards(chargingEnemy.transform.position, startingPositionE1, speed * Time.deltaTime);
             enemy2.transform.position = Vector3.MoveTowards(protectingEnemy.transform.position, startingPositionE2, speed * Time.deltaTime);
+            playerManager.shieldHit = false;
             yield return null;
         }
         if (enemyBigShield.activeSelf == true)
