@@ -85,7 +85,7 @@ public class EnemyManager : MonoBehaviour
         Vector3 enemy2Position = new Vector3(enemy2.transform.position.x, enemy2.transform.position.y, cursorManager.target.transform.position.z);
 
         //add offset to enemy  position so he is not too close to the enemy1
-        enemy2Position += new Vector3(5f, 0f, 0f); //offset
+        enemy2Position += new Vector3(0f, 0f, 3f); //offset
 
         while (Vector3.Distance(enemy1.transform.position, enemy1Position) > 0.01f || Vector3.Distance(enemy2.transform.position, enemy2Position) > 0.01f)
         {
@@ -164,8 +164,8 @@ public class EnemyManager : MonoBehaviour
     public IEnumerator MoveEnemyBack()
     {
         float speed = 3f;
-        Vector3 startingPositionE1 = new Vector3(enemy1.transform.position.x, enemy1.transform.position.y, startingPosE1.transform.position.z);
-        Vector3 startingPositionE2 = new Vector3(enemy2.transform.position.x, enemy2.transform.position.y, startingPosE2.transform.position.z);
+        Vector3 startingPositionE1 = new Vector3(startingPosE1.transform.position.x, startingPosE1.transform.position.y, startingPosE1.transform.position.z);
+        Vector3 startingPositionE2 = new Vector3(startingPosE2.transform.position.x, startingPosE2.transform.position.y, startingPosE2.transform.position.z);
         while (Vector3.Distance(enemy1.transform.position, startingPositionE1) > 0.01f || Vector3.Distance(enemy2.transform.position, startingPositionE2) > 0.01f)
         {
             enemy1.transform.position = Vector3.MoveTowards(enemy1.transform.position, startingPositionE1, speed * Time.deltaTime);

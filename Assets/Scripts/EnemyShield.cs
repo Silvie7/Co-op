@@ -27,7 +27,7 @@ public class EnemyShield : MonoBehaviour
 
             if (enemyManager != null)
             {
-                Debug.Log("STARTc");
+               
                 StartCoroutine(enemyManager.MoveEnemyBack());
             }
 

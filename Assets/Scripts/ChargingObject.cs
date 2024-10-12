@@ -23,14 +23,34 @@ public class ChargingObject: MonoBehaviour
         {
             playerManager.p1ChargeDistanceIs = true;
         }
+        //else
+        //{
+        //    playerManager.p1ChargeDistanceIs = false;
+        //}
 
         if (collider.gameObject.CompareTag("P2TriggerCollider"))
         {
             playerManager.p2ChargeDistanceIs = true;
-            Debug.Log("IsIn");
+        }
+        //else
+        //{
+        //    playerManager.p2ChargeDistanceIs = false;
+        //}
+    }
+
+    public void OnTriggerExit(Collider collider)
+    {
+        if (collider.gameObject.CompareTag("P1TriggerCollider"))
+        {
+            playerManager.p1ChargeDistanceIs = false;
+        }
+
+        if (collider.gameObject.CompareTag("P2TriggerCollider"))
+        {
+            playerManager.p2ChargeDistanceIs = false;
         }
     }
-    
 
-    
+
+
 }
