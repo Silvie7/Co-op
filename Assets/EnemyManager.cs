@@ -21,6 +21,9 @@ public class EnemyManager : MonoBehaviour
 
     public PlayerManager playerManager;
     public CursorManager cursorManager;
+    public ShieldForE1 shieldForE1;
+    public ShieldForE2 shieldForE2;
+    public EnemyShield enemyShield;
 
     // Start is called before the first frame update
     void Start()
@@ -91,6 +94,8 @@ public class EnemyManager : MonoBehaviour
             enemyBigShield.SetActive(true);
             yield return null;
         }
+        StopCoroutine("MoveBothEnemies");
+        Debug.Log("Stop");
     }
 
     void oneChargesOtherProtects()
@@ -113,7 +118,7 @@ public class EnemyManager : MonoBehaviour
             {
                 chargingEnemy = enemy1;
                 protectingEnemy = enemy2;
-                enemy2.SetActive(true);
+                enemy2Shield.SetActive(true);
             }
             else
             {
@@ -139,7 +144,7 @@ public class EnemyManager : MonoBehaviour
     {
         float speed = 3f;
         Vector3 chargingPosition = new Vector3(chargingEnemy.transform.position.x, chargingEnemy.transform.position.y, enemyChargingObject.transform.position.z);
-        Vector3 protectingPosition = new Vector3(protectingEnemy.transform.position.x, protectingEnemy.transform.position.y, cursorPosition.z);
+        Vector3 protectingPosition = new Vector3(protectingEnemy.transform.position.x, protectingEnemy.transform.position.y, cursorManager.target.transform.position.z);
 
         //add offset to enemy  position so he is not too close to the enemy1
 
@@ -150,18 +155,21 @@ public class EnemyManager : MonoBehaviour
             protectingEnemy.transform.position = Vector3.MoveTowards(protectingEnemy.transform.position, protectingPosition, speed * Time.deltaTime);
             yield return null;
         }
-
+        StopCoroutine("MoveEnemy");
+        Debug.Log("Stop");
+        
+       
     }
 
-    IEnumerator MoveEnemyBack()
+    public IEnumerator MoveEnemyBack()
     {
         float speed = 3f;
         Vector3 startingPositionE1 = new Vector3(enemy1.transform.position.x, enemy1.transform.position.y, startingPosE1.transform.position.z);
         Vector3 startingPositionE2 = new Vector3(enemy2.transform.position.x, enemy2.transform.position.y, startingPosE2.transform.position.z);
         while (Vector3.Distance(enemy1.transform.position, startingPositionE1) > 0.01f || Vector3.Distance(enemy2.transform.position, startingPositionE2) > 0.01f)
         {
-            enemy1.transform.position = Vector3.MoveTowards(chargingEnemy.transform.position, startingPositionE1, speed * Time.deltaTime);
-            enemy2.transform.position = Vector3.MoveTowards(protectingEnemy.transform.position, startingPositionE2, speed * Time.deltaTime);
+            enemy1.transform.position = Vector3.MoveTowards(enemy1.transform.position, startingPositionE1, speed * Time.deltaTime);
+            enemy2.transform.position = Vector3.MoveTowards(enemy2.transform.position, startingPositionE2, speed * Time.deltaTime);
             playerManager.shieldHit = false;
             yield return null;
         }

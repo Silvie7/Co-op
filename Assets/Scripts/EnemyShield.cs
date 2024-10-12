@@ -9,6 +9,7 @@ public class EnemyShield : MonoBehaviour
    
     public Transform playerOne;
     public Transform playerTwo;
+    public EnemyManager enemyManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,9 +23,15 @@ public class EnemyShield : MonoBehaviour
   {
     if (collision.gameObject.GetComponent<ShootTowardsPlayer>()!= null)
     {
-        eShieldHit = true;
-        
-        Rigidbody projectileRb = collision.gameObject.GetComponent<Rigidbody>();
+            //eShieldHit = true;
+
+            if (enemyManager != null)
+            {
+                Debug.Log("STARTc");
+                StartCoroutine(enemyManager.MoveEnemyBack());
+            }
+
+            Rigidbody projectileRb = collision.gameObject.GetComponent<Rigidbody>();
         ShootTowardsPlayer shootTowardsPlayer = collision.gameObject.GetComponent<ShootTowardsPlayer>();
 
         Transform randomTarget = Random.value < 0.5f ? playerOne : playerTwo;

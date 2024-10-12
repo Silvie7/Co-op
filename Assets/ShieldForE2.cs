@@ -9,6 +9,7 @@ public class ShieldForE2 : MonoBehaviour
     public Transform playerOne;
     public Transform playerTwo;
     public ShootTowardsPlayer shootTowardsPlayer;
+    public EnemyManager enemyManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +27,11 @@ public class ShieldForE2 : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<ShootTowardsPlayer>()!= null)
         {
-            e2ShieldHit = true;
+            //e2ShieldHit = true;
+            if (enemyManager != null)
+            {
+                StartCoroutine(enemyManager.MoveEnemyBack());
+            }
             Rigidbody projectileRb = collision.gameObject.GetComponent<Rigidbody>();
 
             Transform randomTarget = Random.value < 0.5f ? playerOne : playerTwo;
@@ -37,9 +42,9 @@ public class ShieldForE2 : MonoBehaviour
             projectileRb.velocity = directionToTarget * 5;
            
         }
-        else
-        {
-            e2ShieldHit = false;
-        }
+        //else
+        //{
+        //    e2ShieldHit = false;
+        //}
     }
 }

@@ -18,22 +18,21 @@ public class Shield : MonoBehaviour
   {
     if (collision.gameObject.GetComponent<ShootTowardsPlayer>()!= null)
     {
-        //playerManager.shieldHit = true;
-        Rigidbody projectileRb = collision.gameObject.GetComponent<Rigidbody>();
-        ShootTowardsPlayer shootTowardsPlayer = collision.gameObject.GetComponent<ShootTowardsPlayer>();
-
-        shootTowardsPlayer.ChangeTarget(cursorManager.target.transform);
-        
-        Vector3 directionToTarget = (cursorManager.target.transform.position - projectileRb.position).normalized;
-        projectileRb.velocity = directionToTarget * 5;
-         
             if (enemyManager != null)
             {
 
                 enemyManager.RandomAction();
                 Debug.Log("random");
             }
-            
+            //playerManager.shieldHit = true;
+            Rigidbody projectileRb = collision.gameObject.GetComponent<Rigidbody>();
+        ShootTowardsPlayer shootTowardsPlayer = collision.gameObject.GetComponent<ShootTowardsPlayer>();
+
+        shootTowardsPlayer.ChangeTarget(cursorManager.target.transform);
+        
+        Vector3 directionToTarget = (cursorManager.target.transform.position - projectileRb.position).normalized;
+        projectileRb.velocity = directionToTarget * 5;
+       
     }
    
   }
