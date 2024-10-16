@@ -27,6 +27,7 @@ public class ShieldForP2: MonoBehaviour
         if (collision.gameObject.GetComponent<ShootTowardsPlayer>()!= null)
          {
             playerManager.shieldHit = true;
+            cursorManager.canSelect = true;
             Rigidbody projectileRb = collision.gameObject.GetComponent<Rigidbody>();
             ShootTowardsPlayer shootTowardsPlayer = collision.gameObject.GetComponent<ShootTowardsPlayer>();
 

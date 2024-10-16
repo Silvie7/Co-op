@@ -63,9 +63,18 @@ public class PlayerManager : MonoBehaviour
             p2Shield.SetActive(false);
         }
 
+        //PUSH PLAYER TWO
         if (p1DistanceIs == true && Input.GetButton("Circle"))
         {
             MovePlayer2();
+        }
+
+        //PUSH PLAYER ONE
+        {
+            if (p1DistanceIs == true && Input.GetKey("o"))
+            {
+                MovePlayer1();
+            }
         }
 
         //CHARGING ENERGY P1
@@ -101,13 +110,30 @@ public class PlayerManager : MonoBehaviour
         Vector3 pushDirection = (playerTwoPosition - playerOnePosition).normalized;
 
         // Determine how far to push playerTwo along the Z-axis
-        // Here, we multiply the direction by the pushedSpeed and the desired distance
-        float pushDistance = 3.0f; // Change this value to set how far away you want to push playerTwo
+        // multiply the direction by the pushedSpeed and the desired distance
+        float pushDistance = 3.0f; //how far away the player is being pushed
         Vector3 pushForce = pushDirection * pushedSpeed * pushDistance;
 
         // Apply the force to playerTwo's Rigidbody
         playerTwo.GetComponent<Rigidbody>().AddForce(pushForce, ForceMode.Impulse);
 
 
+    }
+
+    void MovePlayer1()
+    {
+        //current position of player one and two
+        Vector3 playerOnePosition = playerOne.transform.position;
+        Vector3 playerTwoPosition = playerTwo.transform.position;
+
+        //calculate the direction from player one to two
+        Vector3 pushDirection = (playerOnePosition - playerTwoPosition).normalized;
+
+        //how far to push the player
+        float pushDistance = 3.0f;
+        Vector3 pushForce = pushDirection * pushedSpeed * pushDistance;
+
+        //apply the force to players one Rigidbody
+        playerOne.GetComponent<Rigidbody>().AddForce(pushForce, ForceMode.Impulse);
     }
 }
