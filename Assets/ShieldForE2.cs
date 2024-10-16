@@ -10,6 +10,7 @@ public class ShieldForE2 : MonoBehaviour
     public Transform playerTwo;
     public ShootTowardsPlayer shootTowardsPlayer;
     public EnemyManager enemyManager;
+    public CursorManager cursorManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +28,7 @@ public class ShieldForE2 : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<ShootTowardsPlayer>()!= null)
         {
-            //e2ShieldHit = true;
+            cursorManager.cursorFreeze = false;
             if (enemyManager != null)
             {
                 StartCoroutine(enemyManager.MoveEnemyBack());

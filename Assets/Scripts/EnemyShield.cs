@@ -10,6 +10,7 @@ public class EnemyShield : MonoBehaviour
     public Transform playerOne;
     public Transform playerTwo;
     public EnemyManager enemyManager;
+    public CursorManager cursorManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +24,7 @@ public class EnemyShield : MonoBehaviour
   {
     if (collision.gameObject.GetComponent<ShootTowardsPlayer>()!= null)
     {
-            //eShieldHit = true;
+            cursorManager.cursorFreeze = false;
 
             if (enemyManager != null)
             {

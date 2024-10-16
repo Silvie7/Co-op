@@ -133,7 +133,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!114 &8802150159427312967
 MonoBehaviour:
@@ -153,9 +153,8 @@ MonoBehaviour:
   hasHitEnemy: 0
   projectilePlayer: {fileID: 0}
   turnsManager: {fileID: 0}
-  enemyManager: {fileID: 0}
-  pActionScript: {fileID: 0}
   rb: {fileID: 0}
+  slowSpeed: 1
 --- !u!1 &3073471425692385562
 GameObject:
   m_ObjectHideFlags: 0
