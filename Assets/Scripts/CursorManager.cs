@@ -20,6 +20,7 @@ public class CursorManager : MonoBehaviour
     public GameObject target;
     public bool canSelect = true;
     public bool showCursors = true;
+    public bool cursorFreeze = false;
 
     void Start()
     {
@@ -28,15 +29,16 @@ public class CursorManager : MonoBehaviour
 
     void Update()
     {
-        CursorMovement();
-        HandleCursorCenter();
-        //if (canSelect)
+        if (cursorFreeze == false)
+        {
+            CursorMovement();
+            HandleCursorCenter();
+        }
+        
+      
+        //if (cursorFreeze == true)
         //{
-        //    SelectTarget();
-        //}
-        //else 
-        //{
-        //    target = null;
+
         //}
 
     }
@@ -75,6 +77,8 @@ public class CursorManager : MonoBehaviour
             canSelect = true;
         }
     }
+
+
     //void SelectTarget() 
     //{
     //    //foreach (GameObject obj in targets) 

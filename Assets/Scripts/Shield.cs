@@ -18,7 +18,7 @@ public class Shield : MonoBehaviour
   {
     if (collision.gameObject.GetComponent<ShootTowardsPlayer>()!= null)
     {
-            cursorManager.canSelect = false;
+            cursorManager.cursorFreeze = true;
             if (enemyManager != null)
             {
 
