@@ -38,7 +38,7 @@ public class ShieldForP1 : MonoBehaviour
 
             Transform randomTarget = Random.value < 0.5f ? enemyOne : enemyTwo;
 
-            shootTowardsPlayer.ChangeTarget(randomTarget);
+            shootTowardsPlayer.ChangeTarget(randomTarget.position);
                 
             Vector3 directionToTarget = (randomTarget.position - projectileRb.position).normalized;
             projectileRb.velocity = directionToTarget * 5;

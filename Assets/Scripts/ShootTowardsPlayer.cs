@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShootTowardsPlayer : MonoBehaviour
 {
-    public Transform target;
+    public Vector3 target;
     public Vector3 initialDirection; 
     public bool hasHitPlayer = false;
 
@@ -48,7 +48,7 @@ public class ShootTowardsPlayer : MonoBehaviour
     {
          if (target!= null)
          {
-            Vector3 directionToTarget = (target.position - transform.position).normalized;
+            Vector3 directionToTarget = (target - transform.position).normalized;
             float currentSpeed = isInSlowZone ? slowSpeed : normalSpeed;
             rb.velocity = directionToTarget * currentSpeed;
             
@@ -64,7 +64,7 @@ public class ShootTowardsPlayer : MonoBehaviour
         // }
     }
 
-    public void ChangeTarget(Transform newTarget)
+    public void ChangeTarget(Vector3 newTarget)
     {
         target = newTarget;
     }

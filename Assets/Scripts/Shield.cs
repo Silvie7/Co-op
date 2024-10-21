@@ -29,7 +29,7 @@ public class Shield : MonoBehaviour
             Rigidbody projectileRb = collision.gameObject.GetComponent<Rigidbody>();
         ShootTowardsPlayer shootTowardsPlayer = collision.gameObject.GetComponent<ShootTowardsPlayer>();
 
-        shootTowardsPlayer.ChangeTarget(cursorManager.target.transform);
+        shootTowardsPlayer.ChangeTarget(cursorManager.target.transform.position);
         
         Vector3 directionToTarget = (cursorManager.target.transform.position - projectileRb.position).normalized;
         projectileRb.velocity = directionToTarget * 5;

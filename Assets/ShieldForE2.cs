@@ -11,6 +11,11 @@ public class ShieldForE2 : MonoBehaviour
     public ShootTowardsPlayer shootTowardsPlayer;
     public EnemyManager enemyManager;
     public CursorManager cursorManager;
+
+    public GameObject playerField; //the floor object
+
+
+    public Vector3 randomPosition;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,18 +39,35 @@ public class ShieldForE2 : MonoBehaviour
                 StartCoroutine(enemyManager.MoveEnemyBack());
             }
             Rigidbody projectileRb = collision.gameObject.GetComponent<Rigidbody>();
+            ShootTowardsPlayer shootTowardsPlayer = collision.gameObject.GetComponent<ShootTowardsPlayer>();
 
-            Transform randomTarget = Random.value < 0.5f ? playerOne : playerTwo;
+            randomPosition = GetRandomPositionOnField();
 
-            shootTowardsPlayer.ChangeTarget(randomTarget);
+            shootTowardsPlayer.ChangeTarget(randomPosition);
 
-            Vector3 directionToTarget = (randomTarget.position - projectileRb.position).normalized;
+            Vector3 directionToTarget = (randomPosition - projectileRb.position).normalized;
             projectileRb.velocity = directionToTarget * 5;
-           
+
         }
-        //else
-        //{
-        //    e2ShieldHit = false;
-        //}
+     
+    }
+    Vector3 GetRandomPositionOnField()
+    {
+        //Get the collider of the player field
+        var fieldCollider = playerField.GetComponent<Collider>();
+
+        //get bounds of the players field collider
+        Bounds bounds = fieldCollider.bounds;
+
+        //Generate random X and X positions within the bounds
+        float randomX = Random.Range(bounds.min.x, bounds.max.x);
+        float randomZ = Random.Range(bounds.min.z, bounds.max.z);
+
+        //keep the Y position on the floor level
+        float yPosition = bounds.min.y;
+
+        return new Vector3(randomX, yPosition, randomZ);
+
+
     }
 }

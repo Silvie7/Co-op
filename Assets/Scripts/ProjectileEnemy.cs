@@ -12,7 +12,7 @@ public class ProjectileEnemy : MonoBehaviour
 
     
 
-    private Transform targetPlayer;
+    //private Transform targetPlayer;
 
     
 
@@ -30,9 +30,9 @@ public class ProjectileEnemy : MonoBehaviour
        
       instantiatedObject = Instantiate(prefab, transform.position, Quaternion.LookRotation(initialDirection));
 
-      targetPlayer = Random.value > 0.5? player1 : player2;
+      //targetPlayer = Random.value > 0.5? player1 : player2;
 
-      instantiatedObject.GetComponent<ShootTowardsPlayer>().target = targetPlayer;
+      //instantiatedObject.GetComponent<ShootTowardsPlayer>().target = targetPlayer;
       instantiatedObject.GetComponent<ShootTowardsPlayer>().initialDirection = initialDirection;
 
       
