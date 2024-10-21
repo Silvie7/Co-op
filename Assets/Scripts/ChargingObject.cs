@@ -19,7 +19,7 @@ public class ChargingObject: MonoBehaviour
     public void OnTriggerEnter(Collider collider)
     {
 
-        if (collider.gameObject.CompareTag("P1TriggerCollider"))
+        if (collider.gameObject.CompareTag("ColliderPlayerOne"))
         {
             playerManager.p1ChargeDistanceIs = true;
         }
@@ -28,7 +28,7 @@ public class ChargingObject: MonoBehaviour
         //    playerManager.p1ChargeDistanceIs = false;
         //}
 
-        if (collider.gameObject.CompareTag("P2TriggerCollider"))
+        if (collider.gameObject.CompareTag("ColliderPlayerTwo"))
         {
             playerManager.p2ChargeDistanceIs = true;
         }

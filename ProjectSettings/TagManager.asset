@@ -36,9 +36,9 @@ TagManager:
   - Ball
   - CursorPlane
   - UI
-  - 
-  - 
-  - 
+  - ShieldOne
+  - ShieldTwo
+  - P1TriggerCollider
   - 
   - 
   - 

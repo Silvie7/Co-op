@@ -12,6 +12,7 @@ public class ShieldForP2: MonoBehaviour
   
     public PlayerManager playerManager;
     public CursorManager cursorManager;
+    public EnemyManager enemyManager;
 
 
     // Start is called before the first frame update
@@ -27,7 +28,12 @@ public class ShieldForP2: MonoBehaviour
         if (collision.gameObject.GetComponent<ShootTowardsPlayer>()!= null)
          {
             playerManager.shieldHit = true;
-            
+            cursorManager.cursorFreeze = true;
+            if (enemyManager != null)
+            {
+
+                enemyManager.RandomAction();
+            }
             Rigidbody projectileRb = collision.gameObject.GetComponent<Rigidbody>();
             ShootTowardsPlayer shootTowardsPlayer = collision.gameObject.GetComponent<ShootTowardsPlayer>();
 

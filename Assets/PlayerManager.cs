@@ -52,11 +52,10 @@ public class PlayerManager : MonoBehaviour
 
         if (player1Energy != 0)
         {
-            //SMALL SHIELD ACTIVATION FOR P1
-            if (Input.GetKey("q"))
+            //SMALL SHIELD ACTIVATION FOR P2
+            if (Input.GetButton("Square"))
             {
-                p2Shield.SetActive(true);
-
+                p1Shield.SetActive(true);
             }
             else
             {
@@ -69,14 +68,18 @@ public class PlayerManager : MonoBehaviour
                 MovePlayer2();
             }
         }
+        else
+        {
+            p1Shield.SetActive(false);
+        }
 
         if (player2Energy != 0)
         {
-
-            //SMALL SHIELD ACTIVATION FOR P2
-            if (Input.GetButton("Square"))
+            //SMALL SHIELD ACTIVATION FOR P1
+            if (Input.GetKey("q"))
             {
-                p1Shield.SetActive(true);
+                p2Shield.SetActive(true);
+
             }
             else
             {
@@ -90,6 +93,10 @@ public class PlayerManager : MonoBehaviour
                     MovePlayer1();
                 }
             }
+        }
+        else
+        {
+            p2Shield.SetActive(false);
         }
 
         //CHARGING ENERGY P1
