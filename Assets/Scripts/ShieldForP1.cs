@@ -43,11 +43,7 @@ public class ShieldForP1 : MonoBehaviour
             Vector3 directionToTarget = (randomTarget.position - projectileRb.position).normalized;
             projectileRb.velocity = directionToTarget * 5;
         }
-        // else
-        // {
-        //     shieldFor = false;
-        // }
-
+      
     }
 
 }

@@ -7,6 +7,7 @@ using System.Linq;
 public class CursorManager : MonoBehaviour
 {
     public GameObject cursorP1;
+    private Rigidbody rb;
     public GameObject cursorP2;
     public GameObject cursorCenter;
 
@@ -25,6 +26,7 @@ public class CursorManager : MonoBehaviour
     void Start()
     {
         target = cursorCenter;
+        rb = cursorP1.GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -47,7 +49,8 @@ public class CursorManager : MonoBehaviour
         //Cursor Player 1 (controller)
         Vector2 input = new Vector2(Input.GetAxis("P1CR_Horizontal"), Input.GetAxis("P1CR_Vertical"));
         Debug.Log("right stick " + input);
-        cursorP1.transform.position += new Vector3(0, input.y * (joystickSpeed * 0.1f), input.x * (joystickSpeed * 0.1f));
+        Vector3 direction = new Vector3(input.y, 0, input.x);
+        rb.velocity = direction * (joystickSpeed * 100) * Time.deltaTime;
 
         //Cursor Player 2 (mouse)
         RaycastHit hit;

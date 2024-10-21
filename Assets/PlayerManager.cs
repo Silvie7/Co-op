@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class PlayerManager : MonoBehaviour
 
     public GameObject playerOne;
     public GameObject playerTwo;
+    public GameObject shieldCenter;
     public float pushedSpeed = 2f; //the speed of pushed object
 
     public ChargingObject chargingObject;
@@ -23,6 +25,9 @@ public class PlayerManager : MonoBehaviour
     public float player1Energy = 10f;
     public float player2Energy = 10f;
 
+    public float allowedDistance;
+    public float xOffset = 0.5f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +37,9 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        HandleShieldCenter();
+
         if (player1Energy != 0 || player2Energy != 0)
         {
             //BIG SHIELD ACTIVATION
@@ -174,4 +182,21 @@ public class PlayerManager : MonoBehaviour
         player2Energy = Mathf.Max(0, player2Energy - 4);
     }
 
+    void HandleShieldCenter()
+    {
+        var centerPositionPlayers = Vector3.Lerp(playerOne.transform.position, playerTwo.transform.position, 0.5f);
+
+        
+        centerPositionPlayers.x += xOffset;
+        shieldCenter.transform.position = centerPositionPlayers;
+
+        if (p1ChargeDistanceIs == true && Vector3.Distance(playerOne.transform.position, playerTwo.transform.position) > allowedDistance)
+        {
+            shieldCenter.SetActive(false);
+        }
+        else
+        {
+            shieldCenter.SetActive(true);
+        }
+    }
 }

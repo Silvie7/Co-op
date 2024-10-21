@@ -37,20 +37,16 @@ public class ShieldForP2: MonoBehaviour
             Rigidbody projectileRb = collision.gameObject.GetComponent<Rigidbody>();
             ShootTowardsPlayer shootTowardsPlayer = collision.gameObject.GetComponent<ShootTowardsPlayer>();
 
-            //Transform randomTarget = Random.value < 0.5f ? enemyOne : enemyTwo;
+            Transform randomTarget = Random.value < 0.5f ? enemyOne : enemyTwo;
 
-            //cursorManager.target = randomTarget.gameObject;
-            
-            //shootTowardsPlayer.ChangeTarget(randomTarget);
-                
-            //Vector3 directionToTarget = (randomTarget.position - projectileRb.position).normalized;
-            //projectileRb.velocity = directionToTarget * 5;
-          
+            cursorManager.target = randomTarget.gameObject;
+
+            shootTowardsPlayer.ChangeTarget(randomTarget.position);
+
+            Vector3 directionToTarget = (randomTarget.position - projectileRb.position).normalized;
+            projectileRb.velocity = directionToTarget * 5;
+
         }
-        // // else
-        // // {
-        // //     shieldFor = false;
-        // }s
 
     }
 
