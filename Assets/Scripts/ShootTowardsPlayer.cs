@@ -15,6 +15,7 @@ public class ShootTowardsPlayer : MonoBehaviour
 
     public ProjectilePlayer projectilePlayer;
     public TurnsManager turnsManager;
+    private PlayerManager playerManager;
   
     
 
@@ -29,25 +30,18 @@ public class ShootTowardsPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // {
-        //     // Calculate the direction towards the target
-        // Vector3 direction = (target.position - transform.position).normalized;
-
-        // // Shoot towards the target
-        // GetComponent<Rigidbody>().AddForce(direction * shootForce, ForceMode.Impulse);
-        // } 
-         territoryE = GameObject.Find("TerritoryEnemies"); 
-         territoryP = GameObject.Find("TerritoryPlayers"); 
+      
 
         rb = GetComponent<Rigidbody>();
         rb.AddForce(initialDirection * shootForce, ForceMode.Impulse);
 
         turnsManager = GameObject.Find("TurnsManager").GetComponent<TurnsManager>();
-        
-      
+        playerManager = FindObjectOfType<PlayerManager>();
 
-           
-        
+
+
+
+
     }
 
     void FixedUpdate()
@@ -100,6 +94,20 @@ public class ShootTowardsPlayer : MonoBehaviour
             //Destroy(gameObject);
         }    
         
+        if (collision.gameObject.CompareTag("BigShield"))
+        {
+            playerManager.BigShieldEnergyLoss();
+        }
+
+        if (collision.gameObject.name == "ShieldForP1")
+        {
+            playerManager.P1ShieldEnergyLoss();
+        }
+
+        if (collision.gameObject.name == "ShieldForP2")
+        {
+            playerManager.P2ShieldEnergyLoss();
+        }
     }
 
     void OnTriggerEnter(Collider other)

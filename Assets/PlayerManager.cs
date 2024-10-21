@@ -18,6 +18,8 @@ public class PlayerManager : MonoBehaviour
     public bool p2ChargeDistanceIs = false;
     public bool p1DistanceIs = false;
 
+    public float energyCharged = 2;
+
     public float player1Energy = 10f;
     public float player2Energy = 10f;
 
@@ -30,50 +32,63 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        //BIG SHIELD ACTIVATION
-        if (Input.GetKey("x") && Input.GetButton("X"))
+        if (player1Energy != 0 || player2Energy != 0)
         {
-
-            bigShield.SetActive(true);  //activate big shield
-        }
-        else
-        {
-            bigShield.SetActive(false); //deactivate big shield
-        }
-
-        //SMALL SHIELD ACTIVATION FOR P1
-        if (Input.GetKey("q"))
-        {
-            p2Shield.SetActive(true);
-
-        }
-        else
-        {
-            p1Shield.SetActive(false);
-        }
-
-        //SMALL SHIELD ACTIVATION FOR P2
-        if (Input.GetButton("Square"))
-        {
-            p1Shield.SetActive(true);
-        }
-        else
-        {
-            p2Shield.SetActive(false);
-        }
-
-        //PUSH PLAYER TWO
-        if (p1DistanceIs == true && Input.GetButton("Circle"))
-        {
-            MovePlayer2();
-        }
-
-        //PUSH PLAYER ONE
-        {
-            if (p1DistanceIs == true && Input.GetKey("o"))
+            //BIG SHIELD ACTIVATION
+            if (Input.GetKey("x") && Input.GetButton("X"))
             {
-                MovePlayer1();
+
+                bigShield.SetActive(true);  //activate big shield
+            }
+            else
+            {
+                bigShield.SetActive(false); //deactivate big shield
+            }
+        }
+        else
+        {
+            bigShield.SetActive(false);
+        }
+
+        if (player1Energy != 0)
+        {
+            //SMALL SHIELD ACTIVATION FOR P1
+            if (Input.GetKey("q"))
+            {
+                p2Shield.SetActive(true);
+
+            }
+            else
+            {
+                p1Shield.SetActive(false);
+            }
+
+            //PUSH PLAYER TWO (FOR P1)
+            if (p1DistanceIs == true && Input.GetButton("Circle"))
+            {
+                MovePlayer2();
+            }
+        }
+
+        if (player2Energy != 0)
+        {
+
+            //SMALL SHIELD ACTIVATION FOR P2
+            if (Input.GetButton("Square"))
+            {
+                p1Shield.SetActive(true);
+            }
+            else
+            {
+                p2Shield.SetActive(false);
+            }
+
+            //PUSH PLAYER ONE (FRO P2)
+            {
+                if (p1DistanceIs == true && Input.GetKey("o"))
+                {
+                    MovePlayer1();
+                }
             }
         }
 
@@ -82,7 +97,7 @@ public class PlayerManager : MonoBehaviour
         {
             if (!chargingObject.isOnCooldown)
             {
-                player1Energy += 2;
+                player1Energy += energyCharged;
                 chargingObject.StartCoroutine(chargingObject.ChargingCooldown(chargingObject.cooldownTime));
             }
         }
@@ -92,7 +107,7 @@ public class PlayerManager : MonoBehaviour
         {
             if (!chargingObject.isOnCooldown)
             {
-                player2Energy += 2;
+                player2Energy += energyCharged;
                 chargingObject.StartCoroutine(chargingObject.ChargingCooldown(chargingObject.cooldownTime));
             }
 
@@ -136,4 +151,20 @@ public class PlayerManager : MonoBehaviour
         //apply the force to players one Rigidbody
         playerOne.GetComponent<Rigidbody>().AddForce(pushForce, ForceMode.Impulse);
     }
+
+    public void BigShieldEnergyLoss()
+    {
+        player1Energy = Mathf.Max(0, player1Energy - 4);
+        player2Energy = Mathf.Max(0, player2Energy - 4);
+    }
+   
+   public void P1ShieldEnergyLoss()
+    {
+        player1Energy = Mathf.Max(0, player1Energy - 2);
+    }
+    public void P2ShieldEnergyLoss()
+    {
+        player2Energy = Mathf.Max(0, player2Energy - 4);
+    }
+
 }
